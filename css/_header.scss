@@ -1,0 +1,833 @@
+// ==========================================
+// SITE HEADER
+// Top info bar (welcome / timings / phone + WhatsApp) + main nav bar.
+// Main bar is a Bootstrap navbar (navbar-expand-lg); below lg the menu is a
+// Bootstrap offcanvas drawer. .site-header.is-scrolled comes from js/custom.js.
+// ==========================================
+$navy: map-get($colors, primary);
+$navy-dark: map-get($colors, darkprimary);
+$sky: map-get($colors, thirdcolour);
+$orange: map-get($colors, secondary);
+$orange-dark: map-get($colors, darksecondary);
+$ink: map-get($colors, black);
+$muted: map-get($colors, gray);
+$nav-desktop: 992px;
+$nav-mobile: 991px;
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: map-get($colors, white);
+}
+
+// ---------- Top bar ----------
+.mh-topbar {
+  background: $gradient-topbar;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 13px;
+  max-height: 60px;
+  overflow: hidden;
+  @include transition(max-height, 0.35s, ease);
+
+  .site-header.is-scrolled & {
+    max-height: 0;
+  }
+}
+
+.mh-topbar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  min-height: 42px;
+}
+
+.mh-topbar__welcome {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  white-space: nowrap;
+
+  strong {
+    color: map-get($colors, white);
+    font-weight: 500;
+  }
+}
+
+.mh-topbar__pulse {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: map-get($colors, amber);
+  flex-shrink: 0;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 2px solid map-get($colors, amber);
+    opacity: 0;
+    animation: mhPulse 2s ease-out infinite;
+  }
+}
+
+@keyframes mhPulse {
+  0% {
+    transform: scale(0.5);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+}
+
+.mh-topbar__timings {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  white-space: nowrap;
+
+  li + li::before {
+    content: "";
+    display: inline-block;
+    width: 1px;
+    height: 12px;
+    margin-right: 0.5rem;
+    vertical-align: middle;
+    background: rgba(255, 255, 255, 0.3);
+  }
+
+  .mh-ico {
+    margin-right: 4px;
+    vertical-align: -3px;
+  }
+
+  b {
+    color: map-get($colors, white);
+    font-weight: 500;
+  }
+}
+
+.mh-topbar__contact {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  white-space: nowrap;
+}
+
+.mh-topbar__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+  @include transition(color, 0.2s, ease);
+
+  &:hover,
+  &:focus-visible {
+    color: map-get($colors, amber);
+  }
+}
+
+.mh-ico {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+
+  .mh-topbar & {
+    color: map-get($colors, amber);
+  }
+}
+
+.mh-topbar__wa {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.28rem 0.8rem;
+  border-radius: 50px;
+  background: map-get($colors, whatsapp);
+  color: map-get($colors, white);
+  font-weight: 500;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+
+  svg {
+    width: 15px;
+    height: 15px;
+    fill: currentColor;
+  }
+
+  &:hover,
+  &:focus-visible {
+    color: map-get($colors, white);
+    background: #1eb257;
+    transform: translateY(-1px);
+  }
+}
+
+// ---------- Main bar (Bootstrap .navbar) ----------
+.mh-bar {
+  --bs-navbar-padding-x: 0;
+  --bs-navbar-padding-y: 0;
+  --bs-navbar-nav-link-padding-x: 1rem;
+  --bs-nav-link-padding-y: 0.6rem;
+  --bs-nav-link-font-size: 15px;
+  --bs-nav-link-font-weight: 500;
+  --bs-navbar-color: #{$ink};
+  --bs-navbar-hover-color: #{$orange-dark};
+  --bs-navbar-active-color: #{$ink};
+  position: relative;
+  background: map-get($colors, white);
+  @include transition(box-shadow, 0.3s, ease);
+
+  // brand hairline: blue side of the logo flowing into the orange side
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: $gradient-brand;
+  }
+
+  .site-header.is-scrolled & {
+    box-shadow: 0 10px 30px -12px rgba(11, 38, 87, 0.25);
+  }
+}
+
+.mh-bar__inner {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  min-height: 92px;
+  @include transition(min-height, 0.3s, ease);
+
+  .site-header.is-scrolled & {
+    min-height: 76px;
+  }
+}
+
+.mh-logo {
+  display: inline-flex;
+  flex-shrink: 0;
+  margin: 0;
+  padding: 6px 0;
+
+  img {
+    height: 76px;
+    width: auto;
+    @include transition(height, 0.3s, ease);
+
+    .site-header.is-scrolled & {
+      height: 62px;
+    }
+  }
+}
+
+// ---------- Nav links ----------
+// Prefixed with .mh-bar .mh-nav to outrank Bootstrap's .navbar-nav .nav-link.active/.show
+.mh-bar .mh-nav .mh-nav__link {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 50px;
+  white-space: nowrap;
+  transition: color 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+
+  &:hover,
+  &:focus-visible,
+  &.show {
+    color: $orange-dark;
+    background: map-get($colors, lightsecondary);
+  }
+
+  &.active {
+    color: map-get($colors, white);
+    background: $gradient-primary;
+    box-shadow: 0 8px 18px -8px rgba(23, 63, 135, 0.7);
+  }
+
+  // chevron instead of Bootstrap's solid caret
+  &.dropdown-toggle::after {
+    width: 7px;
+    height: 7px;
+    margin: -3px 0 0 0.45rem;
+    border: 0;
+    border-right: 1.8px solid currentColor;
+    border-bottom: 1.8px solid currentColor;
+    transform: rotate(45deg);
+    @include transition(transform, 0.25s, ease);
+  }
+
+  &.dropdown-toggle.show::after {
+    margin-top: 3px;
+    transform: rotate(-135deg);
+  }
+}
+
+// ---------- Dropdown panels (Bootstrap .dropdown-menu) ----------
+.mh-drop,
+.mh-mega {
+  --bs-dropdown-border-radius: 16px;
+  --bs-dropdown-border-color: rgba(23, 63, 135, 0.08);
+  --bs-dropdown-box-shadow: 0 24px 50px -20px rgba(11, 38, 87, 0.35);
+  --bs-dropdown-link-color: #{$ink};
+  --bs-dropdown-link-hover-color: #{$navy};
+  --bs-dropdown-link-hover-bg: #{map-get($colors, lightprimary)};
+  --bs-dropdown-link-active-color: #{$navy};
+  --bs-dropdown-link-active-bg: #{map-get($colors, lightprimary)};
+  box-shadow: var(--bs-dropdown-box-shadow);
+}
+
+.mh-drop {
+  --bs-dropdown-min-width: 250px;
+  --bs-dropdown-padding-x: 0.6rem;
+  --bs-dropdown-padding-y: 0.6rem;
+}
+
+.mh-drop__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mh-drop__link {
+  position: relative;
+  padding: 0.5rem 0.9rem;
+  border-radius: 10px;
+  font-size: 14px;
+  white-space: normal;
+  transition: color 0.2s ease, background-color 0.2s ease, padding 0.2s ease;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0.35rem;
+    top: 50%;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: $orange;
+    opacity: 0;
+    transform: translate(-4px, -50%);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  &:hover,
+  &:focus-visible {
+    padding-left: 1.25rem;
+
+    &::before {
+      opacity: 1;
+      transform: translate(0, -50%);
+    }
+  }
+}
+
+.mh-drop__link--all {
+  margin-top: 0.35rem;
+  color: $orange-dark;
+  font-weight: 600;
+}
+
+.mh-mega__title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 0.6rem;
+  padding: 0 0.9rem 0.6rem;
+  border-bottom: 1px dashed rgba(23, 63, 135, 0.15);
+  color: $navy;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  &::before {
+    content: "";
+    width: 18px;
+    height: 3px;
+    border-radius: 3px;
+    background: $gradient-secondary;
+  }
+}
+
+.mh-mega__promo {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.6rem;
+  padding: 1.4rem;
+  border-radius: 14px;
+  overflow: hidden;
+  background: $gradient-primary;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 13.5px;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(249, 168, 38, 0.55) 0%, rgba(249, 168, 38, 0) 70%);
+  }
+
+  h4 {
+    position: relative;
+    margin: 0;
+    color: map-get($colors, white);
+    font-size: 18px;
+    line-height: 1.3;
+  }
+
+  p {
+    position: relative;
+  }
+}
+
+.mh-mega__promo-link {
+  position: relative;
+  align-self: flex-start;
+  margin-top: 0.3rem;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  background: map-get($colors, white);
+  color: $orange-dark;
+  font-size: 13px;
+  font-weight: 600;
+  transition: color 0.2s ease, background-color 0.2s ease;
+
+  &:hover,
+  &:focus-visible {
+    background: $orange;
+    color: map-get($colors, white);
+  }
+}
+
+// ---------- Book button ----------
+.mh-btn-book {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-shrink: 0;
+  padding: 0.45rem 0.5rem 0.45rem 1.35rem;
+  border-radius: 50px;
+  overflow: hidden;
+  background: $gradient-secondary;
+  color: map-get($colors, white);
+  font-size: 15px;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: 0 12px 24px -10px rgba(244, 123, 32, 0.75);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  // light sweep on hover
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(120deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.45) 50%, rgba(255, 255, 255, 0) 100%);
+    transform: skewX(-20deg);
+    @include transition(left, 0.6s, ease);
+  }
+
+  &:hover,
+  &:focus-visible {
+    color: map-get($colors, white);
+    transform: translateY(-2px);
+    box-shadow: 0 16px 28px -10px rgba(244, 123, 32, 0.85);
+
+    &::before {
+      left: 125%;
+    }
+
+    .mh-btn-book__icon {
+      transform: rotate(-45deg);
+    }
+  }
+}
+
+.mh-btn-book__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: map-get($colors, white);
+  color: $orange-dark;
+  @include transition(transform, 0.3s, ease);
+
+  svg {
+    width: 16px;
+    height: 16px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+}
+
+// ---------- Toggler ----------
+.mh-toggle {
+  position: relative;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border: 0;
+  border-radius: 12px;
+  background: map-get($colors, lightprimary);
+
+  &:focus {
+    box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.25);
+  }
+
+  span {
+    position: absolute;
+    left: 12px;
+    width: 22px;
+    height: 2px;
+    border-radius: 2px;
+    background: $navy;
+
+    &:nth-child(1) {
+      top: 15px;
+    }
+    &:nth-child(2) {
+      top: 22px;
+      width: 15px;
+      background: $orange;
+      @include transition(width, 0.3s, ease);
+    }
+    &:nth-child(3) {
+      top: 29px;
+    }
+  }
+
+  &:hover span:nth-child(2) {
+    width: 22px;
+  }
+}
+
+// ---------- Off-canvas drawer ----------
+.offcanvas-backdrop {
+  background-color: map-get($colors, darkblue);
+
+  &.show {
+    opacity: 0.55;
+  }
+}
+
+// The drawer lives inside the sticky header, whose stacking context (z 1000)
+// sits under Bootstrap's body-level backdrop (z 1040). While the drawer is
+// open, lift the header above the backdrop and dim the header itself so it
+// matches the rest of the page.
+.site-header::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  background: map-get($colors, darkblue);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.site-header:has(.mh-offcanvas.showing, .mh-offcanvas.show, .mh-offcanvas.hiding) {
+  z-index: 1045;
+}
+
+.site-header:has(.mh-offcanvas.showing, .mh-offcanvas.show)::after {
+  opacity: 0.55;
+  visibility: visible;
+}
+
+.mh-offcanvas {
+  --bs-offcanvas-width: min(360px, 88vw);
+  --bs-offcanvas-border-width: 0;
+  --bs-offcanvas-box-shadow: -20px 0 40px -20px rgba(7, 26, 61, 0.4);
+}
+
+.mh-offcanvas__head {
+  min-height: 72px;
+  padding: 0.5rem 1rem 0.5rem 1.25rem;
+  border-bottom: 1px solid rgba(23, 63, 135, 0.08);
+
+  img {
+    height: 50px;
+    width: auto;
+  }
+}
+
+.mh-offcanvas__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 12px;
+  background: map-get($colors, lightprimary);
+  color: $navy;
+  transition: background-color 0.2s ease, color 0.2s ease;
+
+  svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.2;
+    stroke-linecap: round;
+  }
+
+  &:hover,
+  &:focus-visible {
+    background: $orange;
+    color: map-get($colors, white);
+  }
+}
+
+// ---------- Desktop (lg and up) ----------
+@include min($nav-desktop) {
+  .mh-offcanvas__body {
+    flex-grow: 1;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .mh-nav {
+    gap: 0.25rem;
+    margin: 0 auto;
+  }
+
+  .site-header::after {
+    display: none;
+  }
+
+  // Dropdowns open on hover (and still on click / keyboard via Bootstrap)
+  .mh-bar .mh-dropdown > .dropdown-menu {
+    display: block;
+    top: calc(100% + 12px);
+    left: 0;
+    margin-top: 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(12px);
+    transition: opacity 0.28s ease, transform 0.28s ease, visibility 0.28s ease;
+
+    // invisible bridge so the pointer can travel from link to panel
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 100%;
+      height: 16px;
+    }
+  }
+
+  .mh-bar .mh-dropdown:hover > .dropdown-menu,
+  .mh-bar .mh-dropdown > .dropdown-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .mh-bar .mh-nav .mh-dropdown:hover > .mh-nav__link {
+    color: $orange-dark;
+    background: map-get($colors, lightsecondary);
+
+    &.active {
+      color: map-get($colors, white);
+      background: $gradient-primary;
+    }
+
+    &.dropdown-toggle::after {
+      margin-top: 3px;
+      transform: rotate(-135deg);
+    }
+  }
+
+  // Mega panel spans the bar, centred, instead of hanging off its link
+  .mh-bar .mh-dropdown--mega {
+    position: static;
+
+    > .mh-mega {
+      top: 100%;
+      left: 50%;
+      width: min(920px, 92vw);
+      margin-left: calc(min(920px, 92vw) / -2);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr) 220px;
+      gap: 1rem;
+      padding: 1.4rem;
+
+      &::before {
+        height: 34px;
+      }
+    }
+  }
+}
+
+@include minMax($nav-desktop, 1199px) {
+  .mh-bar {
+    --bs-navbar-nav-link-padding-x: 0.7rem;
+    --bs-nav-link-font-size: 14px;
+  }
+  .mh-btn-book {
+    font-size: 14px;
+    padding-left: 1rem;
+  }
+  .mh-logo img {
+    height: 64px;
+  }
+}
+
+@include max(1399px) {
+  .mh-topbar__welcome {
+    display: none;
+  }
+}
+
+// ---------- Below lg: drawer layout ----------
+@include max($nav-mobile) {
+  .mh-bar__inner,
+  .site-header.is-scrolled .mh-bar__inner {
+    min-height: 72px;
+  }
+
+  .mh-logo img,
+  .site-header.is-scrolled .mh-logo img {
+    height: 58px;
+  }
+
+  .mh-offcanvas__body {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+  }
+
+  .mh-nav {
+    padding: 0.75rem 1rem;
+  }
+
+  .mh-nav .nav-item {
+    border-bottom: 1px solid rgba(23, 63, 135, 0.06);
+  }
+
+  .mh-bar .mh-nav .mh-nav__link {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0.85rem 1rem;
+    border-radius: 12px;
+    font-size: 15.5px;
+  }
+
+  .mh-drop,
+  .mh-mega {
+    margin: 0.25rem 0 0.75rem;
+    padding: 0.5rem;
+    border: 0;
+    box-shadow: none;
+    background: map-get($colors, lightgray);
+  }
+
+  .mh-mega__col + .mh-mega__col {
+    margin-top: 1rem;
+  }
+
+  .mh-mega__title {
+    margin-top: 0.4rem;
+  }
+
+  .mh-mega__promo {
+    display: none;
+  }
+
+  // button straddles the white list and the tinted footer
+  .mh-offcanvas__body > .mh-btn-book {
+    justify-content: space-between;
+    margin: auto 1.25rem 0;
+    transform: translateY(50%);
+    z-index: 1;
+  }
+
+  .mh-offcanvas__foot {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    padding: 2.25rem 1.25rem 1.25rem;
+    background: map-get($colors, lightgradient);
+    font-size: 14px;
+
+    .mh-topbar__link {
+      color: $navy;
+
+      &:hover {
+        color: $orange-dark;
+      }
+
+      .mh-ico {
+        color: $orange;
+      }
+    }
+  }
+
+  .mh-offcanvas__hours {
+    color: $muted;
+    line-height: 1.6;
+
+    b {
+      color: $ink;
+      font-weight: 500;
+    }
+  }
+
+  .mh-topbar__timings {
+    display: none;
+  }
+}
+
+@include max(575px) {
+  .mh-topbar__inner {
+    justify-content: center;
+  }
+
+  .mh-topbar__contact {
+    gap: 0.75rem;
+  }
+
+  .mh-topbar__phone--alt {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mh-topbar__pulse::after {
+    animation: none;
+  }
+}

@@ -1,0 +1,66 @@
+//variables
+// Palette taken from img/logo.png: navy wordmark, sky-blue spine & leaves,
+// orange/amber "LIFE" wordmark, child figure and hand.
+$colors: (
+  black: #1c2536,
+  white: #fff,
+  red: #d93025,
+  gray: #6b7689,
+  darkprimary: #0b2657,
+  primary: #173f87,
+  lightprimary: #eaf2fb,
+  secondary: #f47b20,
+  lightsecondary: #fff1e4,
+  darksecondary: #d9600b,
+  thirdcolour: #1e88e5,
+  lightthrdcolour: #4fb3f0,
+  darkbluecolour: #1565c0,
+  amber: #f9a826,
+  lightgray: #f4f7fb,
+  lightgradient: (
+    linear-gradient(135deg, #eaf2fb 0%, #fff1e4 100%),
+  ),
+  darkblue: #071a3d,
+  whatsapp: #25d366,
+);
+
+// Brand gradients (blue side of the logo -> orange side)
+$gradient-brand: linear-gradient(90deg, #1e88e5 0%, #173f87 45%, #f47b20 100%);
+$gradient-primary: linear-gradient(135deg, #1e88e5 0%, #173f87 100%);
+$gradient-secondary: linear-gradient(135deg, #f9a826 0%, #f47b20 55%, #e8650f 100%);
+$gradient-topbar: linear-gradient(90deg, #071a3d 0%, #0b2657 50%, #173f87 100%);
+
+$fsize: 16px;
+
+//devices breakpoints
+$breakpoints: (
+  "xs": 0,
+  "sm": 576px,
+  "md": 768px,
+  "lg": 996px,
+  "xl": 1200px,
+  "xxl": 1400px,
+);
+
+//font weights
+$font-weights: (
+  light: 300,
+  regular: 400,
+  semibold: 600,
+  bold: 700,
+);
+
+@each $weight-name, $weight-value in $font-weights {
+  .font-#{$weight-name} {
+    font-weight: $weight-value;
+  }
+}
+
+@each $color-name, $color-value in $colors {
+  .font-#{$color-name} {
+    color: $color-value;
+  }
+   .background-#{$color-name} {
+    background: $color-value;
+  }
+}
