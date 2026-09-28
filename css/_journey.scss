@@ -1,0 +1,411 @@
+// ==========================================
+// JOURNEY TO RECOVERY
+// Five-step timeline. js/custom.js adds .is-inview when the steps scroll into
+// view, which draws the progress line and lights each node in turn.
+// ==========================================
+$jr-node: 76px;
+$jr-gap: 1.25rem;
+$jr-amber: map-get($colors, amber);
+$jr-orange: map-get($colors, secondary);
+
+.journey-to-recovery {
+  position: relative;
+  padding: 6.5rem 0;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(30, 136, 229, 0.28) 0%, rgba(30, 136, 229, 0) 38%),
+    radial-gradient(circle at 88% 85%, rgba(244, 123, 32, 0.22) 0%, rgba(244, 123, 32, 0) 40%),
+    linear-gradient(160deg, #071a3d 0%, #0b2657 55%, #173f87 100%);
+  color: map-get($colors, white);
+
+  // faint grid texture
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: linear-gradient(180deg, transparent 0%, #000 30%, #000 70%, transparent 100%);
+    pointer-events: none;
+  }
+
+  > .container-90 {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+// ---------- Heading ----------
+.jr-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.jr-head__text {
+  max-width: 640px;
+}
+
+.jr-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-bottom: 1rem;
+  padding: 0.4rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.06);
+  color: $jr-amber;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  &::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: $jr-amber;
+    box-shadow: 0 0 0 4px rgba(249, 168, 38, 0.2);
+  }
+}
+
+.jr-title {
+  margin: 0 0 1rem;
+  color: map-get($colors, white);
+  font-size: clamp(1.8rem, 3.4vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.2;
+
+  span {
+    background: linear-gradient(90deg, #f9a826 0%, #f47b20 60%, #ff8f3c 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+.jr-lead {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 1.02rem;
+  line-height: 1.75;
+}
+
+.jr-head__btn {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.5rem 0.55rem 0.5rem 1.5rem;
+  border-radius: 50px;
+  background: $gradient-secondary;
+  color: map-get($colors, white);
+  font-size: 15px;
+  font-weight: 600;
+  box-shadow: 0 16px 30px -14px rgba(244, 123, 32, 0.9);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: map-get($colors, white);
+    color: map-get($colors, darksecondary);
+    transition: transform 0.3s ease;
+  }
+
+  svg {
+    width: 17px;
+    height: 17px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  &:hover,
+  &:focus-visible {
+    color: map-get($colors, white);
+    transform: translateY(-2px);
+    box-shadow: 0 20px 34px -14px rgba(244, 123, 32, 1);
+
+    span {
+      transform: rotate(-45deg);
+    }
+  }
+}
+
+// ---------- Timeline ----------
+.jr-steps {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: $jr-gap;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  // track + animated fill, running node centre to node centre
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: $jr-node * 0.5;
+    left: calc((100% - 4 * #{$jr-gap}) / 10);
+    right: calc((100% - 4 * #{$jr-gap}) / 10);
+    height: 2px;
+    border-radius: 2px;
+  }
+
+  &::before {
+    background: repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.22) 0 8px, transparent 8px 16px);
+  }
+
+  &::after {
+    background: linear-gradient(90deg, #4fb3f0 0%, #1e88e5 30%, #f9a826 70%, #f47b20 100%);
+    box-shadow: 0 0 12px rgba(249, 168, 38, 0.6);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 1.8s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+
+  &.is-inview::after {
+    transform: scaleX(1);
+  }
+}
+
+.jr-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.jr-step__node {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: $jr-node;
+  height: $jr-node;
+  border: 2px solid rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+  background: #0d2c63;
+  color: rgba(255, 255, 255, 0.85);
+  transition: background 0.35s ease, transform 0.35s ease;
+
+  svg {
+    width: 30px;
+    height: 30px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  // lit state, staggered to follow the line as it draws (an animation, so the
+  // stagger never delays the hover effect)
+  .jr-steps.is-inview & {
+    animation: jrNodeLight 0.5s ease forwards;
+  }
+
+  @for $i from 2 through 5 {
+    .jr-steps.is-inview .jr-step:nth-child(#{$i}) & {
+      animation-delay: #{0.4s * ($i - 1)};
+    }
+  }
+}
+
+@keyframes jrNodeLight {
+  to {
+    border-color: $jr-amber;
+    color: map-get($colors, white);
+    box-shadow: 0 0 0 6px rgba(249, 168, 38, 0.12), 0 12px 30px -8px rgba(244, 123, 32, 0.6);
+  }
+}
+
+.jr-step__num {
+  position: absolute;
+  top: -4px;
+  right: -6px;
+  min-width: 28px;
+  padding: 0.15rem 0.35rem;
+  border-radius: 50px;
+  background: $gradient-secondary;
+  color: map-get($colors, white);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.4;
+  box-shadow: 0 4px 10px -2px rgba(244, 123, 32, 0.7);
+}
+
+.jr-step__card {
+  flex-grow: 1;
+  width: 100%;
+  margin-top: 1.6rem;
+  padding: 1.5rem 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 20px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.02) 100%);
+  transition: transform 0.35s ease, border-color 0.35s ease, background 0.35s ease;
+}
+
+.jr-step:hover {
+  .jr-step__node {
+    background: $gradient-secondary;
+    transform: translateY(-4px);
+  }
+
+  .jr-step__card {
+    transform: translateY(-4px);
+    border-color: rgba(249, 168, 38, 0.4);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.03) 100%);
+  }
+}
+
+.jr-step__label {
+  display: block;
+  margin-bottom: 0.45rem;
+  color: $jr-amber;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.jr-step__title {
+  margin: 0 0 0.55rem;
+  color: map-get($colors, white);
+  font-size: 1.12rem;
+  font-weight: 600;
+}
+
+.jr-step__text {
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+// ---------- Responsive ----------
+@include minMax(992px, 1199px) {
+  .jr-step__card {
+    padding: 1.25rem 1rem;
+  }
+
+  .jr-step__text {
+    font-size: 13.5px;
+  }
+}
+
+// Below lg: vertical timeline, line runs down the left
+@include max(991px) {
+  .journey-to-recovery {
+    padding: 4.5rem 0;
+  }
+
+  .jr-head {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 2.75rem;
+  }
+
+  .jr-steps {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+
+    &::before,
+    &::after {
+      top: $jr-node * 0.5;
+      bottom: $jr-node * 0.5;
+      left: $jr-node * 0.5 - 1px;
+      right: auto;
+      width: 2px;
+      height: auto;
+    }
+
+    &::before {
+      background: repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0 8px, transparent 8px 16px);
+    }
+
+    &::after {
+      background: linear-gradient(180deg, #4fb3f0 0%, #1e88e5 30%, #f9a826 70%, #f47b20 100%);
+      transform: scaleY(0);
+      transform-origin: top;
+    }
+
+    &.is-inview::after {
+      transform: scaleY(1);
+    }
+  }
+
+  .jr-step {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 1.25rem;
+    text-align: left;
+  }
+
+  .jr-step__card {
+    margin-top: 0;
+  }
+}
+
+@include max(575px) {
+  $jr-node-sm: 60px;
+
+  .jr-steps {
+    &::before,
+    &::after {
+      top: $jr-node-sm * 0.5;
+      bottom: $jr-node-sm * 0.5;
+      left: $jr-node-sm * 0.5 - 1px;
+    }
+  }
+
+  .jr-step {
+    gap: 1rem;
+  }
+
+  .jr-step__node {
+    width: $jr-node-sm;
+    height: $jr-node-sm;
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  .jr-step__card {
+    padding: 1.15rem 1.1rem;
+    border-radius: 16px;
+  }
+
+  .jr-head__btn {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jr-steps::after {
+    transition: none;
+  }
+
+  .jr-steps.is-inview .jr-step__node {
+    animation-duration: 0.01s;
+    animation-delay: 0s !important;
+  }
+}

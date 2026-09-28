@@ -73,6 +73,23 @@ $(function () {
   });
 });
 
+// Journey to recovery: draw the timeline once the steps scroll into view
+$(function () {
+  var steps = document.querySelector('.jr-steps');
+  if (!steps) return;
+  if (!('IntersectionObserver' in window)) {
+    steps.classList.add('is-inview');
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    if (entries[0].isIntersecting) {
+      steps.classList.add('is-inview');
+      io.disconnect();
+    }
+  }, { threshold: 0.35 });
+  io.observe(steps);
+});
+
 // Categories carousel
 var categoriesSwiper = new Swiper('.categoriesSwiper', {
   slidesPerView: 2,
