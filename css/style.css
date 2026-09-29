@@ -2903,6 +2903,290 @@ a {
     animation: none;
   }
 }
+.site-footer {
+  position: relative;
+  font-size: 14.5px;
+}
+
+.ft-main {
+  position: relative;
+  padding: 5rem 0 4rem;
+  overflow: hidden;
+  background: linear-gradient(180deg, #f5f9fe 0%, #eaf2fb 100%);
+}
+.ft-main::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #1e88e5 0%, #173f87 45%, #f47b20 100%);
+}
+.ft-main::after {
+  content: "";
+  position: absolute;
+  right: -80px;
+  bottom: -90px;
+  width: 380px;
+  height: 380px;
+  background: url("../img/favicon-192.png") center/contain no-repeat;
+  opacity: 0.06;
+  pointer-events: none;
+}
+.ft-main > .container-90 {
+  position: relative;
+  z-index: 1;
+}
+
+.ft-logo {
+  display: inline-block;
+  margin-bottom: 1.2rem;
+}
+.ft-logo img {
+  height: 92px;
+  width: auto;
+}
+
+.ft-about {
+  max-width: 360px;
+  margin-bottom: 1.5rem !important;
+  color: #6b7689;
+  line-height: 1.75;
+}
+
+.ft-social {
+  display: flex;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ft-social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #fff;
+  color: #173f87;
+  box-shadow: 0 8px 18px -10px rgba(11, 38, 87, 0.45);
+  transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+}
+.ft-social a:hover, .ft-social a:focus-visible {
+  color: #fff;
+  transform: translateY(-3px);
+}
+.ft-social svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+.ft-social .ft-social__fb:hover,
+.ft-social .ft-social__fb:focus-visible {
+  background: #1877f2;
+}
+.ft-social .ft-social__ig:hover,
+.ft-social .ft-social__ig:focus-visible {
+  background: linear-gradient(45deg, #f9ce34 0%, #ee2a7b 50%, #6228d7 100%);
+}
+.ft-social .ft-social__yt:hover,
+.ft-social .ft-social__yt:focus-visible {
+  background: #ff0000;
+}
+.ft-social .ft-social__wa:hover,
+.ft-social .ft-social__wa:focus-visible {
+  background: #25d366;
+}
+
+.ft-heading {
+  position: relative;
+  margin: 0.5rem 0 1.5rem;
+  padding-bottom: 0.8rem;
+  color: #173f87;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+.ft-heading::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 36px;
+  height: 3px;
+  border-radius: 3px;
+  background: linear-gradient(135deg, #f9a826 0%, #f47b20 55%, #e8650f 100%);
+}
+
+.ft-links {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ft-links li + li {
+  margin-top: 0.75rem;
+}
+.ft-links a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  color: #1c2536;
+  transition: color 0.25s ease, padding 0.25s ease;
+}
+.ft-links a::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  border-top: 1.8px solid #f47b20;
+  border-right: 1.8px solid #f47b20;
+  opacity: 0;
+  transform: rotate(45deg) translateX(-4px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.ft-links a:hover, .ft-links a:focus-visible {
+  color: #d9600b;
+  padding-left: 1rem;
+}
+.ft-links a:hover::before, .ft-links a:focus-visible::before {
+  opacity: 1;
+  transform: rotate(45deg) translateX(0);
+}
+
+.ft-contact {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ft-contact li {
+  display: flex;
+  gap: 0.9rem;
+  color: #1c2536;
+  line-height: 1.6;
+}
+.ft-contact li + li {
+  margin-top: 1.1rem;
+}
+.ft-contact small {
+  display: block;
+  color: #6b7689;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.ft-contact address {
+  margin: 0;
+  font-style: normal;
+}
+.ft-contact a {
+  color: #173f87;
+  font-weight: 500;
+  transition: color 0.25s ease;
+}
+.ft-contact a:hover, .ft-contact a:focus-visible {
+  color: #d9600b;
+}
+
+.ft-contact__icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 13px;
+  background: #fff;
+  color: #f47b20;
+  box-shadow: 0 8px 18px -12px rgba(11, 38, 87, 0.5);
+}
+.ft-contact__icon svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ft-bottom {
+  background: linear-gradient(90deg, #071a3d 0%, #0b2657 50%, #173f87 100%);
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 13.5px;
+}
+
+.ft-bottom__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+  min-height: 64px;
+  padding: 0.9rem 0;
+}
+
+.ft-bottom__links {
+  display: flex;
+  gap: 1.5rem;
+  margin: 0 0 0 auto;
+  padding: 0;
+  list-style: none;
+}
+.ft-bottom__links a {
+  color: rgba(255, 255, 255, 0.75);
+  transition: color 0.25s ease;
+}
+.ft-bottom__links a:hover, .ft-bottom__links a:focus-visible {
+  color: #f9a826;
+}
+
+.ft-top {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f9a826 0%, #f47b20 55%, #e8650f 100%);
+  color: #fff;
+  box-shadow: 0 8px 18px -8px rgba(244, 123, 32, 0.9);
+  transition: transform 0.3s ease;
+}
+.ft-top svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.ft-top:hover, .ft-top:focus-visible {
+  color: #fff;
+  transform: translateY(-3px);
+}
+
+@media (max-width: 991px) {
+  .ft-main {
+    padding: 4rem 0 3rem;
+  }
+}
+@media (max-width: 575px) {
+  .ft-logo img {
+    height: 80px;
+  }
+  .ft-bottom__inner {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.25rem 0;
+  }
+  .ft-bottom__links {
+    margin: 0;
+  }
+}
 .page-loader {
   position: fixed;
   inset: 0;

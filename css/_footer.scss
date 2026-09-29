@@ -1,0 +1,333 @@
+// ==========================================
+// FOOTER
+// Row 1: about + social / quick links / services / contact (light).
+// Row 2: copyright bar (navy). Year filled by #footerYear in js/custom.js.
+// ==========================================
+$ft-navy: map-get($colors, primary);
+$ft-orange: map-get($colors, secondary);
+$ft-muted: map-get($colors, gray);
+
+.site-footer {
+  position: relative;
+  font-size: 14.5px;
+}
+
+// ---------- Row 1 ----------
+.ft-main {
+  position: relative;
+  padding: 5rem 0 4rem;
+  overflow: hidden;
+  background: linear-gradient(180deg, #f5f9fe 0%, #eaf2fb 100%);
+
+  // brand hairline
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: $gradient-brand;
+  }
+
+  // oversized, faded emblem as a watermark
+  &::after {
+    content: "";
+    position: absolute;
+    right: -80px;
+    bottom: -90px;
+    width: 380px;
+    height: 380px;
+    background: url("../img/favicon-192.png") center / contain no-repeat;
+    opacity: 0.06;
+    pointer-events: none;
+  }
+
+  > .container-90 {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.ft-logo {
+  display: inline-block;
+  margin-bottom: 1.2rem;
+
+  img {
+    height: 92px;
+    width: auto;
+  }
+}
+
+.ft-about {
+  max-width: 360px;
+  margin-bottom: 1.5rem !important;
+  color: $ft-muted;
+  line-height: 1.75;
+}
+
+.ft-social {
+  display: flex;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: map-get($colors, white);
+    color: $ft-navy;
+    box-shadow: 0 8px 18px -10px rgba(11, 38, 87, 0.45);
+    transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+
+    &:hover,
+    &:focus-visible {
+      color: map-get($colors, white);
+      transform: translateY(-3px);
+    }
+  }
+
+  svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+  }
+
+  // each network's own colour on hover
+  .ft-social__fb:hover,
+  .ft-social__fb:focus-visible {
+    background: #1877f2;
+  }
+  .ft-social__ig:hover,
+  .ft-social__ig:focus-visible {
+    background: linear-gradient(45deg, #f9ce34 0%, #ee2a7b 50%, #6228d7 100%);
+  }
+  .ft-social__yt:hover,
+  .ft-social__yt:focus-visible {
+    background: #ff0000;
+  }
+  .ft-social__wa:hover,
+  .ft-social__wa:focus-visible {
+    background: map-get($colors, whatsapp);
+  }
+}
+
+.ft-heading {
+  position: relative;
+  margin: 0.5rem 0 1.5rem;
+  padding-bottom: 0.8rem;
+  color: $ft-navy;
+  font-size: 1.1rem;
+  font-weight: 600;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 36px;
+    height: 3px;
+    border-radius: 3px;
+    background: $gradient-secondary;
+  }
+}
+
+.ft-links {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li + li {
+    margin-top: 0.75rem;
+  }
+
+  a {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    color: map-get($colors, black);
+    transition: color 0.25s ease, padding 0.25s ease;
+
+    // chevron that slides in on hover
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 6px;
+      height: 6px;
+      border-top: 1.8px solid $ft-orange;
+      border-right: 1.8px solid $ft-orange;
+      opacity: 0;
+      transform: rotate(45deg) translateX(-4px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    &:hover,
+    &:focus-visible {
+      color: map-get($colors, darksecondary);
+      padding-left: 1rem;
+
+      &::before {
+        opacity: 1;
+        transform: rotate(45deg) translateX(0);
+      }
+    }
+  }
+}
+
+.ft-contact {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    display: flex;
+    gap: 0.9rem;
+    color: map-get($colors, black);
+    line-height: 1.6;
+  }
+
+  li + li {
+    margin-top: 1.1rem;
+  }
+
+  small {
+    display: block;
+    color: $ft-muted;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  address {
+    margin: 0;
+    font-style: normal;
+  }
+
+  a {
+    color: $ft-navy;
+    font-weight: 500;
+    transition: color 0.25s ease;
+
+    &:hover,
+    &:focus-visible {
+      color: map-get($colors, darksecondary);
+    }
+  }
+}
+
+.ft-contact__icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 13px;
+  background: map-get($colors, white);
+  color: $ft-orange;
+  box-shadow: 0 8px 18px -12px rgba(11, 38, 87, 0.5);
+
+  svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+}
+
+// ---------- Row 2 ----------
+.ft-bottom {
+  background: $gradient-topbar;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 13.5px;
+}
+
+.ft-bottom__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+  min-height: 64px;
+  padding: 0.9rem 0;
+}
+
+.ft-bottom__links {
+  display: flex;
+  gap: 1.5rem;
+  margin: 0 0 0 auto;
+  padding: 0;
+  list-style: none;
+
+  a {
+    color: rgba(255, 255, 255, 0.75);
+    transition: color 0.25s ease;
+
+    &:hover,
+    &:focus-visible {
+      color: map-get($colors, amber);
+    }
+  }
+}
+
+.ft-top {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: $gradient-secondary;
+  color: map-get($colors, white);
+  box-shadow: 0 8px 18px -8px rgba(244, 123, 32, 0.9);
+  transition: transform 0.3s ease;
+
+  svg {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  &:hover,
+  &:focus-visible {
+    color: map-get($colors, white);
+    transform: translateY(-3px);
+  }
+}
+
+// ---------- Responsive ----------
+@include max(991px) {
+  .ft-main {
+    padding: 4rem 0 3rem;
+  }
+}
+
+@include max(575px) {
+  .ft-logo img {
+    height: 80px;
+  }
+
+  .ft-bottom__inner {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.25rem 0;
+  }
+
+  .ft-bottom__links {
+    margin: 0;
+  }
+}
