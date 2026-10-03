@@ -145,23 +145,30 @@ $jr-orange: map-get($colors, secondary);
 }
 
 // ---------- Timeline ----------
+// Step count and index come from journey.php (--jr-count on the list,
+// --jr-i on each step), so the layout follows however many steps data.php has.
 .jr-steps {
+  --jr-count: 5;
   position: relative;
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(var(--jr-count), minmax(0, 1fr));
   gap: $jr-gap;
   margin: 0;
   padding: 0;
   list-style: none;
 
-  // track + animated fill, running node centre to node centre
+  // track + animated fill, running node centre to node centre.
+  // z-index 0 keeps it behind the steps (z-index 1), which each form their
+  // own stacking context once AOS animates them.
   &::before,
   &::after {
     content: "";
     position: absolute;
+    z-index: 0;
     top: $jr-node * 0.5;
-    left: calc((100% - 4 * #{$jr-gap}) / 10);
-    right: calc((100% - 4 * #{$jr-gap}) / 10);
+    // half a column in from each edge = first and last node centres
+    left: calc((100% - (var(--jr-count) - 1) * #{$jr-gap}) / (2 * var(--jr-count)));
+    right: calc((100% - (var(--jr-count) - 1) * #{$jr-gap}) / (2 * var(--jr-count)));
     height: 2px;
     border-radius: 2px;
   }
@@ -175,7 +182,8 @@ $jr-orange: map-get($colors, secondary);
     box-shadow: 0 0 12px rgba(249, 168, 38, 0.6);
     transform: scaleX(0);
     transform-origin: left;
-    transition: transform 1.8s cubic-bezier(0.65, 0, 0.35, 1);
+    // draw time scales with the number of gaps, matching the node stagger
+    transition: transform calc((var(--jr-count) - 1) * 0.45s) cubic-bezier(0.65, 0, 0.35, 1);
   }
 
   &.is-inview::after {
@@ -184,6 +192,8 @@ $jr-orange: map-get($colors, secondary);
 }
 
 .jr-step {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -219,12 +229,7 @@ $jr-orange: map-get($colors, secondary);
   // stagger never delays the hover effect)
   .jr-steps.is-inview & {
     animation: jrNodeLight 0.5s ease forwards;
-  }
-
-  @for $i from 2 through 5 {
-    .jr-steps.is-inview .jr-step:nth-child(#{$i}) & {
-      animation-delay: #{0.4s * ($i - 1)};
-    }
+    animation-delay: calc(var(--jr-i, 0) * 0.4s);
   }
 }
 

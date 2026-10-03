@@ -81,13 +81,55 @@ $(function () {
     steps.classList.add('is-inview');
     return;
   }
+  // Fire once the list's top passes 75% of the viewport height. A ratio
+  // threshold could never be reached when the (vertical, mobile) timeline is
+  // much taller than the screen.
   var io = new IntersectionObserver(function (entries) {
     if (entries[0].isIntersecting) {
       steps.classList.add('is-inview');
       io.disconnect();
     }
-  }, { threshold: 0.35 });
+  }, { rootMargin: '0px 0px -25% 0px' });
   io.observe(steps);
+});
+
+// Stat counters: [data-count-to="26"] counts up from 0 when scrolled into view
+$(function () {
+  var counters = document.querySelectorAll('[data-count-to]');
+  if (!counters.length) return;
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function run(el) {
+    var target = parseInt(el.getAttribute('data-count-to'), 10) || 0;
+    if (reduceMotion) {
+      el.textContent = target;
+      return;
+    }
+    var duration = 1400;
+    var start = null;
+    function step(now) {
+      if (start === null) start = now;
+      var p = Math.min((now - start) / duration, 1);
+      // ease-out cubic so the count settles gently
+      el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  if (!('IntersectionObserver' in window)) {
+    counters.forEach(run);
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        run(entry.target);
+        io.unobserve(entry.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -15% 0px' });
+  counters.forEach(function (el) { io.observe(el); });
 });
 
 // Categories carousel
