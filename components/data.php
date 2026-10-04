@@ -137,9 +137,10 @@ $nav = [
     ['id' => 'home', 'label' => 'Home', 'url' => 'index.php'],
     ['id' => 'about', 'label' => 'About Us', 'url' => 'about.php', 'children' => [
         ['label' => 'About the Clinic', 'url' => 'about.php'],
-        ['label' => 'Dr. Y. Abhilash (PT)', 'url' => 'about.php#doctor'],
-        ['label' => 'Why Choose Us', 'url' => 'about.php#why-us'],
-        ['label' => 'Clinic Gallery', 'url' => 'gallery.php'],
+        // 'id' marks a child that is its own page: highlights "About Us" there
+        // and builds the breadcrumb Home › About Us › Dr. Y. Abhilash (PT)
+        ['id' => 'doctors', 'label' => 'Dr. Y. Abhilash (PT)', 'url' => 'doctors.php'],
+        ['id' => 'whychooseus', 'label' => 'Why Choose Us', 'url' => 'whychooseus.php'],
     ]],
     ['id' => 'treatments', 'label' => 'Treatments', 'url' => 'treatments.php', 'mega' => true],
     ['id' => 'specialities', 'label' => 'Specialities', 'url' => 'specialities.php', 'children' => array_map(function ($s) {
@@ -252,6 +253,98 @@ $aboutPage = [
             ['icon' => 'clock', 'title' => 'Open 7 Days', 'text' => 'Mornings and evenings Monday to Saturday, plus Sunday mornings — care that fits around work and school.'],
         ],
     ],
+];
+
+// ---------------------------------------------------------------------------
+// Doctor profile page
+// Credentials left empty are simply not shown; fill them in and they appear.
+// ---------------------------------------------------------------------------
+$doctorPage = [
+    'banner' => [
+        'title'     => 'Meet',
+        'highlight' => 'Dr. Y. Abhilash (PT)',
+        'lead'      => 'Registered physiotherapist helping adults and children move freely, recover fully and stay strong.',
+        'image'     => 'banner03',
+    ],
+
+    'profile' => [
+        'photo'            => '', // TODO: e.g. 'img/dr-abhilash.jpg' (portrait, ~800x1000); initials show until set
+        'qualifications'   => '', // TODO: e.g. 'BPT, MPT (Orthopaedics)'
+        'experience_years' => 0,  // TODO: e.g. 10 -> shows "10+ Years Experience"
+        'languages'        => '', // TODO: e.g. 'English, Telugu, Hindi'
+        'bio' => [
+            'Dr. Y. Abhilash (PT) is a registered physiotherapist (Regd. No. 08928) who leads care at New Life Physiotherapy Clinic.',
+            'His approach is simple: find the real cause of pain, explain it clearly, and treat it with hands-on therapy and targeted exercise. He works with adults and children across orthopaedic, sports and neurological conditions — from back pain and frozen shoulder to stroke rehabilitation and Parkinson\'s disease.',
+        ],
+    ],
+
+    'experience' => [
+        'eyebrow'   => 'Clinical Experience',
+        'title'     => 'Areas of',
+        'highlight' => 'Expertise',
+        'lead'      => 'Hands-on experience across the full range of conditions treated at the clinic.',
+        // 'cat' pulls the matching conditions from $treatments; 'items' lists them by hand
+        'areas' => [
+            ['cat' => 'spine', 'icon' => 'spine', 'title' => 'Spine & Back Rehabilitation', 'text' => 'Assessment and rehab for neck and back pain, disc problems and nerve pain.'],
+            ['cat' => 'joints', 'icon' => 'knee', 'title' => 'Joint & Sports Injuries', 'text' => 'Restoring movement and strength after joint, ligament and sports injuries.'],
+            ['cat' => 'neuro', 'icon' => 'brain', 'title' => 'Neurological Rehabilitation', 'text' => 'Long-term rehab to rebuild movement, balance and independence.'],
+            ['icon' => 'clipboard-plus', 'title' => 'Pre & Post Operative Care', 'text' => 'Preparing the body for surgery and guiding a safe, steady recovery afterwards.', 'items' => ['Pre-surgery conditioning', 'Post-surgery rehab', 'Joint mobilisation', 'Strength training']],
+            ['icon' => 'child', 'title' => 'Child Therapy', 'text' => 'Gentle, play-based physiotherapy that helps children move, grow and thrive.', 'items' => ['Play-based therapy', 'Posture & movement', 'Parent guidance']],
+        ],
+        // TODO: career history, newest first. Shown as a timeline once filled:
+        //   ['period' => '2019 – Present', 'title' => 'Physiotherapist', 'place' => 'New Life Physiotherapy Clinic, Hyderabad'],
+        'timeline' => [],
+    ],
+
+    'advantages' => [
+        'eyebrow'   => 'Why Patients Choose Him',
+        'title'     => 'Advantages of Treating with',
+        'highlight' => 'Dr. Abhilash',
+        'points'    => [
+            ['icon' => 'shield', 'title' => 'Registered & Accountable', 'text' => 'Registered physiotherapist, Regd. No. 08928 — your care is in qualified hands.'],
+            ['icon' => 'assess', 'title' => 'A Diagnosis You Understand', 'text' => 'Your condition explained in plain language, with a clear plan and milestones.'],
+            ['icon' => 'hand', 'title' => 'Hands-on Expertise', 'text' => 'Manual therapy, laser therapy, taping and joint mobilisation tailored to your body.'],
+            ['icon' => 'family', 'title' => 'Adults & Children', 'text' => 'Experience across orthopaedic, sports, neurological and child physiotherapy.'],
+            ['icon' => 'plan', 'title' => 'Home Exercise Programme', 'text' => 'Simple exercises to do at home so your progress continues between visits.'],
+            ['icon' => 'clock', 'title' => 'Flexible Timings', 'text' => 'Morning and evening slots six days a week, plus Sunday mornings.'],
+        ],
+    ],
+];
+
+// ---------------------------------------------------------------------------
+// Why Choose Us page
+// (also reuses $aboutPage['apart'] and $journeySteps)
+// ---------------------------------------------------------------------------
+$whyPage = [
+    'banner' => [
+        'title'     => 'Why',
+        'highlight' => 'Choose Us',
+        'lead'      => 'Care that listens, explains and adapts — so you recover faster and stay strong.',
+        'image'     => 'banner01',
+    ],
+
+    'promise' => [
+        'eyebrow'   => 'Our Care Promise',
+        'title'     => 'What You Can Count On,',
+        'highlight' => 'Every Visit',
+        'lead'      => 'Five commitments that shape how we treat every patient, from the first call to the final session.',
+        'image'     => 'banner02',
+        'badge'     => ['title' => 'Free Consultation', 'text' => 'Talk to us before you commit'],
+        'items'     => [
+            ['title' => 'We listen first', 'text' => 'Every visit starts with your story — your pain, your routine and what you want to get back to.'],
+            ['title' => 'We explain clearly', 'text' => 'You will always know what is causing your pain and what each part of your treatment is for.'],
+            ['title' => 'We tailor every plan', 'text' => 'Your plan is built around your condition, your goals and your daily life — never copied from someone else\'s.'],
+            ['title' => 'We track your progress', 'text' => 'Regular reviews show how far you have come, and your plan changes as you improve.'],
+            ['title' => 'We are honest with you', 'text' => 'If physiotherapy is not the right answer for your problem, we will tell you and point you in the right direction.'],
+        ],
+    ],
+];
+
+// Closing call-to-action band (any page)
+$ctaBand = [
+    'title'     => 'Ready to Start Your',
+    'highlight' => 'Recovery?',
+    'text'      => 'Book a free consultation with Dr. Y. Abhilash (PT) — or call us and we will find a time that suits you.',
 ];
 
 // ---------------------------------------------------------------------------

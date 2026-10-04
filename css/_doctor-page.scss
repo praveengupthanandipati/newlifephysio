@@ -1,0 +1,906 @@
+// ==========================================
+// DOCTOR PROFILE PAGE
+// Profile card + credentials, areas of expertise (+ optional career
+// timeline), advantages with a booking card. Uses the page banner and the
+// AOS / count-up load animations from _about-page.scss and js/custom.js.
+// ==========================================
+$dp-navy: map-get($colors, primary);
+$dp-orange: map-get($colors, secondary);
+$dp-amber: map-get($colors, amber);
+$dp-muted: map-get($colors, gray);
+
+// "View profile" link on the About page doctor card
+.who-doctor__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-top: 0.2rem;
+  color: map-get($colors, darksecondary);
+  font-size: 12.5px;
+  font-weight: 600;
+
+  svg {
+    width: 14px;
+    height: 14px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: transform 0.25s ease;
+  }
+
+  &:hover,
+  &:focus-visible {
+    color: $dp-orange;
+
+    svg {
+      transform: translateX(3px);
+    }
+  }
+}
+
+.who-doctor small {
+  display: block;
+}
+
+// Shared headings
+.doc-eyebrow {
+  @extend .svc-eyebrow;
+}
+
+.doc-title {
+  @extend .svc-title;
+}
+
+.doc-text {
+  margin-bottom: 1rem !important;
+  color: $dp-muted;
+  font-size: 1.02rem;
+  line-height: 1.8;
+}
+
+// ---------- Profile ----------
+.doc-profile {
+  position: relative;
+  padding: 6.5rem 0 5.5rem;
+  overflow: hidden;
+  background: map-get($colors, white);
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 8%;
+    left: -140px;
+    width: 520px;
+    height: 520px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(244, 123, 32, 0.1) 0%, rgba(244, 123, 32, 0) 70%);
+    pointer-events: none;
+  }
+
+  > .container-90 {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.doc-card {
+  max-width: 440px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 28px;
+  background: map-get($colors, white);
+  box-shadow: 0 34px 60px -30px rgba(11, 38, 87, 0.55);
+}
+
+.doc-card__portrait {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 4 / 3.6;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 80% 15%, rgba(249, 168, 38, 0.45) 0%, rgba(249, 168, 38, 0) 40%),
+    $gradient-topbar;
+
+  // emblem watermark behind the initials
+  &::before {
+    content: "";
+    position: absolute;
+    right: -50px;
+    bottom: -60px;
+    width: 260px;
+    height: 260px;
+    background: url("../img/favicon-192.png") center / contain no-repeat;
+    opacity: 0.12;
+  }
+
+  img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+  }
+}
+
+.doc-card__initials {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  color: map-get($colors, white);
+  font-size: 54px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.25), 0 0 0 12px rgba(255, 255, 255, 0.05), 0 0 0 26px rgba(255, 255, 255, 0.03);
+
+  // slowly rotating dashed orbit
+  &::after {
+    content: "";
+    position: absolute;
+    inset: -18px;
+    border: 2px dashed rgba(249, 168, 38, 0.6);
+    border-radius: 50%;
+    animation: dpOrbit 22s linear infinite;
+  }
+}
+
+@keyframes dpOrbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.doc-card__badge {
+  position: absolute;
+  left: 1.2rem;
+  bottom: 1.2rem;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: 50px;
+  background: map-get($colors, white);
+  color: $dp-navy;
+  font-size: 12.5px;
+  font-weight: 600;
+  box-shadow: 0 10px 20px -10px rgba(7, 26, 61, 0.6);
+
+  svg {
+    width: 15px;
+    height: 15px;
+    fill: none;
+    stroke: $dp-orange;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+}
+
+.doc-card__body {
+  padding: 1.6rem 1.6rem 1.7rem;
+  text-align: center;
+}
+
+.doc-card__name {
+  margin-bottom: 0.2rem !important;
+  color: $dp-navy;
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.doc-card__role {
+  color: $dp-muted;
+  font-size: 14px;
+}
+
+.doc-card__stats {
+  display: flex;
+  justify-content: center;
+  margin: 1.3rem 0;
+  padding: 1rem 0;
+  list-style: none;
+  border-top: 1px dashed rgba(23, 63, 135, 0.15);
+  border-bottom: 1px dashed rgba(23, 63, 135, 0.15);
+
+  li {
+    flex: 1;
+    padding: 0 0.5rem;
+
+    & + li {
+      border-left: 1px solid rgba(23, 63, 135, 0.1);
+    }
+  }
+
+  strong {
+    display: block;
+    background: $gradient-secondary;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size: 1.7rem;
+    font-weight: 700;
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .doc-card__stat-label {
+    display: block;
+    margin-top: 0.2rem;
+    color: $dp-muted;
+    font-size: 12px;
+  }
+}
+
+.doc-card__actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.7rem;
+}
+
+.doc-card__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.75rem 1rem;
+  border-radius: 50px;
+  color: map-get($colors, white);
+  font-size: 14.5px;
+  font-weight: 600;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  &:hover,
+  &:focus-visible {
+    color: map-get($colors, white);
+    transform: translateY(-2px);
+  }
+}
+
+.doc-card__btn--call {
+  background: $gradient-primary;
+  box-shadow: 0 12px 22px -12px rgba(23, 63, 135, 0.9);
+
+  svg {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+}
+
+.doc-card__btn--wa {
+  background: map-get($colors, whatsapp);
+  box-shadow: 0 12px 22px -12px rgba(37, 211, 102, 0.8);
+
+  svg {
+    fill: currentColor;
+  }
+}
+
+// credentials list
+.doc-creds {
+  margin: 1.6rem 0;
+  overflow: hidden;
+  border: 1px solid rgba(23, 63, 135, 0.08);
+  border-radius: 20px;
+  background: linear-gradient(160deg, #f5f9fe 0%, #ffffff 100%);
+}
+
+.doc-creds__row {
+  display: grid;
+  grid-template-columns: 170px minmax(0, 1fr);
+  gap: 1rem;
+  padding: 0.9rem 1.3rem;
+
+  & + & {
+    border-top: 1px solid rgba(23, 63, 135, 0.07);
+  }
+
+  dt {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    color: $dp-muted;
+    font-size: 13.5px;
+    font-weight: 500;
+
+    &::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: $dp-orange;
+    }
+  }
+
+  dd {
+    margin: 0;
+    color: $dp-navy;
+    font-size: 14.5px;
+    font-weight: 600;
+  }
+}
+
+.doc-chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem 1rem;
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  a {
+    display: inline-block;
+    padding: 0.4rem 0.9rem;
+    border: 1px solid rgba(30, 136, 229, 0.25);
+    border-radius: 50px;
+    background: map-get($colors, lightprimary);
+    color: $dp-navy;
+    font-size: 13px;
+    font-weight: 500;
+    transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+
+    &:hover,
+    &:focus-visible {
+      border-color: $dp-orange;
+      background: $dp-orange;
+      color: map-get($colors, white);
+    }
+  }
+}
+
+.doc-chips__label {
+  color: $dp-navy;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+// ---------- Experience ----------
+.doc-exp {
+  position: relative;
+  padding: 6rem 0;
+  background:
+    radial-gradient(circle at 1px 1px, rgba(23, 63, 135, 0.07) 1px, transparent 0) 0 0 / 22px 22px,
+    linear-gradient(180deg, #f5f9fe 0%, #ffffff 100%);
+}
+
+.doc-exp__head {
+  max-width: 680px;
+  margin: 0 auto 3rem;
+  text-align: center;
+}
+
+.doc-exp__grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 1.4rem;
+}
+
+// 3 cards on the first row, the last 2 centred-wide on the second
+.doc-area {
+  grid-column: span 2;
+
+  &:nth-child(4),
+  &:nth-child(5) {
+    grid-column: span 3;
+  }
+}
+
+.doc-area {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 1.8rem 1.6rem;
+  overflow: hidden;
+  border: 1px solid rgba(23, 63, 135, 0.08);
+  border-radius: 24px;
+  background: map-get($colors, white);
+  box-shadow: 0 14px 34px -28px rgba(11, 38, 87, 0.6);
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+
+  // gradient top edge
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: $gradient-brand;
+    transform: scaleX(0.25);
+    transform-origin: left;
+    transition: transform 0.45s ease;
+  }
+
+  &:hover {
+    transform: translateY(-5px);
+    border-color: transparent;
+    box-shadow: 0 28px 48px -26px rgba(11, 38, 87, 0.5);
+
+    &::before {
+      transform: scaleX(1);
+    }
+
+    .doc-area__icon {
+      background: $gradient-secondary;
+      color: map-get($colors, white);
+    }
+  }
+}
+
+.doc-area__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.doc-area__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: map-get($colors, lightprimary);
+  color: map-get($colors, thirdcolour);
+  transition: background 0.35s ease, color 0.35s ease;
+
+  svg {
+    width: 28px;
+    height: 28px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+}
+
+.doc-area__count {
+  padding: 0.25rem 0.75rem;
+  border-radius: 50px;
+  background: map-get($colors, lightsecondary);
+  color: map-get($colors, darksecondary);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.doc-area__title {
+  margin: 1.2rem 0 0.45rem;
+  color: $dp-navy;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.doc-area__text {
+  margin-bottom: 1.1rem !important;
+  color: $dp-muted;
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.doc-area__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: auto 0 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    padding: 0.3rem 0.7rem;
+    border-radius: 50px;
+    background: map-get($colors, lightgray);
+    color: map-get($colors, black);
+    font-size: 12.5px;
+  }
+
+  a {
+    color: inherit;
+
+    &:hover,
+    &:focus-visible {
+      color: map-get($colors, darksecondary);
+    }
+  }
+}
+
+// optional career timeline
+.doc-timeline {
+  max-width: 760px;
+  margin: 3.5rem auto 0;
+  padding: 2rem 2.2rem;
+  border-radius: 24px;
+  background: map-get($colors, white);
+  box-shadow: 0 14px 34px -28px rgba(11, 38, 87, 0.6);
+
+  ol {
+    position: relative;
+    margin: 0;
+    padding: 0 0 0 1.8rem;
+    list-style: none;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 6px;
+      bottom: 6px;
+      left: 6px;
+      width: 2px;
+      background: linear-gradient(180deg, #1e88e5 0%, #f47b20 100%);
+    }
+  }
+
+  li {
+    position: relative;
+
+    & + li {
+      margin-top: 1.4rem;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 5px;
+      left: calc(-1.8rem + 1px);
+      width: 12px;
+      height: 12px;
+      border: 3px solid map-get($colors, white);
+      border-radius: 50%;
+      background: $dp-orange;
+      box-shadow: 0 0 0 2px $dp-orange;
+    }
+  }
+
+  strong {
+    display: block;
+    color: $dp-navy;
+    font-size: 15.5px;
+  }
+}
+
+.doc-timeline__title {
+  margin: 0 0 1.4rem;
+  color: $dp-navy;
+  font-size: 1.2rem;
+}
+
+.doc-timeline__period {
+  display: inline-block;
+  margin-bottom: 0.2rem;
+  color: map-get($colors, darksecondary);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.doc-timeline__place {
+  color: $dp-muted;
+  font-size: 14px;
+}
+
+// ---------- Advantages ----------
+.doc-adv {
+  position: relative;
+  padding: 6rem 0;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 10% 15%, rgba(30, 136, 229, 0.28) 0%, rgba(30, 136, 229, 0) 38%),
+    radial-gradient(circle at 92% 90%, rgba(244, 123, 32, 0.22) 0%, rgba(244, 123, 32, 0) 40%),
+    linear-gradient(160deg, #071a3d 0%, #0b2657 55%, #173f87 100%);
+  color: map-get($colors, white);
+}
+
+.doc-adv__head {
+  margin-bottom: 2.4rem;
+}
+
+.doc-adv__eyebrow {
+  @extend .jr-eyebrow;
+}
+
+.doc-adv__title {
+  @extend .jr-title;
+}
+
+.doc-adv__list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.doc-adv__item {
+  display: flex;
+  gap: 1rem;
+  padding: 1.35rem 1.3rem;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 20px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.02) 100%);
+  transition: transform 0.35s ease, border-color 0.35s ease, background 0.35s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: rgba(249, 168, 38, 0.45);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.11) 0%, rgba(255, 255, 255, 0.04) 100%);
+
+    .doc-adv__icon {
+      background: $gradient-secondary;
+      color: map-get($colors, white);
+    }
+  }
+
+  h3 {
+    margin: 0.1rem 0 0.35rem;
+    color: map-get($colors, white);
+    font-size: 1.05rem;
+    font-weight: 600;
+  }
+
+  p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    line-height: 1.65;
+  }
+}
+
+.doc-adv__icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 15px;
+  background: rgba(249, 168, 38, 0.15);
+  color: $dp-amber;
+  transition: background 0.35s ease, color 0.35s ease;
+
+  svg {
+    width: 25px;
+    height: 25px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+}
+
+.doc-book {
+  position: sticky;
+  top: 120px;
+  padding: 2rem 1.8rem;
+  border-radius: 24px;
+  background: map-get($colors, white);
+  color: map-get($colors, black);
+  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.6);
+
+  h3 {
+    margin: 1rem 0 0.5rem;
+    color: $dp-navy;
+    font-size: 1.3rem;
+    line-height: 1.3;
+  }
+
+  > p {
+    color: $dp-muted;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+}
+
+.doc-book__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: $gradient-secondary;
+  color: map-get($colors, white);
+  box-shadow: 0 14px 26px -14px rgba(244, 123, 32, 0.9);
+
+  svg {
+    width: 28px;
+    height: 28px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+}
+
+.doc-book__hours {
+  margin: 1.3rem 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.65rem 0;
+    border-bottom: 1px dashed rgba(23, 63, 135, 0.15);
+    font-size: 13.5px;
+  }
+
+  span {
+    color: $dp-muted;
+  }
+
+  b {
+    color: $dp-navy;
+    font-weight: 600;
+    text-align: right;
+  }
+}
+
+.doc-book__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border-radius: 14px;
+  font-size: 15px;
+  font-weight: 600;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+
+  & + & {
+    margin-top: 0.7rem;
+  }
+
+  svg {
+    width: 17px;
+    height: 17px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  &:hover,
+  &:focus-visible {
+    transform: translateY(-2px);
+  }
+}
+
+.doc-book__btn--primary {
+  background: $gradient-secondary;
+  color: map-get($colors, white);
+  box-shadow: 0 14px 26px -14px rgba(244, 123, 32, 0.95);
+
+  &:hover,
+  &:focus-visible {
+    color: map-get($colors, white);
+  }
+}
+
+.doc-book__btn--call {
+  border: 1.5px solid rgba(23, 63, 135, 0.2);
+  color: $dp-navy;
+
+  &:hover,
+  &:focus-visible {
+    border-color: $dp-navy;
+    background: $dp-navy;
+    color: map-get($colors, white);
+  }
+}
+
+// ---------- Responsive ----------
+@include max(1199px) {
+  .doc-creds__row {
+    grid-template-columns: 140px minmax(0, 1fr);
+  }
+}
+
+@include max(991px) {
+  .doc-profile {
+    padding: 4.5rem 0 4rem;
+  }
+
+  .doc-exp,
+  .doc-adv {
+    padding: 4.5rem 0;
+  }
+
+  .doc-exp__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.1rem;
+  }
+
+  .doc-area,
+  .doc-area:nth-child(4),
+  .doc-area:nth-child(5) {
+    grid-column: span 1;
+  }
+
+  // odd count: last card spans the row
+  .doc-area:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+
+  .doc-book {
+    position: static;
+  }
+}
+
+@include max(767px) {
+  .doc-adv__list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@include max(575px) {
+  .doc-card__initials {
+    width: 120px;
+    height: 120px;
+    font-size: 44px;
+  }
+
+  .doc-card__body {
+    padding: 1.4rem 1.2rem 1.5rem;
+  }
+
+  .doc-card__stats strong {
+    font-size: 1.45rem;
+  }
+
+  .doc-creds__row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.2rem;
+    padding: 0.8rem 1.1rem;
+  }
+
+  .doc-exp__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .doc-area:last-child:nth-child(odd) {
+    grid-column: auto;
+  }
+
+  .doc-timeline {
+    padding: 1.6rem 1.3rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .doc-card__initials::after {
+    animation: none;
+  }
+}

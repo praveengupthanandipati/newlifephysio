@@ -36,6 +36,44 @@ function anchor(string $id): string
     return ($onHome ? '' : 'index.php') . '#' . $id;
 }
 
+/**
+ * Breadcrumb trail for a page id from $nav, top level or child:
+ *   'about'   -> [About Us]
+ *   'doctors' -> [About Us, Dr. Y. Abhilash (PT)]
+ * Each crumb is ['label' => ..., 'url' => ...]. Home is not included.
+ */
+function nav_trail(string $id): array
+{
+    foreach ($GLOBALS['nav'] ?? [] as $item) {
+        if ($item['id'] === $id) {
+            return [['label' => $item['label'], 'url' => $item['url']]];
+        }
+        foreach ($item['children'] ?? [] as $child) {
+            if (($child['id'] ?? null) === $id) {
+                return [
+                    ['label' => $item['label'], 'url' => $item['url']],
+                    ['label' => $child['label'], 'url' => $child['url']],
+                ];
+            }
+        }
+    }
+    return [];
+}
+
+/** True when $item, or one of its children, is the current page. */
+function nav_is_active(array $item, string $activePage): bool
+{
+    if ($item['id'] === $activePage) {
+        return true;
+    }
+    foreach ($item['children'] ?? [] as $child) {
+        if (($child['id'] ?? null) === $activePage) {
+            return true;
+        }
+    }
+    return false;
+}
+
 /** "17:00" -> "5 PM", "09:30" -> "9:30 AM". */
 function format_time(string $time): string
 {

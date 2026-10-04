@@ -13,8 +13,14 @@
 /** @var array $treatments */
 /** @var array $megaPromo */
 
-$navActive = function ($id) use ($activePage) {
-    return $id === $activePage ? ' active' : '';
+// Active when the item, or one of its child pages (e.g. doctors under About), is open
+$navActive = function ($id) use ($activePage, $nav) {
+    foreach ($nav as $item) {
+        if ($item['id'] === $id) {
+            return nav_is_active($item, $activePage) ? ' active' : '';
+        }
+    }
+    return '';
 };
 $navCurrent = function ($id) use ($activePage) {
     return $id === $activePage ? ' aria-current="page"' : '';
@@ -120,7 +126,8 @@ $mainPhone = $site['phones'][0];
                             <a class="nav-link mh-nav__link dropdown-toggle<?= $navActive($item['id']) ?>" href="<?= e($item['url']) ?>" role="button" data-bs-toggle="dropdown" aria-expanded="false"><?= e($item['label']) ?></a>
                             <ul class="dropdown-menu mh-drop">
 <?php foreach ($item['children'] as $child): ?>
-                                <li><a class="dropdown-item mh-drop__link" href="<?= e($child['url']) ?>"><?= e($child['label']) ?></a></li>
+<?php $childCurrent = ($child['id'] ?? null) === $activePage; ?>
+                                <li><a class="dropdown-item mh-drop__link<?= $childCurrent ? ' active' : '' ?>" href="<?= e($child['url']) ?>"<?= $childCurrent ? ' aria-current="page"' : '' ?>><?= e($child['label']) ?></a></li>
 <?php endforeach; ?>
                             </ul>
                         </li>

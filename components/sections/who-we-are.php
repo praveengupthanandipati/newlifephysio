@@ -39,6 +39,7 @@ $stats = [
                         <span>
                             <strong><?= e($doctor['name']) ?></strong>
                             <small><?= e($doctor['role']) ?> &middot; Regd. No. <?= e($doctor['reg_no']) ?></small>
+                            <a class="who-doctor__link" href="doctors.php">View profile <?= icon('arrow') ?></a>
                         </span>
                     </div>
                 </div>

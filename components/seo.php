@@ -39,6 +39,25 @@ $seoPages = [
             'physiotherapy doctor near me', 'physio clinic {city}',
         ],
     ],
+    'doctors' => [
+        'title'       => 'Dr. Y. Abhilash (PT) | Physiotherapist in {city}',
+        'description' => 'Meet Dr. Y. Abhilash (PT), registered physiotherapist (Regd. No. 08928) for back pain, sports injuries, stroke rehab and child therapy in {city}.',
+        'keywords'    => [
+            'Dr. Y. Abhilash', 'Dr. Y. Abhilash physiotherapist', 'best physiotherapist in {city}',
+            'physiotherapist near me', 'registered physiotherapist {city}', 'physiotherapy doctor {city}',
+            'sports physiotherapist {city}', 'neuro physiotherapist {city}', 'paediatric physiotherapist {city}',
+            'back pain specialist {city}', 'stroke rehabilitation physiotherapist',
+        ],
+    ],
+    'whychooseus' => [
+        'title'       => 'Why Choose Us | New Life Physiotherapy, {city}',
+        'description' => 'Registered physiotherapist, root-cause assessment, personalised plans and hands-on care, open 7 days. See why {city} patients choose New Life Physiotherapy.',
+        'keywords'    => [
+            'why choose New Life Physiotherapy', 'best physiotherapy clinic in {city}', 'trusted physiotherapist {city}',
+            'personalised physiotherapy', 'physiotherapy clinic open on sunday {city}', 'registered physiotherapist near me',
+            'hands-on physiotherapy {city}', 'physiotherapy free consultation {city}',
+        ],
+    ],
     'treatments' => [
         'title'       => 'Conditions We Treat | Physiotherapy in {city}',
         'description' => 'Physiotherapy for spondylosis, disc bulge, sciatica, frozen shoulder, tennis elbow, plantar fasciitis, hemiplegia, Parkinson\'s and more in {city}.',
@@ -121,7 +140,7 @@ function page_seo(string $page): array
  */
 function page_schema(string $page): array
 {
-    global $site, $treatments, $nav;
+    global $site, $treatments;
 
     $address = array_filter([
         '@type'           => 'PostalAddress',
@@ -168,21 +187,35 @@ function page_schema(string $page): array
 
     $graph = [$clinic];
 
-    // Breadcrumb for inner pages (needs absolute URLs)
+    // The doctor as a Person linked to the clinic (doctor profile page)
+    if ($page === 'doctors') {
+        $profile = $GLOBALS['doctorPage']['profile'];
+        $graph[] = array_filter([
+            '@context'    => 'https://schema.org',
+            '@type'       => 'Person',
+            'name'        => $site['doctor']['name'],
+            'jobTitle'    => $site['doctor']['role'],
+            'description' => $profile['bio'][0],
+            'image'       => $profile['photo'] ? absolute_url($profile['photo']) : null,
+            'url'         => absolute_url('doctors.php'),
+            'hasCredential' => $profile['qualifications'] ?: null,
+            'knowsLanguage' => $profile['languages'] ?: null,
+            'knowsAbout'  => array_column($GLOBALS['specialities'], 'name'),
+            'worksFor'    => ['@type' => 'Physiotherapy', 'name' => $site['name']],
+        ]);
+    }
+
+    // Breadcrumb for inner pages, following the page's place in $nav
+    // (needs absolute URLs)
     if ($page !== 'home' && absolute_url() !== null) {
-        $label = $page;
-        foreach ($nav as $item) {
-            if ($item['id'] === $page) {
-                $label = $item['label'];
-            }
+        $items = [['@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => absolute_url()]];
+        foreach (nav_trail($page) as $i => $crumb) {
+            $items[] = ['@type' => 'ListItem', 'position' => $i + 2, 'name' => $crumb['label'], 'item' => absolute_url($crumb['url'])];
         }
         $graph[] = [
             '@context'        => 'https://schema.org',
             '@type'           => 'BreadcrumbList',
-            'itemListElement' => [
-                ['@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => absolute_url()],
-                ['@type' => 'ListItem', 'position' => 2, 'name' => $label, 'item' => absolute_url($page . '.php')],
-            ],
+            'itemListElement' => $items,
         ];
     }
 

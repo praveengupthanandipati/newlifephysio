@@ -4,20 +4,16 @@
  * Set $banner before including:
  *   ['title' => 'About', 'highlight' => 'New Life Physiotherapy',
  *    'lead' => '...', 'image' => 'banner02']   // image = img/<name>.jpg + -1024.jpg
- * The breadcrumb label is the current page's menu label from $nav.
+ * The breadcrumb follows the page's place in $nav (nav_trail), so child
+ * pages read e.g. Home › About Us › Dr. Y. Abhilash (PT).
  */
 
 // Provided by data.php / init.php (declared for the editor)
 /** @var array $banner */
-/** @var array $nav */
 /** @var string $activePage */
 
-$crumb = $banner['title'];
-foreach ($nav as $item) {
-    if ($item['id'] === $activePage) {
-        $crumb = $item['label'];
-    }
-}
+$trail = nav_trail($activePage) ?: [['label' => $banner['title'], 'url' => '']];
+$lastCrumb = count($trail) - 1;
 ?>
 <!-- page banner -->
 <section class="page-banner">
@@ -26,7 +22,13 @@ foreach ($nav as $item) {
         <nav class="page-banner__crumbs" aria-label="Breadcrumb">
             <ol>
                 <li><a href="index.php">Home</a></li>
-                <li aria-current="page"><?= e($crumb) ?></li>
+<?php foreach ($trail as $i => $crumb): ?>
+<?php if ($i === $lastCrumb): ?>
+                <li aria-current="page"><?= e($crumb['label']) ?></li>
+<?php else: ?>
+                <li><a href="<?= e($crumb['url']) ?>"><?= e($crumb['label']) ?></a></li>
+<?php endif; ?>
+<?php endforeach; ?>
             </ol>
         </nav>
         <h1 class="page-banner__title"><?= e($banner['title']) ?> <span><?= e($banner['highlight']) ?></span></h1>
