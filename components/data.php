@@ -61,6 +61,14 @@ $site = [
 
     'cities' => ['Hyderabad', 'Secunderabad', 'Other'],
 
+    // Analytics & search engine verification. Empty values output nothing,
+    // so no tracking runs until a real ID is set.
+    'analytics' => [
+        'ga4_id'            => '', // TODO: GA4 Measurement ID, e.g. 'G-XXXXXXXXXX' (Admin › Data streams)
+        'gsc_verification'  => '', // TODO: Google Search Console HTML-tag content value
+        'bing_verification' => '', // TODO: Bing Webmaster Tools msvalidate.01 content value
+    ],
+
     'whatsapp_messages' => [
         'book'  => 'Hi, I would like to book an appointment',
         'query' => 'Hi, I would like to ask about a treatment',

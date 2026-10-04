@@ -1,3 +1,32 @@
+// Analytics: send a GA4 event. Safe no-op until GA4 is configured
+// ($site['analytics']['ga4_id'] in components/data.php loads gtag).
+window.nlTrack = function (name, params) {
+  if (typeof window.gtag === 'function') window.gtag('event', name, params || {});
+};
+
+// Analytics: conversion clicks anywhere on the site (calls, WhatsApp, email,
+// booking buttons). link_location says which part of the page it came from.
+document.addEventListener('click', function (e) {
+  var link = e.target.closest && e.target.closest('a[href]');
+  if (!link) return;
+  var href = link.getAttribute('href');
+  var area = link.closest('header, footer, section');
+  var params = {
+    link_location: area ? (area.id || area.className.split(' ')[0] || area.tagName.toLowerCase()) : 'page',
+    link_text: link.textContent.replace(/\s+/g, ' ').trim().slice(0, 60)
+  };
+  if (href.indexOf('tel:') === 0) {
+    params.phone = href.slice(4);
+    window.nlTrack('click_call', params);
+  } else if (href.indexOf('wa.me') !== -1) {
+    window.nlTrack('click_whatsapp', params);
+  } else if (href.indexOf('mailto:') === 0) {
+    window.nlTrack('click_email', params);
+  } else if (link.hash === '#appointment') {
+    window.nlTrack('click_book_cta', params);
+  }
+});
+
 // Header: Bootstrap offcanvas drawer (below lg) helpers
 $(function () {
   var drawerEl = document.getElementById('mhOffcanvas');
@@ -155,7 +184,9 @@ $(function () {
   var jump = document.getElementById('trtJump');
   if (jump) {
     jump.addEventListener('change', function () {
-      if (this.value) window.location.hash = this.value;
+      if (!this.value) return;
+      window.nlTrack('select_content', { content_type: 'treatment', item_id: this.value });
+      window.location.hash = this.value;
     });
   }
 
@@ -990,6 +1021,12 @@ document.addEventListener('DOMContentLoaded', function () {
       .then(function (res) { return res.json(); })
       .then(function (data) {
         if (data.status === 'success') {
+          // GA4 key event; read the choices before reset() clears them
+          window.nlTrack('generate_lead', {
+            form_name: 'free_consultation',
+            treatment: form.elements.treatment.value,
+            city: form.elements.city.value
+          });
           form.reset();
           Object.keys(rules).forEach(function (name) { showError(name, ''); });
         } else if (data.errors) {

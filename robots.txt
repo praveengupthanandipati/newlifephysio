@@ -1,0 +1,9 @@
+# New Life Physiotherapy Clinic
+User-agent: *
+Allow: /
+
+# Site building blocks, not pages
+Disallow: /components/
+
+# TODO: replace with your live domain, then remove the leading "#"
+# Sitemap: https://www.yourdomain.com/sitemap.php

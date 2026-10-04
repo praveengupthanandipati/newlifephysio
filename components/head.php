@@ -3,6 +3,11 @@
  * Document head: SEO meta, social sharing tags, structured data, favicons
  * and stylesheets. Content comes from $seo (init.php -> seo.php).
  */
+
+// Provided by init.php / data.php (declared for the editor)
+/** @var array $seo */
+/** @var array $site */
+/** @var string $page */
 $canonical = absolute_url($seo['path']);
 $shareImage = absolute_url($seo['image']) ?? $seo['image'];
 ?>
@@ -16,11 +21,12 @@ $shareImage = absolute_url($seo['image']) ?? $seo['image'];
     <title><?= e($seo['title']) ?></title>
     <meta name="description" content="<?= e($seo['description']) ?>">
     <meta name="keywords" content="<?= e($seo['keywords']) ?>">
-    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="robots" content="<?= e($seo['robots']) ?>">
     <meta name="author" content="<?= e($site['name']) ?>">
 <?php if ($canonical): ?>
     <link rel="canonical" href="<?= e($canonical) ?>">
 <?php endif; ?>
+<?php require __DIR__ . '/analytics.php'; ?>
 
     <!-- local SEO -->
     <meta name="geo.region" content="<?= e($site['address']['region_code']) ?>">
