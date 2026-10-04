@@ -117,6 +117,168 @@ $childTherapy = [
 // Extra choices in the booking form's treatment dropdown
 $bookingExtraOptions = ['Pre / Post Operative Rehab', 'Child Therapy', 'Other / Not sure'];
 
+// Treatments page
+$treatmentsPage = [
+    'banner' => [
+        'title'     => 'Conditions We',
+        'highlight' => 'Treat',
+        'lead'      => 'Find your condition, learn the common signs and see how physiotherapy can help you recover.',
+        'image'     => 'banner02',
+    ],
+];
+
+// Treatments page: Child Therapy entry (the 26 above + this one)
+$childTreatment = ['slug' => 'child-therapy', 'name' => 'Child Therapy', 'cat' => 'child', 'icon' => 'child'];
+
+// Treatments page: intro for each category group
+$treatmentCategoryInfo = [
+    'spine'  => ['icon' => 'spine', 'text' => 'Neck and back problems — from wear-and-tear and disc issues to nerve pain and muscle spasm.'],
+    'joints' => ['icon' => 'knee', 'text' => 'Joint, ligament and tendon problems, sports injuries and foot pain that hold you back.'],
+    'neuro'  => ['icon' => 'brain', 'text' => 'Rehabilitation after stroke, nerve injury and neurological conditions to rebuild movement and independence.'],
+    'child'  => ['icon' => 'child', 'text' => 'Gentle, play-based physiotherapy for babies and children.'],
+];
+
+// Treatments page: detail for each condition, keyed by slug.
+// signs = what patients notice, care = how physiotherapy helps.
+$treatmentDetails = [
+    'spondylosis' => [
+        'overview' => 'Age-related wear of the discs and joints of the spine, in the neck (cervical) or lower back (lumbar). It can cause stiffness, pain and sometimes pressure on the nerves.',
+        'signs'    => ['Neck or back stiffness', 'Pain that worsens with long sitting', 'Tingling or numbness in arms or legs', 'Headaches starting from the neck'],
+        'care'     => ['Manual therapy & mobilisation', 'Posture correction', 'Strengthening & stretching', 'Ergonomic advice'],
+    ],
+    'spondylitis' => [
+        'overview' => 'Inflammation of the joints of the spine that causes pain and stiffness — often worse after rest and better with movement.',
+        'signs'    => ['Morning stiffness', 'Pain that eases with activity', 'Reduced spinal movement', 'Tiredness'],
+        'care'     => ['Spinal mobility exercises', 'Laser therapy for pain relief', 'Postural training', 'Home exercise programme'],
+    ],
+    'ankylosing-spondylitis' => [
+        'overview' => 'A long-term inflammatory arthritis that mainly affects the spine and pelvic joints. Regular, guided exercise is key to keeping the spine flexible.',
+        'signs'    => ['Low back and buttock pain', 'Morning stiffness lasting over 30 minutes', 'Stooping posture over time', 'Reduced chest expansion'],
+        'care'     => ['Spinal mobility programme', 'Breathing exercises', 'Posture training', 'Strength & flexibility work'],
+    ],
+    'disc-bulge' => [
+        'overview' => 'When a spinal disc pushes outward it can press on nearby nerves, causing back or neck pain that may spread into the arm or leg. Many cases improve with targeted physiotherapy.',
+        'signs'    => ['Back or neck pain', 'Pain spreading into an arm or leg', 'Numbness or tingling', 'Pain on bending or sitting'],
+        'care'     => ['Directional & core exercises', 'Manual therapy', 'Nerve mobilisation', 'Posture & lifting advice'],
+    ],
+    'sciatica' => [
+        'overview' => 'Pain along the sciatic nerve — from the lower back through the buttock and down the leg — often caused by a disc bulge or tight muscles pressing on the nerve.',
+        'signs'    => ['Shooting pain down the leg', 'Numbness or tingling in the leg or foot', 'Weakness in the leg', 'Pain worse on sitting'],
+        'care'     => ['Nerve gliding exercises', 'Manual therapy', 'Core strengthening', 'Laser therapy for pain relief'],
+    ],
+    'low-back-ache' => [
+        'overview' => 'One of the most common problems we see — often linked to posture, weak core muscles, strain or long hours of sitting.',
+        'signs'    => ['Dull or sharp lower back pain', 'Stiffness on waking', 'Pain on bending or lifting', 'Muscle tightness'],
+        'care'     => ['Manual therapy', 'Core strengthening', 'Kinesio taping', 'Posture & ergonomic advice'],
+    ],
+    'torticollis' => [
+        'overview' => 'A twisted or tilted neck caused by tight or spasming neck muscles. It can affect adults, and babies can be born with it (congenital torticollis).',
+        'signs'    => ['Head tilted to one side', 'Chin turned the other way', 'Neck pain or stiffness', 'Limited neck rotation'],
+        'care'     => ['Gentle stretching', 'Soft-tissue release', 'Positioning advice for infants', 'Neck strengthening'],
+    ],
+    'muscle-spasm' => [
+        'overview' => 'A sudden, involuntary tightening of a muscle — often in the back or neck — triggered by strain, poor posture or fatigue.',
+        'signs'    => ['Sudden sharp pain', 'A hard knot in the muscle', 'Limited movement', 'Recurring cramps'],
+        'care'     => ['Soft-tissue release', 'Laser therapy', 'Stretching', 'Load management advice'],
+    ],
+    'ligament-injuries' => [
+        'overview' => 'Sprains and tears of the ligaments that stabilise joints such as the knee (ACL, MCL) and ankle — from sport, falls or twisting.',
+        'signs'    => ['Swelling after an injury', 'Joint feels unstable or gives way', 'Pain when putting weight on it', 'Bruising'],
+        'care'     => ['Pain & swelling management', 'Progressive strengthening', 'Balance & proprioception training', 'Pre & post-surgery rehab'],
+    ],
+    'joint-stiffness' => [
+        'overview' => 'Reduced joint movement after injury, surgery, a period in plaster or arthritis, making everyday tasks harder.',
+        'signs'    => ['Restricted range of motion', 'Stiffness after rest', 'Pain at the end of movement', 'Weakness around the joint'],
+        'care'     => ['Joint mobilisation', 'Stretching', 'Strengthening', 'Home exercise programme'],
+    ],
+    'adhesive-capsulitis' => [
+        'overview' => 'Frozen shoulder: the shoulder capsule thickens and tightens, causing pain and a gradual loss of movement. It passes through phases, and guided physiotherapy helps restore movement.',
+        'signs'    => ['Shoulder pain, worse at night', 'Difficulty reaching overhead or behind the back', 'Gradual loss of movement', 'Pain lying on that side'],
+        'care'     => ['Joint mobilisation', 'Stretching programme', 'Laser therapy', 'Home exercise plan'],
+    ],
+    'rheumatoid-arthritis' => [
+        'overview' => 'An autoimmune condition that inflames the joints, commonly the hands, wrists and feet. Physiotherapy helps manage pain and keep the joints moving.',
+        'signs'    => ['Swollen, painful joints', 'Morning stiffness', 'Reduced grip strength', 'Fatigue'],
+        'care'     => ['Gentle range-of-motion exercise', 'Strengthening', 'Joint protection advice', 'Pain relief modalities'],
+    ],
+    'sports-injuries' => [
+        'overview' => 'Sprains, strains and overuse injuries from sport and exercise, treated with a clear plan to get you back to your activity safely.',
+        'signs'    => ['Pain during or after activity', 'Swelling', 'Drop in performance', 'Recurring niggles'],
+        'care'     => ['Injury assessment', 'Sports taping', 'Strength & conditioning', 'Return-to-sport planning'],
+    ],
+    'tendinitis' => [
+        'overview' => 'Irritation of a tendon from overuse or repetitive strain — common in the shoulder, elbow, knee and Achilles.',
+        'signs'    => ['Pain with movement', 'Tenderness over the tendon', 'Mild swelling', 'Stiffness'],
+        'care'     => ['Graded tendon loading', 'Laser therapy', 'Kinesio taping', 'Activity modification'],
+    ],
+    'tennis-elbow' => [
+        'overview' => 'Lateral epicondylitis: overuse of the forearm muscles that causes pain on the outer side of the elbow — and not just in tennis players.',
+        'signs'    => ['Outer elbow pain', 'Weak grip', 'Pain lifting or twisting', 'Pain when shaking hands'],
+        'care'     => ['Eccentric strengthening', 'Soft-tissue release', 'Taping & brace advice', 'Laser therapy'],
+    ],
+    'golfers-elbow' => [
+        'overview' => 'Medial epicondylitis: overuse of the forearm muscles that causes pain on the inner side of the elbow.',
+        'signs'    => ['Inner elbow pain', 'Pain when gripping', 'Elbow stiffness', 'Weakness in the wrist or hand'],
+        'care'     => ['Strengthening', 'Stretching', 'Soft-tissue release', 'Kinesio taping'],
+    ],
+    'calcaneal-spur' => [
+        'overview' => 'A bony growth on the heel bone, often linked with plantar fasciitis. Physiotherapy eases the pain by treating the tissues around it.',
+        'signs'    => ['Sharp heel pain on standing', 'Pain after rest', 'Tenderness under the heel', 'Pain worse on hard floors'],
+        'care'     => ['Kinesio taping', 'Calf & foot stretching', 'Laser therapy', 'Footwear advice'],
+    ],
+    'plantar-fasciitis' => [
+        'overview' => 'Irritation of the thick band of tissue under the foot — the classic sharp heel pain with your first steps in the morning.',
+        'signs'    => ['Heel pain with the first steps of the day', 'Pain after long standing', 'Tenderness along the arch', 'Tight calves'],
+        'care'     => ['Stretching programme', 'Kinesio taping', 'Foot & calf strengthening', 'Laser therapy'],
+    ],
+    'foot-drop' => [
+        'overview' => 'Difficulty lifting the front of the foot, often caused by nerve injury, stroke or spinal problems, so the toes drag while walking.',
+        'signs'    => ['Toes catch or drag', 'High-stepping walk', 'Frequent tripping', 'Weak ankle lift'],
+        'care'     => ['Muscle stimulation & strengthening', 'Gait training', 'Balance work', 'Advice on ankle supports'],
+    ],
+    'wrist-drop' => [
+        'overview' => 'Weakness in lifting the wrist and fingers, usually from an injury to the radial nerve, making gripping and daily tasks difficult.',
+        'signs'    => ['Unable to lift the wrist', 'Weak grip', 'Difficulty straightening the fingers', 'Numbness on the back of the hand'],
+        'care'     => ['Nerve & muscle stimulation', 'Strengthening', 'Functional hand training', 'Splinting advice'],
+    ],
+    'bells-palsy' => [
+        'overview' => 'Sudden weakness of the muscles on one side of the face caused by inflammation of the facial nerve. Most people recover, and physiotherapy supports that recovery.',
+        'signs'    => ['Drooping on one side of the face', 'Difficulty closing the eye', 'Trouble smiling or eating', 'Changes in taste'],
+        'care'     => ['Facial exercises', 'Electrical stimulation', 'Facial massage', 'Home exercise guidance'],
+    ],
+    'hemiplegia' => [
+        'overview' => 'Weakness or paralysis of one side of the body, most often after a stroke. Rehab focuses on regaining movement, balance and independence.',
+        'signs'    => ['Weakness on one side', 'Difficulty walking', 'Poor balance', 'Muscle stiffness (spasticity)'],
+        'care'     => ['Neuro rehabilitation exercises', 'Gait & balance training', 'Spasticity management', 'Daily-living skills'],
+    ],
+    'paraplegia' => [
+        'overview' => 'Paralysis of the lower body, usually from a spinal cord injury or disease. Physiotherapy builds strength, mobility and independence.',
+        'signs'    => ['Loss of leg movement or feeling', 'Difficulty with sitting balance', 'Muscle stiffness', 'Risk of pressure sores'],
+        'care'     => ['Upper-body strengthening', 'Transfer training', 'Wheelchair skills', 'Stretching & positioning'],
+    ],
+    'quadriplegia' => [
+        'overview' => 'Paralysis affecting all four limbs, usually after an injury to the spinal cord in the neck. Rehab maximises function and comfort and supports carers.',
+        'signs'    => ['Weakness in the arms and legs', 'Breathing difficulty', 'Muscle stiffness', 'Needing help with daily tasks'],
+        'care'     => ['Breathing exercises', 'Positioning & stretching', 'Functional training', 'Guidance for carers'],
+    ],
+    'parkinsons-disease' => [
+        'overview' => 'A progressive neurological condition that affects movement. Regular physiotherapy helps maintain mobility, balance and confidence.',
+        'signs'    => ['Tremor', 'Slowness of movement', 'Stiffness', 'Balance problems or falls'],
+        'care'     => ['Gait & balance training', 'Large-amplitude movement practice', 'Strength & flexibility', 'Fall prevention'],
+    ],
+    'muscular-dystrophy' => [
+        'overview' => 'A group of genetic conditions that cause progressive muscle weakness. Physiotherapy helps maintain strength, mobility and quality of life.',
+        'signs'    => ['Progressive weakness', 'Frequent falls', 'Difficulty climbing stairs', 'Muscle tightness'],
+        'care'     => ['Gentle strengthening', 'Stretching to prevent contractures', 'Advice on mobility aids', 'Breathing exercises'],
+    ],
+    'child-therapy' => [
+        'overview' => 'Physiotherapy for babies and children with delayed milestones, posture problems, torticollis, injuries or neurological conditions — delivered through play.',
+        'signs_label' => 'When to see us',
+        'signs'    => ['Late sitting, crawling or walking', 'Poor balance or frequent falls', 'Head tilt or flat spot on the head', 'Pain or injury from sport or play'],
+        'care'     => ['Play-based exercises', 'Developmental milestone training', 'Posture & balance work', 'Home programme for parents'],
+    ],
+];
+
 // ---------------------------------------------------------------------------
 // Specialities (therapies offered)
 // ---------------------------------------------------------------------------
@@ -356,7 +518,7 @@ $footerServices = [
     ['label' => 'Frozen Shoulder', 'url' => 'treatments.php#adhesive-capsulitis'],
     ['label' => 'Sciatica', 'url' => 'treatments.php#sciatica'],
     ['label' => 'Neuro Rehab', 'url' => 'treatments.php#hemiplegia'],
-    ['label' => 'Child Therapy', 'anchor' => 'services'],
+    ['label' => 'Child Therapy', 'url' => 'treatments.php#child-therapy'],
 ];
 
 $legalLinks = [

@@ -103,7 +103,7 @@ $mainPhone = $site['phones'][0];
 <?php $catItems = array_filter($treatments, function ($t) use ($catId) { return $t['cat'] === $catId; }); ?>
 <?php if (!$catItems) continue; ?>
                                 <div class="mh-mega__col">
-                                    <h6 class="mh-mega__title"><?= e($catLabel) ?></h6>
+                                    <h6 class="mh-mega__title"><a href="<?= e($item['url']) ?>#cat-<?= e($catId) ?>"><?= e($catLabel) ?></a></h6>
                                     <ul class="mh-drop__list">
 <?php foreach ($catItems as $t): ?>
                                         <li><a class="dropdown-item mh-drop__link" href="treatments.php#<?= e($t['slug']) ?>"><?= e($t['name']) ?></a></li>

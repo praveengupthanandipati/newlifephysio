@@ -11,15 +11,23 @@ $(function () {
     if (drawerEl.classList.contains('show') && !drawerEl.contains(e.target)) drawer.hide();
   });
 
-  // In-page links (e.g. #appointment): close the drawer first, then scroll once
-  // Bootstrap has released the body scroll lock.
-  $(drawerEl).on('click', 'a[href^="#"]', function (e) {
+  // Links to a section of the current page ("#appointment", or
+  // "treatments.php#sciatica" while on treatments.php): close the drawer
+  // first, then jump once Bootstrap has released the body scroll lock.
+  $(drawerEl).on('click', 'a[href*="#"]', function (e) {
     if (!drawerEl.classList.contains('show')) return;
-    var target = document.querySelector(this.getAttribute('href'));
+    if (this.pathname !== window.location.pathname || !this.hash) return;
+    var target = document.getElementById(decodeURIComponent(this.hash.slice(1)));
     if (!target) return;
     e.preventDefault();
+    var hash = this.hash;
     drawerEl.addEventListener('hidden.bs.offcanvas', function () {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // setting the hash scrolls (honouring scroll-margin) and updates :target
+      if (window.location.hash === hash) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        window.location.hash = hash;
+      }
     }, { once: true });
     drawer.hide();
   });
@@ -91,6 +99,83 @@ $(function () {
     }
   }, { rootMargin: '0px 0px -25% 0px' });
   io.observe(steps);
+});
+
+// Treatments page: contents highlighting, mobile jump menu, deep links
+$(function () {
+  var toc = document.getElementById('trtToc');
+  if (!toc) return;
+
+  // Highlight the condition currently on screen in the sticky contents.
+  // Active = the last section whose top has passed just below the sticky
+  // header. Deterministic, so it is right after direct jumps (deep links,
+  // contents clicks) as well as normal scrolling.
+  var links = toc.querySelectorAll('.trt-toc__link');
+  var catLinks = toc.querySelectorAll('.trt-toc__cat');
+  var items = [].map.call(links, function (link) {
+    return document.getElementById(link.getAttribute('href').slice(1));
+  });
+  var current = -1;
+  var ticking = false;
+
+  function updateActive() {
+    ticking = false;
+    var line = 170; // px from the viewport top, just under the header
+    var index = 0;
+    for (var i = 0; i < items.length; i++) {
+      if (items[i] && items[i].getBoundingClientRect().top <= line) index = i;
+    }
+    if (index === current) return;
+    current = index;
+
+    [].forEach.call(links, function (link, i) {
+      link.classList.toggle('active', i === index);
+    });
+    var cat = items[index].getAttribute('data-cat');
+    [].forEach.call(catLinks, function (link) {
+      link.classList.toggle('active', link.getAttribute('href') === '#cat-' + cat);
+    });
+
+    // keep the active entry visible inside the scrollable contents box
+    var link = links[index];
+    if (link.offsetTop < toc.scrollTop + 40 || link.offsetTop > toc.scrollTop + toc.clientHeight - 60) {
+      toc.scrollTop = link.offsetTop - toc.clientHeight / 2;
+    }
+  }
+
+  $(window).on('scroll resize', function () {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(updateActive);
+    }
+  });
+  updateActive();
+
+  // Mobile "Jump to a condition" select
+  var jump = document.getElementById('trtJump');
+  if (jump) {
+    jump.addEventListener('change', function () {
+      if (this.value) window.location.hash = this.value;
+    });
+  }
+
+  // Arriving from another page (e.g. index.php -> treatments.php#sciatica):
+  // re-align once the page loader has gone, in case anything above the
+  // section shifted while loading. :target styling highlights the section.
+  function alignToHash() {
+    var id = decodeURIComponent(window.location.hash.slice(1));
+    var target = id && document.getElementById(id);
+    if (!target) return;
+    setTimeout(function () {
+      target.scrollIntoView({ block: 'start' });
+    }, 650);
+  }
+  // "load" may already have fired on fast / cached loads
+  if (document.readyState === 'complete') {
+    alignToHash();
+  } else {
+    $(window).on('load', alignToHash);
+  }
 });
 
 // Stat counters: [data-count-to="26"] counts up from 0 when scrolled into view
