@@ -47,7 +47,7 @@ foreach ($treatmentCategories as $catId => $catLabel) {
                         <h3 class="svc-feature__title"><?= e($childTherapy['title']) ?></h3>
                         <p class="svc-feature__text"><?= e($childTherapy['text']) ?></p>
                     </div>
-                    <a class="svc-feature__btn" href="<?= e(anchor('appointment')) ?>"><?= e($childTherapy['cta']) ?> <?= icon('arrow') ?></a>
+                    <a class="svc-feature__btn" href="<?= e(booking_url()) ?>"><?= e($childTherapy['cta']) ?> <?= icon('arrow') ?></a>
                 </div>
             </article>
         </div>

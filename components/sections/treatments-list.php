@@ -110,7 +110,7 @@ $number = 0;
                         </div>
 
                         <div class="trt-item__foot">
-                            <a class="trt-item__book" href="<?= e(anchor('appointment')) ?>">Book an assessment <?= icon('arrow') ?></a>
+                            <a class="trt-item__book" href="<?= e(booking_url()) ?>">Book an assessment <?= icon('arrow') ?></a>
                             <a class="trt-item__ask" href="<?= e(whatsapp_link($site['whatsapp'], 'Hi, I would like to know about treatment for ' . $t['name'])) ?>" target="_blank" rel="noopener"><?= icon('whatsapp') ?>Ask on WhatsApp</a>
                         </div>
                     </article>

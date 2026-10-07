@@ -46,7 +46,7 @@ $mainPhone = $site['phones'][0];
 <?php endforeach; ?>
                     </ul>
 
-                    <a class="doc-book__btn doc-book__btn--primary" href="<?= e(anchor('appointment')) ?>">Book Free Consultation <?= icon('arrow') ?></a>
+                    <a class="doc-book__btn doc-book__btn--primary" href="<?= e(booking_url()) ?>">Book Free Consultation <?= icon('arrow') ?></a>
                     <a class="doc-book__btn doc-book__btn--call" href="tel:<?= e(tel($mainPhone)) ?>"><?= icon('phone') ?><?= e($mainPhone) ?></a>
                 </aside>
             </div>

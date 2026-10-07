@@ -1,5 +1,5 @@
 <?php
-$page = 'home';
+$page = 'about';
 require __DIR__ . '/components/init.php';
 require __DIR__ . '/components/head.php';
 ?>
@@ -10,11 +10,11 @@ require __DIR__ . '/components/head.php';
 <!-- main -->
 <main>
 <?php
-require __DIR__ . '/components/sections/hero.php';
-require __DIR__ . '/components/sections/services.php';
-require __DIR__ . '/components/sections/about.php';
-require __DIR__ . '/components/sections/journey.php';
-require __DIR__ . '/components/sections/testimonials.php';
+/** @var array $aboutPage  from data.php via init.php */
+$banner = $aboutPage['banner'];
+require __DIR__ . '/components/sections/page-banner.php';
+require __DIR__ . '/components/sections/who-we-are.php';
+require __DIR__ . '/components/sections/why-us.php';
 ?>
 </main>
 <!--/ main -->

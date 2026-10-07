@@ -30,6 +30,8 @@ foreach ($nav as $item) {
         }
     }
 }
+// Pages reached from buttons rather than the menu
+$ids[] = 'free-appointment';
 
 $urls = [];
 foreach (array_unique($ids) as $id) {
@@ -43,7 +45,7 @@ foreach (array_unique($ids) as $id) {
     $urls[] = [
         'loc'      => $base . ($id === 'home' ? '' : $file),
         'lastmod'  => date('Y-m-d', filemtime(__DIR__ . '/' . $file)),
-        'priority' => $id === 'home' ? '1.0' : ($id === 'treatments' ? '0.9' : '0.7'),
+        'priority' => $id === 'home' ? '1.0' : (in_array($id, ['treatments', 'free-appointment'], true) ? '0.9' : '0.7'),
     ];
 }
 

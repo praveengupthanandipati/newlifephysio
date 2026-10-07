@@ -19,7 +19,7 @@ $apart = $aboutPage['apart'];
             </div>
             <div class="why-head__aside" data-aos="fade-left">
                 <p class="why-lead"><?= e($apart['lead']) ?></p>
-                <a class="why-btn" href="<?= e(anchor('appointment')) ?>">
+                <a class="why-btn" href="<?= e(booking_url()) ?>">
                     Book Free Consultation
                     <span aria-hidden="true"><?= icon('arrow') ?></span>
                 </a>

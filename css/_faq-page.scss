@@ -1,0 +1,530 @@
+// ==========================================
+// FAQ PAGE
+// Search + topic filters + help card (sticky on desktop), and the questions
+// as a restyled Bootstrap accordion grouped by topic.
+// ==========================================
+$fq-navy: map-get($colors, primary);
+$fq-orange: map-get($colors, secondary);
+$fq-muted: map-get($colors, gray);
+
+.faq-page {
+  position: relative;
+  padding: 5rem 0 3rem;
+  background:
+    radial-gradient(circle at 1px 1px, rgba(23, 63, 135, 0.06) 1px, transparent 0) 0 0 / 22px 22px,
+    linear-gradient(180deg, #f5f9fe 0%, #ffffff 35%);
+}
+
+.is-hidden {
+  display: none !important;
+}
+
+// ---------- Side: search, filters, help ----------
+.faq-side {
+  position: sticky;
+  top: 110px;
+}
+
+.faq-search {
+  position: relative;
+  margin-bottom: 1rem;
+
+  .form-control {
+    height: 54px;
+    padding-left: 3rem;
+    border-color: #dbe3ef;
+    border-radius: 16px;
+    background: map-get($colors, white);
+    font-size: 15px;
+    box-shadow: 0 12px 28px -22px rgba(11, 38, 87, 0.6);
+
+    &:focus {
+      border-color: map-get($colors, thirdcolour);
+      box-shadow: 0 0 0 4px rgba(30, 136, 229, 0.12);
+    }
+  }
+}
+
+.faq-search__icon {
+  position: absolute;
+  top: 50%;
+  left: 1.1rem;
+  width: 19px;
+  height: 19px;
+  fill: none;
+  stroke: $fq-orange;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.faq-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.faq-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.5rem 0.9rem;
+  border: 1px solid rgba(23, 63, 135, 0.12);
+  border-radius: 50px;
+  background: map-get($colors, white);
+  color: map-get($colors, black);
+  font-size: 13.5px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: color 0.25s ease, background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+
+  span {
+    min-width: 22px;
+    padding: 0.05rem 0.4rem;
+    border-radius: 50px;
+    background: map-get($colors, lightprimary);
+    color: $fq-navy;
+    font-size: 11.5px;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  &:hover,
+  &:focus-visible {
+    border-color: rgba(244, 123, 32, 0.4);
+    color: map-get($colors, darksecondary);
+  }
+
+  &.is-active {
+    border-color: transparent;
+    background: $gradient-primary;
+    color: map-get($colors, white);
+    box-shadow: 0 10px 20px -10px rgba(23, 63, 135, 0.8);
+
+    span {
+      background: rgba(255, 255, 255, 0.2);
+      color: map-get($colors, white);
+    }
+  }
+}
+
+.faq-help {
+  position: relative;
+  padding: 1.8rem 1.6rem;
+  overflow: hidden;
+  border-radius: 24px;
+  background: $gradient-topbar;
+  color: rgba(255, 255, 255, 0.78);
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -70px;
+    right: -50px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(249, 168, 38, 0.35) 0%, rgba(249, 168, 38, 0) 70%);
+  }
+
+  > * {
+    position: relative;
+  }
+
+  h2 {
+    margin: 1rem 0 0.4rem;
+    color: map-get($colors, white);
+    font-size: 1.3rem;
+  }
+
+  p {
+    margin-bottom: 1.2rem !important;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+}
+
+.faq-help__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  background: $gradient-secondary;
+  color: map-get($colors, white);
+
+  svg {
+    width: 26px;
+    height: 26px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.9;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+}
+
+.faq-help__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border-radius: 14px;
+  font-size: 14.5px;
+  font-weight: 600;
+  transition: transform 0.3s ease;
+
+  & + & {
+    margin-top: 0.6rem;
+  }
+
+  svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  &:hover,
+  &:focus-visible {
+    transform: translateY(-2px);
+  }
+}
+
+.faq-help__btn--call {
+  background: map-get($colors, white);
+  color: $fq-navy;
+
+  svg {
+    fill: none;
+    stroke: $fq-orange;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  &:hover,
+  &:focus-visible {
+    color: $fq-navy;
+  }
+}
+
+.faq-help__btn--wa {
+  background: map-get($colors, whatsapp);
+  color: map-get($colors, white);
+
+  svg {
+    fill: currentColor;
+  }
+
+  &:hover,
+  &:focus-visible {
+    color: map-get($colors, white);
+  }
+}
+
+// ---------- Groups ----------
+.faq-group + .faq-group {
+  margin-top: 2.5rem;
+}
+
+.faq-group__title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0 0 1rem;
+  color: $fq-navy;
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.faq-group__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: map-get($colors, lightsecondary);
+  color: map-get($colors, darksecondary);
+
+  svg {
+    width: 22px;
+    height: 22px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.9;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+}
+
+// ---------- Accordion ----------
+.faq-acc {
+  --bs-accordion-bg: transparent;
+  --bs-accordion-border-width: 0;
+  --bs-accordion-btn-focus-box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.2);
+  --bs-accordion-active-bg: transparent;
+  --bs-accordion-active-color: #{$fq-navy};
+}
+
+.faq-item {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(23, 63, 135, 0.08) !important;
+  border-radius: 18px !important;
+  background: map-get($colors, white);
+  box-shadow: 0 10px 28px -24px rgba(11, 38, 87, 0.6);
+  scroll-margin-top: 130px;
+  transition: box-shadow 0.35s ease, border-color 0.35s ease;
+
+  & + & {
+    margin-top: 0.8rem;
+  }
+
+  &:hover {
+    border-color: rgba(244, 123, 32, 0.3) !important;
+  }
+
+  // open state: accent strip + deeper shadow
+  &:has(.accordion-collapse.show) {
+    border-color: transparent !important;
+    box-shadow: 0 24px 44px -26px rgba(11, 38, 87, 0.5);
+
+    .faq-item__num {
+      background: $gradient-secondary;
+      color: map-get($colors, white);
+    }
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 4px;
+    background: $gradient-secondary;
+    transform: scaleY(0);
+    transition: transform 0.35s ease;
+  }
+
+  &:has(.accordion-collapse.show)::before {
+    transform: scaleY(1);
+  }
+
+  .accordion-header {
+    margin: 0;
+  }
+
+  .accordion-button {
+    gap: 0.9rem;
+    padding: 1.15rem 1.3rem;
+    border-radius: 18px !important;
+    color: $fq-navy;
+    font-size: 15.5px;
+    font-weight: 600;
+    line-height: 1.4;
+    box-shadow: none;
+
+    // plus / minus instead of Bootstrap's chevron
+    &::after {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      margin-left: auto;
+      border-radius: 50%;
+      background:
+        linear-gradient($fq-orange, $fq-orange) center / 12px 2px no-repeat,
+        linear-gradient($fq-orange, $fq-orange) center / 2px 12px no-repeat,
+        map-get($colors, lightsecondary);
+      transform: rotate(0);
+      transition: transform 0.35s ease, background-color 0.35s ease;
+    }
+
+    &:not(.collapsed) {
+      background: transparent;
+      color: $fq-navy;
+      box-shadow: none;
+
+      &::after {
+        background:
+          linear-gradient(#fff, #fff) center / 12px 2px no-repeat,
+          linear-gradient(#fff, #fff) center / 2px 12px no-repeat,
+          $fq-orange;
+        transform: rotate(135deg);
+      }
+    }
+
+    &:focus-visible {
+      box-shadow: var(--bs-accordion-btn-focus-box-shadow);
+    }
+  }
+
+  .accordion-body {
+    padding: 0 1.4rem 1.3rem 4.45rem;
+    color: $fq-muted;
+    font-size: 14.5px;
+    line-height: 1.75;
+
+    p {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.faq-item__num {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: map-get($colors, lightprimary);
+  color: $fq-navy;
+  font-size: 13px;
+  font-weight: 700;
+  transition: background 0.35s ease, color 0.35s ease;
+}
+
+.faq-item__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.75rem;
+  color: map-get($colors, darksecondary);
+  font-size: 14px;
+  font-weight: 600;
+
+  svg {
+    width: 15px;
+    height: 15px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: transform 0.25s ease;
+  }
+
+  &:hover,
+  &:focus-visible {
+    color: $fq-orange;
+
+    svg {
+      transform: translateX(3px);
+    }
+  }
+}
+
+.faq-empty {
+  padding: 2.5rem 1.5rem;
+  border: 2px dashed rgba(23, 63, 135, 0.15);
+  border-radius: 22px;
+  text-align: center;
+
+  h3 {
+    margin: 1rem 0 0.4rem;
+    color: $fq-navy;
+    font-size: 1.15rem;
+  }
+
+  p {
+    margin-bottom: 1.2rem !important;
+    color: $fq-muted;
+    font-size: 14.5px;
+  }
+
+  .faq-help__btn {
+    display: inline-flex;
+    width: auto;
+    padding: 0.75rem 1.4rem;
+  }
+}
+
+.faq-empty__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: map-get($colors, lightprimary);
+  color: map-get($colors, thirdcolour);
+
+  svg {
+    width: 26px;
+    height: 26px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+}
+
+// ---------- Responsive ----------
+@include max(991px) {
+  .faq-page {
+    padding: 3rem 0 2rem;
+  }
+
+  .faq-side {
+    position: static;
+  }
+
+  // filters become one swipeable row
+  .faq-filters {
+    flex-wrap: nowrap;
+    margin: 0 -5% 0.5rem;
+    padding: 0 5% 0.5rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  // help card: shown after the questions on small screens (cta band follows)
+  .faq-help {
+    display: none;
+  }
+}
+
+@include max(575px) {
+  .faq-group__title {
+    font-size: 1.15rem;
+  }
+
+  .faq-item {
+    border-radius: 16px !important;
+
+    .accordion-button {
+      gap: 0.7rem;
+      padding: 1rem;
+      font-size: 14.5px;
+
+      &::after {
+        width: 28px;
+        height: 28px;
+      }
+    }
+
+    .accordion-body {
+      padding: 0 1rem 1.1rem;
+      font-size: 14px;
+    }
+  }
+
+  .faq-item__num {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    font-size: 12px;
+  }
+}

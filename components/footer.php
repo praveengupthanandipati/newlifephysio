@@ -1,14 +1,27 @@
 <?php
 /**
- * Site footer: about + social / quick links / services / contact, then the
- * copyright bar. Everything comes from data.php.
+ * Site footer: about + social / quick links / specialities / contact, then
+ * the copyright bar. Everything comes from data.php. Links to pages that
+ * don't exist yet (legal pages) and empty social profiles are left out.
  */
+
+// Provided by data.php / init.php (declared for the editor)
+/** @var array $site */
+/** @var string $activePage */
+/** @var array $socialNetworks */
+/** @var array $footerQuickLinks */
+/** @var array $footerSpecialities */
+/** @var array $legalLinks */
+
 $addressLine = implode(', ', array_filter([
-    $site['address']['street'] ?: '[Clinic street address]', // TODO placeholder until set in data.php
+    $site['address']['street'], // TODO: set the street address in data.php
     $site['address']['city'],
     $site['address']['region'],
     $site['address']['postal_code'],
 ]));
+$footerLegal = array_filter($legalLinks, function ($link) {
+    return is_file(__DIR__ . '/../' . $link['url']);
+});
 ?>
 <!-- footer -->
 <footer class="site-footer">
@@ -17,7 +30,7 @@ $addressLine = implode(', ', array_filter([
         <div class="container-90">
             <div class="row g-5">
                 <!-- about + social -->
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-3 col-md-6">
                     <a class="ft-logo" href="index.php" aria-label="<?= e($site['name']) ?> - Home">
                         <img src="<?= e($site['logo']) ?>" alt="<?= e($site['name'] . ' - ' . $site['tagline']) ?>" loading="lazy">
                     </a>
@@ -25,7 +38,8 @@ $addressLine = implode(', ', array_filter([
 
                     <ul class="ft-social" aria-label="Social media">
 <?php foreach ($socialNetworks as $key => $network): ?>
-                        <li><a class="<?= e($network['class']) ?>" href="<?= e($site['social'][$key] ?: '#') ?>" target="_blank" rel="noopener" aria-label="<?= e($network['label']) ?>"><?= icon($network['icon']) ?></a></li>
+<?php if (empty($site['social'][$key])) continue; // TODO: add profile URLs in data.php ?>
+                        <li><a class="<?= e($network['class']) ?>" href="<?= e($site['social'][$key]) ?>" target="_blank" rel="noopener" aria-label="<?= e($network['label']) ?>"><?= icon($network['icon']) ?></a></li>
 <?php endforeach; ?>
                         <li><a class="ft-social__wa" href="<?= e(whatsapp_link($site['whatsapp'])) ?>" target="_blank" rel="noopener" aria-label="WhatsApp"><?= icon('whatsapp') ?></a></li>
                     </ul>
@@ -35,18 +49,18 @@ $addressLine = implode(', ', array_filter([
                 <div class="col-lg-2 col-md-6 col-6">
                     <h5 class="ft-heading">Quick Links</h5>
                     <ul class="ft-links">
-<?php foreach ($nav as $item): ?>
-                        <li><a href="<?= e($item['url']) ?>"><?= e($item['label']) ?></a></li>
+<?php foreach ($footerQuickLinks as $link): ?>
+                        <li><a href="<?= e($link['url']) ?>"<?= $link['url'] === $activePage . '.php' || ($activePage === 'home' && $link['url'] === 'index.php') ? ' aria-current="page"' : '' ?>><?= e($link['label']) ?></a></li>
 <?php endforeach; ?>
                     </ul>
                 </div>
 
-                <!-- services -->
-                <div class="col-lg-2 col-md-6 col-6">
-                    <h5 class="ft-heading">Our Services</h5>
+                <!-- specialities -->
+                <div class="col-lg-3 col-md-6 col-6">
+                    <h5 class="ft-heading">Specialities</h5>
                     <ul class="ft-links">
-<?php foreach ($footerServices as $link): ?>
-                        <li><a href="<?= e(isset($link['anchor']) ? anchor($link['anchor']) : $link['url']) ?>"><?= e($link['label']) ?></a></li>
+<?php foreach ($footerSpecialities as $link): ?>
+                        <li><a href="<?= e($link['url']) ?>"<?= ($link['id'] ?? null) === $activePage ? ' aria-current="page"' : '' ?>><?= e($link['label']) ?></a></li>
 <?php endforeach; ?>
                     </ul>
                 </div>
@@ -59,7 +73,7 @@ $addressLine = implode(', ', array_filter([
                             <span class="ft-contact__icon" aria-hidden="true"><?= icon('map-pin') ?></span>
                             <span>
                                 <small>Address</small>
-                                <address><?= e($addressLine) ?></address>
+                                <address><a href="<?= e(map_directions_url()) ?>" target="_blank" rel="noopener"><?= e($addressLine) ?></a></address>
                             </span>
                         </li>
                         <li>
@@ -74,11 +88,12 @@ $addressLine = implode(', ', array_filter([
                         <li>
                             <span class="ft-contact__icon" aria-hidden="true"><?= icon('mail') ?></span>
                             <span>
-                                <small>Email</small>
 <?php if ($site['email']): ?>
+                                <small>Email</small>
                                 <a href="mailto:<?= e($site['email']) ?>"><?= e($site['email']) ?></a>
-<?php else: ?>
-                                <a href="mailto:">[your-email@clinic.com]</a><?php /* TODO: set $site['email'] in data.php */ ?>
+<?php else: // TODO: set $site['email'] in data.php to show the address here ?>
+                                <small>Write to Us</small>
+                                <a href="contact.php">Send us a message</a>
 <?php endif; ?>
                             </span>
                         </li>
@@ -101,11 +116,13 @@ $addressLine = implode(', ', array_filter([
     <div class="ft-bottom">
         <div class="container-90 ft-bottom__inner">
             <p>&copy; <span id="footerYear"><?= date('Y') ?></span> <?= e($site['name']) ?>. All rights reserved.</p>
+<?php if ($footerLegal): ?>
             <ul class="ft-bottom__links">
-<?php foreach ($legalLinks as $link): ?>
+<?php foreach ($footerLegal as $link): ?>
                 <li><a href="<?= e($link['url']) ?>"><?= e($link['label']) ?></a></li>
 <?php endforeach; ?>
             </ul>
+<?php endif; ?>
             <a class="ft-top" href="#" aria-label="Back to top">
                 <?= icon('arrow-up') ?>
             </a>

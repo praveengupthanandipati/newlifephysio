@@ -1,0 +1,206 @@
+// ==========================================
+// TESTIMONIALS (home)
+// Swiper carousel of patient review cards; heading reuses .svc-head.
+// js/custom.js shows 1 / 2 / 3 cards per view by screen width.
+// ==========================================
+$tm-navy: map-get($colors, primary);
+$tm-orange: map-get($colors, secondary);
+
+.testimonials-home {
+  position: relative;
+  padding: 6.5rem 0;
+  overflow: hidden;
+  background: linear-gradient(180deg, map-get($colors, lightgray) 0%, map-get($colors, white) 100%);
+
+  @include max(767px) {
+    padding: 4.5rem 0;
+  }
+}
+
+.tm-carousel {
+  position: relative;
+}
+
+// Room for the card shadow, which Swiper's overflow:hidden would clip
+.tmSwiper {
+  padding: 1rem 0.5rem 2.5rem;
+  margin: -1rem -0.5rem 0;
+
+  // equal-height cards
+  .swiper-slide {
+    height: auto;
+  }
+}
+
+// ---------- Card ----------
+.tm-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: 0;
+  padding: 2.25rem 2rem 1.75rem;
+  border: 1px solid rgba(23, 63, 135, 0.08);
+  border-radius: 24px;
+  background: map-get($colors, white);
+  box-shadow: 0 18px 40px -28px rgba(11, 38, 87, 0.45);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 26px 50px -28px rgba(11, 38, 87, 0.55);
+  }
+
+  @include max(575px) {
+    padding: 1.75rem 1.4rem 1.5rem;
+    border-radius: 20px;
+  }
+}
+
+.tm-card__quote {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.75rem;
+  display: flex;
+
+  svg {
+    width: 44px;
+    height: 44px;
+    fill: map-get($colors, lightsecondary);
+    stroke: none;
+  }
+}
+
+.tm-card__stars {
+  display: flex;
+  gap: 0.2rem;
+  margin-bottom: 1.1rem;
+
+  svg {
+    width: 18px;
+    height: 18px;
+    fill: #dfe5ee;
+    stroke: none;
+
+    &.is-on {
+      fill: map-get($colors, amber);
+    }
+  }
+}
+
+.tm-card__text {
+  position: relative;
+  flex: 1;
+  margin: 0 0 1.5rem;
+
+  p {
+    color: map-get($colors, black);
+    font-size: 0.97rem;
+    line-height: 1.75;
+  }
+}
+
+.tm-card__author {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding-top: 1.25rem;
+  border-top: 1px dashed rgba(23, 63, 135, 0.15);
+
+  strong {
+    display: block;
+    color: $tm-navy;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  small {
+    display: block;
+    color: $tm-orange;
+    font-size: 0.82rem;
+    font-weight: 500;
+  }
+}
+
+.tm-card__avatar {
+  display: inline-flex;
+  flex: 0 0 48px;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: $gradient-primary;
+  color: map-get($colors, white);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+// ---------- Controls ----------
+.tm-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+}
+
+.tm-nav {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border: 1px solid rgba(23, 63, 135, 0.15);
+  border-radius: 50%;
+  background: map-get($colors, white);
+  color: $tm-navy;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+
+  svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  &:hover,
+  &:focus-visible {
+    border-color: $tm-orange;
+    background: $tm-orange;
+    color: map-get($colors, white);
+  }
+
+  &.swiper-button-disabled {
+    opacity: 0.4;
+    cursor: default;
+  }
+}
+
+.tm-pagination {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.45rem;
+
+  .swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+    margin: 0;
+    border-radius: 10px;
+    background: rgba(23, 63, 135, 0.2);
+    opacity: 1;
+    transition: width 0.35s ease, background-color 0.35s ease;
+  }
+
+  .swiper-pagination-bullet-active {
+    width: 28px;
+    background: $gradient-secondary;
+  }
+}

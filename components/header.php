@@ -117,7 +117,7 @@ $mainPhone = $site['phones'][0];
                                 <div class="mh-mega__promo">
                                     <h4><?= e($megaPromo['title']) ?></h4>
                                     <p><?= e($megaPromo['text']) ?></p>
-                                    <a class="mh-mega__promo-link" href="<?= e(anchor('appointment')) ?>"><?= e($megaPromo['cta']) ?></a>
+                                    <a class="mh-mega__promo-link" href="<?= e(booking_url()) ?>"><?= e($megaPromo['cta']) ?></a>
                                 </div>
                             </div>
                         </li>
@@ -137,7 +137,7 @@ $mainPhone = $site['phones'][0];
 <?php endforeach; ?>
                     </ul>
 
-                    <a class="mh-btn-book" href="<?= e(anchor('appointment')) ?>">
+                    <a class="mh-btn-book" href="<?= e(booking_url()) ?>">
                         Book Free Appointment
                         <span class="mh-btn-book__icon" aria-hidden="true"><?= icon('arrow') ?></span>
                     </a>

@@ -12,7 +12,7 @@
 /** @var array $banner */
 /** @var string $activePage */
 
-$trail = nav_trail($activePage) ?: [['label' => $banner['title'], 'url' => '']];
+$trail = nav_trail($activePage) ?: [['label' => trim($banner['title'] . ' ' . $banner['highlight']), 'url' => '']];
 $lastCrumb = count($trail) - 1;
 ?>
 <!-- page banner -->

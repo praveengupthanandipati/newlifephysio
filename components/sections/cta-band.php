@@ -20,7 +20,7 @@ $mainPhone = $site['phones'][0];
                 <p><?= e($ctaBand['text']) ?></p>
             </div>
             <div class="cta-band__actions">
-                <a class="cta-band__btn cta-band__btn--book" href="<?= e(anchor('appointment')) ?>">Book Free Consultation <?= icon('arrow') ?></a>
+                <a class="cta-band__btn cta-band__btn--book" href="<?= e(booking_url()) ?>">Book Free Consultation <?= icon('arrow') ?></a>
                 <a class="cta-band__btn cta-band__btn--call" href="tel:<?= e(tel($mainPhone)) ?>"><?= icon('phone') ?><?= e($mainPhone) ?></a>
                 <a class="cta-band__btn cta-band__btn--wa" href="<?= e(whatsapp_link($site['whatsapp'], $site['whatsapp_messages']['book'])) ?>" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp"><?= icon('whatsapp') ?>WhatsApp</a>
             </div>

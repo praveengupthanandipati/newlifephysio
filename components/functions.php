@@ -37,6 +37,22 @@ function anchor(string $id): string
 }
 
 /**
+ * Where "Book appointment" buttons go: the booking form on the same page on
+ * the home and free-appointment pages, otherwise the free-appointment page.
+ */
+function booking_url(): string
+{
+    $page = $GLOBALS['activePage'] ?? 'home';
+    return in_array($page, ['home', 'free-appointment'], true) ? '#appointment' : 'free-appointment.php';
+}
+
+/** Treatment choices of the booking forms (and what appointment.php accepts). */
+function booking_treatments(): array
+{
+    return array_merge(array_column($GLOBALS['treatments'], 'name'), $GLOBALS['bookingExtraOptions']);
+}
+
+/**
  * Breadcrumb trail for a page id from $nav, top level or child:
  *   'about'   -> [About Us]
  *   'doctors' -> [About Us, Dr. Y. Abhilash (PT)]
@@ -74,6 +90,13 @@ function nav_is_active(array $item, string $activePage): bool
     return false;
 }
 
+/** URL-safe id from text: "Is physiotherapy painful?" -> "is-physiotherapy-painful". */
+function slugify(string $text): string
+{
+    $text = strtolower(str_replace("'", '', $text));
+    return trim(preg_replace('/[^a-z0-9]+/', '-', $text), '-');
+}
+
 /** "17:00" -> "5 PM", "09:30" -> "9:30 AM". */
 function format_time(string $time): string
 {
@@ -96,4 +119,33 @@ function absolute_url(string $path = ''): ?string
 {
     $base = rtrim($GLOBALS['site']['url'] ?? '', '/');
     return $base !== '' ? $base . '/' . ltrim($path, '/') : null;
+}
+
+/** Contact form subjects: page subjects + every speciality + "Other". */
+function contact_subjects(): array
+{
+    return array_merge(
+        $GLOBALS['contactPage']['form']['subjects'],
+        array_column($GLOBALS['specialities'], 'name'),
+        ['Other']
+    );
+}
+
+/** Google Maps search text for the clinic: $site['map']['query'], else name + address. */
+function map_query(): string
+{
+    $site = $GLOBALS['site'];
+    $address = implode(', ', array_filter([
+        $site['address']['street'],
+        $site['address']['city'],
+        $site['address']['region'],
+        $site['address']['postal_code'],
+    ]));
+    return $site['map']['query'] ?: $site['name'] . ', ' . $address;
+}
+
+/** Google Maps directions link to the clinic. */
+function map_directions_url(): string
+{
+    return 'https://www.google.com/maps/dir/?api=1&destination=' . rawurlencode(map_query());
 }

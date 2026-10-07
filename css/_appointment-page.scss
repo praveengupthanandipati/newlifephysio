@@ -1,0 +1,237 @@
+// ==========================================
+// FREE APPOINTMENT PAGE
+// Booking form (field styles from _contact-page.scss: .ct-*), choice pills
+// for patient type / preferred time, and the "what's included" side panel.
+// ==========================================
+$ap-navy: map-get($colors, primary);
+$ap-orange: map-get($colors, secondary);
+$ap-muted: map-get($colors, gray);
+
+@mixin ap-icon($size: 20px) {
+  svg {
+    flex-shrink: 0;
+    width: $size;
+    height: $size;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.9;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+}
+
+.ap-booking {
+  padding: 5rem 0 6rem;
+  background: linear-gradient(180deg, map-get($colors, lightgray) 0%, map-get($colors, white) 100%);
+
+  @include max(767px) {
+    padding: 3rem 0 4rem;
+  }
+}
+
+// ---------- Choice pills (radio groups) ----------
+.ap-choice {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.6rem;
+  padding: 2px;
+  border-radius: 14px;
+
+  &.is-invalid {
+    box-shadow: 0 0 0 1px map-get($colors, red);
+  }
+}
+
+.ap-choice__item {
+  position: relative;
+  margin: 0;
+  cursor: pointer;
+
+  input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  > span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 50px;
+    height: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid rgba(23, 63, 135, 0.15);
+    border-radius: 12px;
+    background: map-get($colors, lightgray);
+    color: $ap-navy;
+    font-size: 14.5px;
+    font-weight: 600;
+    text-align: center;
+    transition: border-color 0.25s ease, background-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+    @include ap-icon(18px);
+  }
+
+  input:checked + span {
+    border-color: $ap-orange;
+    background: map-get($colors, lightsecondary);
+    color: map-get($colors, darksecondary);
+    box-shadow: 0 8px 18px -12px rgba(244, 123, 32, 0.8);
+  }
+
+  input:focus-visible + span {
+    box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.25);
+  }
+
+  &:hover > span {
+    border-color: rgba(244, 123, 32, 0.5);
+  }
+
+  // time not available on the chosen day
+  &.is-disabled {
+    cursor: not-allowed;
+
+    > span {
+      border-style: dashed;
+      background: transparent;
+      color: #aab2c0;
+      text-decoration: line-through;
+    }
+  }
+}
+
+.ap-choice--time .ap-choice__item > span {
+  flex-direction: column;
+  gap: 0;
+  line-height: 1.25;
+
+  strong {
+    font-size: 14px;
+  }
+
+  small {
+    color: $ap-muted;
+    font-size: 11.5px;
+    font-weight: 500;
+  }
+}
+
+// ---------- Side panel ----------
+.ap-side {
+  position: sticky;
+  top: 120px;
+  display: grid;
+  gap: 1.25rem;
+
+  @include max(991px) {
+    position: static;
+  }
+}
+
+.ap-included {
+  padding: 2.25rem 2rem;
+  border-radius: 26px;
+  background:
+    radial-gradient(circle at 90% 8%, rgba(244, 123, 32, 0.25) 0%, rgba(244, 123, 32, 0) 45%),
+    linear-gradient(160deg, #071a3d 0%, #0b2657 55%, #173f87 100%);
+  color: map-get($colors, white);
+  box-shadow: 0 30px 60px -34px rgba(11, 38, 87, 0.8);
+
+  h2 {
+    margin: 0 0 1.4rem;
+    color: map-get($colors, white);
+    font-size: 1.3rem;
+    font-weight: 700;
+  }
+
+  ul {
+    display: grid;
+    gap: 0.85rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    color: rgba(255, 255, 255, 0.88);
+    font-size: 15px;
+    line-height: 1.55;
+    @include ap-icon(20px);
+
+    svg {
+      color: map-get($colors, amber);
+    }
+  }
+
+  @include max(575px) {
+    padding: 1.75rem 1.25rem;
+    border-radius: 20px;
+  }
+}
+
+.ap-trust {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 1rem 1.2rem;
+    border: 1px solid rgba(23, 63, 135, 0.08);
+    border-radius: 18px;
+    background: map-get($colors, white);
+    box-shadow: 0 14px 32px -26px rgba(11, 38, 87, 0.6);
+  }
+
+  strong {
+    display: block;
+    color: $ap-navy;
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  small {
+    display: block;
+    color: $ap-muted;
+    font-size: 13px;
+  }
+}
+
+.ap-trust__icon {
+  display: inline-flex;
+  flex: 0 0 44px;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: map-get($colors, lightsecondary);
+  color: map-get($colors, darksecondary);
+  @include ap-icon(22px);
+}
+
+.ap-quick {
+  padding: 1.5rem 1.4rem;
+  border: 1px dashed rgba(244, 123, 32, 0.45);
+  border-radius: 18px;
+  background: map-get($colors, white);
+
+  p {
+    margin-bottom: 0 !important;
+    color: $ap-navy;
+    font-size: 14.5px;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .ct-hours__actions {
+    margin-top: 1rem;
+  }
+}

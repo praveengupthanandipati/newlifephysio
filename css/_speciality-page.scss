@@ -1,0 +1,198 @@
+// ==========================================
+// SPECIALITY PAGES (Manual Therapy, Laser Therapy, ...)
+// Most blocks reuse the About / Why / FAQ page styles; this adds the intro
+// check list, the 4-up techniques grid, condition chips + benefits card and
+// the FAQ section wrapper.
+// ==========================================
+$sp-navy: map-get($colors, primary);
+$sp-orange: map-get($colors, secondary);
+$sp-muted: map-get($colors, gray);
+
+@mixin sp-icon($size: 18px) {
+  svg {
+    flex-shrink: 0;
+    width: $size;
+    height: $size;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.9;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+}
+
+// ---------- Intro check list ----------
+.sp-checks {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem 1rem;
+  margin: 1.75rem 0 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: $sp-navy;
+    font-size: 15px;
+    font-weight: 600;
+    @include sp-icon(20px);
+
+    svg {
+      color: $sp-orange;
+    }
+  }
+
+  @include max(575px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// ---------- Techniques: 4 per row on wide screens ----------
+.why-grid.sp-tech-grid {
+  @include min(1200px) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  @include minMax(992px, 1199px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+// ---------- Conditions + benefits ----------
+.sp-helps,
+.sp-faq {
+  padding: 6.5rem 0;
+
+  @include max(767px) {
+    padding: 4.5rem 0;
+  }
+}
+
+.sp-helps {
+  background: linear-gradient(180deg, map-get($colors, lightgray) 0%, map-get($colors, white) 100%);
+}
+
+.sp-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sp-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.7rem 1.1rem;
+  border: 1px solid rgba(23, 63, 135, 0.1);
+  border-radius: 50px;
+  background: map-get($colors, white);
+  box-shadow: 0 10px 24px -20px rgba(11, 38, 87, 0.6);
+  color: $sp-navy;
+  font-size: 14.5px;
+  font-weight: 500;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+  @include sp-icon(18px);
+
+  svg {
+    color: $sp-orange;
+    transition: color 0.3s ease;
+  }
+
+  &:is(a):hover,
+  &:is(a):focus-visible {
+    border-color: $sp-orange;
+    background: $sp-orange;
+    color: map-get($colors, white);
+    transform: translateY(-2px);
+
+    svg {
+      color: map-get($colors, white);
+    }
+  }
+
+  @include max(575px) {
+    padding: 0.6rem 0.95rem;
+    font-size: 13.5px;
+  }
+}
+
+.sp-chip--plain {
+  background: map-get($colors, lightprimary);
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.sp-benefits {
+  height: 100%;
+  padding: 2.25rem 2rem;
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 90% 10%, rgba(244, 123, 32, 0.25) 0%, rgba(244, 123, 32, 0) 45%),
+    linear-gradient(160deg, #071a3d 0%, #0b2657 55%, #173f87 100%);
+  color: map-get($colors, white);
+  box-shadow: 0 30px 60px -34px rgba(11, 38, 87, 0.8);
+
+  h3 {
+    margin: 0 0 1.4rem;
+    color: map-get($colors, white);
+    font-size: 1.35rem;
+    font-weight: 700;
+  }
+
+  ul {
+    display: grid;
+    gap: 0.85rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    color: rgba(255, 255, 255, 0.88);
+    font-size: 15px;
+    line-height: 1.55;
+    @include sp-icon(20px);
+
+    svg {
+      color: map-get($colors, amber);
+    }
+  }
+
+  @include max(575px) {
+    padding: 1.75rem 1.4rem;
+    border-radius: 20px;
+  }
+}
+
+// ---------- FAQ ----------
+.sp-faq__list {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.sp-faq__more {
+  margin-top: 2rem !important;
+  color: $sp-muted;
+  text-align: center;
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: $sp-orange;
+    font-weight: 600;
+    @include sp-icon(16px);
+
+    &:hover {
+      color: map-get($colors, darksecondary);
+    }
+  }
+}

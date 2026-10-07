@@ -23,7 +23,7 @@ $hoursText = 'Open ' . implode('; ', array_map(function ($group) {
                 <h2 class="jr-title" id="journeyTitle">Your Journey to <span>Recovery</span></h2>
                 <p class="jr-lead">A clear, step-by-step path from your first call to moving freely again &mdash; with <?= e($site['doctor']['name']) ?> guiding you all the way.</p>
             </div>
-            <a class="jr-head__btn" href="<?= e(anchor('appointment')) ?>" data-aos="fade-up" data-aos-delay="100">
+            <a class="jr-head__btn" href="<?= e(booking_url()) ?>" data-aos="fade-up" data-aos-delay="100">
                 Start Your Journey
                 <span aria-hidden="true"><?= icon('arrow') ?></span>
             </a>

@@ -1,0 +1,536 @@
+// ==========================================
+// CONTACT PAGE
+// Contact cards, enquiry form, clinic timings (live open / closed badge from
+// js/custom.js) and the Google Map. Headings reuse .svc-*, the submit button
+// and field errors reuse the hero booking form styles.
+// ==========================================
+$ct-navy: map-get($colors, primary);
+$ct-orange: map-get($colors, secondary);
+$ct-muted: map-get($colors, gray);
+$ct-green: #1e9e57;
+
+@mixin ct-icon($size: 22px) {
+  svg {
+    flex-shrink: 0;
+    width: $size;
+    height: $size;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.9;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+}
+
+// ---------- Contact cards ----------
+.ct-info {
+  padding-top: 4.5rem;
+
+  @include max(767px) {
+    padding-top: 3rem;
+  }
+}
+
+.ct-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  @include max(575px) {
+    grid-template-columns: 1fr;
+    gap: 0.9rem;
+  }
+}
+
+.ct-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+  padding: 1.75rem 1.6rem;
+  border: 1px solid rgba(23, 63, 135, 0.08);
+  border-radius: 22px;
+  background: map-get($colors, white);
+  box-shadow: 0 24px 50px -32px rgba(11, 38, 87, 0.55);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 30px 56px -30px rgba(11, 38, 87, 0.6);
+  }
+
+  h2 {
+    margin: 0.75rem 0 0.35rem;
+    color: $ct-navy;
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+
+  a,
+  address {
+    margin: 0;
+    color: map-get($colors, black);
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.6;
+    word-break: break-word;
+  }
+
+  a:hover {
+    color: $ct-orange;
+  }
+
+  small {
+    color: $ct-muted;
+    font-size: 13px;
+  }
+
+  @include max(575px) {
+    padding: 1.4rem 1.25rem;
+    border-radius: 18px;
+  }
+}
+
+.ct-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  background: $gradient-primary;
+  color: map-get($colors, white);
+  @include ct-icon(24px);
+}
+
+.ct-card--wa .ct-card__icon {
+  background: map-get($colors, whatsapp);
+
+  svg {
+    fill: currentColor;
+    stroke: none;
+  }
+}
+
+.ct-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.35rem !important;
+  color: $ct-orange !important;
+  font-weight: 600 !important;
+  @include ct-icon(16px);
+}
+
+// ---------- Form + timings ----------
+.ct-main {
+  padding: 5rem 0 6rem;
+
+  @include max(767px) {
+    padding: 3.5rem 0 4rem;
+  }
+}
+
+.ct-form-box {
+  height: 100%;
+  padding: 2.5rem;
+  border: 1px solid rgba(23, 63, 135, 0.08);
+  border-radius: 26px;
+  background: map-get($colors, white);
+  box-shadow: 0 24px 50px -36px rgba(11, 38, 87, 0.5);
+
+  .svc-title {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+  }
+
+  .svc-lead {
+    margin-bottom: 1.75rem;
+  }
+
+  @include max(575px) {
+    padding: 1.6rem 1.2rem;
+    border-radius: 20px;
+  }
+}
+
+.ct-label {
+  display: block;
+  margin-bottom: 0.4rem;
+  color: $ct-navy;
+  font-size: 14px;
+  font-weight: 600;
+
+  span {
+    color: $ct-orange;
+  }
+
+  small {
+    color: $ct-muted;
+    font-weight: 400;
+  }
+}
+
+.ct-input {
+  min-height: 50px;
+  padding: 0.7rem 1rem;
+  border: 1px solid rgba(23, 63, 135, 0.15);
+  border-radius: 12px;
+  background-color: map-get($colors, lightgray);
+  color: map-get($colors, black);
+  font-size: 15px;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+
+  &::placeholder {
+    color: #8a94a6;
+  }
+
+  &:focus {
+    border-color: map-get($colors, thirdcolour);
+    background-color: map-get($colors, white);
+    box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.15);
+  }
+
+  &.is-invalid {
+    border-color: map-get($colors, red);
+    background-image: none;
+
+    &:focus {
+      box-shadow: 0 0 0 3px rgba(217, 48, 37, 0.15);
+    }
+  }
+}
+
+textarea.ct-input {
+  min-height: 140px;
+  resize: vertical;
+}
+
+.ct-prefix {
+  border: 1px solid rgba(23, 63, 135, 0.15);
+  border-radius: 12px 0 0 12px;
+  background: map-get($colors, lightprimary);
+  color: $ct-navy;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.input-group > .ct-input {
+  border-radius: 0 12px 12px 0 !important;
+}
+
+.ct-form__meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.ct-count {
+  margin-top: 0.3rem;
+  margin-left: auto;
+  color: $ct-muted;
+  font-size: 12px;
+}
+
+// honeypot: off-screen, not display:none (some bots skip hidden fields)
+.ct-hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.ct-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  color: $ct-muted;
+  font-size: 14px;
+  line-height: 1.5;
+  cursor: pointer;
+
+  .form-check-input {
+    flex-shrink: 0;
+    width: 1.15em;
+    height: 1.15em;
+    margin-top: 0.15em;
+    border-color: rgba(23, 63, 135, 0.3);
+
+    &:checked {
+      border-color: $ct-orange;
+      background-color: $ct-orange;
+    }
+
+    &.is-invalid {
+      border-color: map-get($colors, red);
+    }
+  }
+}
+
+.ct-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  @include ct-icon(18px);
+
+  .ct-submit__busy {
+    display: none;
+  }
+
+  &.is-busy {
+    .ct-submit__text,
+    svg {
+      display: none;
+    }
+
+    .ct-submit__busy {
+      display: inline;
+    }
+  }
+}
+
+.ct-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-top: 0.9rem !important;
+  color: $ct-muted;
+  font-size: 13px;
+  text-align: center;
+  @include ct-icon(15px);
+}
+
+// ---------- Timings ----------
+.ct-hours {
+  position: sticky;
+  top: 120px;
+  padding: 2.25rem 2rem;
+  border-radius: 26px;
+  background:
+    radial-gradient(circle at 90% 8%, rgba(244, 123, 32, 0.25) 0%, rgba(244, 123, 32, 0) 45%),
+    linear-gradient(160deg, #071a3d 0%, #0b2657 55%, #173f87 100%);
+  color: map-get($colors, white);
+  box-shadow: 0 30px 60px -34px rgba(11, 38, 87, 0.8);
+
+  @include max(991px) {
+    position: static;
+  }
+
+  @include max(575px) {
+    padding: 1.75rem 1.25rem;
+    border-radius: 20px;
+  }
+}
+
+.ct-hours__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+
+  h2 {
+    margin: 0;
+    color: map-get($colors, white);
+    font-size: 1.35rem;
+    font-weight: 700;
+  }
+}
+
+.ct-hours__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.1);
+  color: map-get($colors, amber);
+  @include ct-icon(24px);
+}
+
+.ct-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-left: auto;
+  padding: 0.35rem 0.85rem;
+  border-radius: 50px;
+  font-size: 12.5px;
+  font-weight: 600;
+
+  &::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  &.is-open {
+    background: rgba(30, 158, 87, 0.18);
+    color: #5be39a;
+
+    &::before {
+      animation: ct-pulse 1.6s ease-in-out infinite;
+    }
+  }
+
+  &.is-closed {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffb4a8;
+  }
+}
+
+@keyframes ct-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(91, 227, 154, 0.6); }
+  50% { box-shadow: 0 0 0 5px rgba(91, 227, 154, 0); }
+}
+
+.ct-hours__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 0.75rem 0.85rem;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.14);
+    border-radius: 10px;
+    font-size: 14.5px;
+
+    &:last-child {
+      border-bottom: 0;
+    }
+
+    &.is-today {
+      border-bottom-color: transparent;
+      background: rgba(255, 255, 255, 0.1);
+
+      .ct-hours__day {
+        color: map-get($colors, amber);
+
+        &::after {
+          content: " (Today)";
+          font-size: 12px;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}
+
+.ct-hours__day {
+  font-weight: 600;
+}
+
+.ct-hours__time {
+  color: rgba(255, 255, 255, 0.85);
+  text-align: right;
+}
+
+.ct-hours__note {
+  margin-top: 1.25rem !important;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 13.5px;
+  line-height: 1.6;
+}
+
+.ct-hours__actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+
+  @include max(360px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ct-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  height: 48px;
+  border-radius: 12px;
+  color: map-get($colors, white);
+  font-size: 14.5px;
+  font-weight: 600;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  @include ct-icon(18px);
+
+  &:hover,
+  &:focus-visible {
+    color: map-get($colors, white);
+    transform: translateY(-2px);
+  }
+}
+
+.ct-btn--call {
+  background: $gradient-secondary;
+}
+
+.ct-btn--wa {
+  background: map-get($colors, whatsapp);
+
+  svg {
+    fill: currentColor;
+    stroke: none;
+  }
+}
+
+// ---------- Map ----------
+.ct-map {
+  padding: 0 0 6rem;
+
+  @include max(767px) {
+    padding-bottom: 4rem;
+  }
+}
+
+.ct-map__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+  margin-bottom: 1.75rem;
+
+  .svc-title {
+    margin-bottom: 0;
+  }
+}
+
+.ct-map__frame {
+  overflow: hidden;
+  border: 1px solid rgba(23, 63, 135, 0.08);
+  border-radius: 26px;
+  box-shadow: 0 24px 50px -32px rgba(11, 38, 87, 0.5);
+  aspect-ratio: 16 / 7;
+
+  iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  @include max(991px) {
+    aspect-ratio: 4 / 3;
+  }
+
+  @include max(575px) {
+    border-radius: 18px;
+    aspect-ratio: 1 / 1;
+  }
+}

@@ -87,6 +87,151 @@ var heroSwiper = new Swiper('.heroSwiper', {
   },
 });
 
+// Home testimonials carousel: 1 / 2 / 3 cards per view
+var tmSwiper = new Swiper('.tmSwiper', {
+  slidesPerView: 1,
+  spaceBetween: 20,
+  loop: true,
+  speed: 700,
+  grabCursor: true,
+  autoplay: {
+    delay: 5000,
+    disableOnInteraction: false,
+  },
+  pagination: {
+    el: '.testimonials-home .tm-pagination',
+    clickable: true,
+  },
+  navigation: {
+    nextEl: '.testimonials-home .tm-next',
+    prevEl: '.testimonials-home .tm-prev',
+  },
+  breakpoints: {
+    768: {
+      slidesPerView: 2,
+      spaceBetween: 24,
+    },
+    1200: {
+      slidesPerView: 3,
+      spaceBetween: 28,
+    },
+  },
+});
+
+// Pause testimonials while hovered (Swiper 5 has no pauseOnMouseEnter)
+$('.tmSwiper').on('mouseenter', function () {
+  if (tmSwiper.autoplay) tmSwiper.autoplay.stop();
+}).on('mouseleave', function () {
+  if (tmSwiper.autoplay) tmSwiper.autoplay.start();
+});
+
+// Gallery: category filters + full-screen zoom viewer
+$(function () {
+  var $section = $('.gallery-page');
+  var lightbox = document.getElementById('glLightbox');
+  if (!$section.length || !lightbox) return;
+
+  var $tabs = $section.find('.svc-tab');
+  var $items = $section.find('.gl-item');
+  var caption = lightbox.querySelector('.gl-lightbox__caption');
+  var current = lightbox.querySelector('.gl-current');
+  var zoomBtn = lightbox.querySelector('.gl-zoom-toggle');
+  var viewer = null;
+  var opener = null;
+
+  // filters
+  $tabs.on('click', function () {
+    var filter = $(this).data('filter');
+    $tabs.removeClass('is-active').attr('aria-pressed', 'false');
+    $(this).addClass('is-active').attr('aria-pressed', 'true');
+    $items.each(function () {
+      this.classList.toggle('is-hidden', filter !== 'all' && this.getAttribute('data-cat') !== filter);
+    });
+  });
+
+  function setZoomed(zoomed) {
+    lightbox.classList.toggle('is-zoomed', zoomed);
+    zoomBtn.setAttribute('aria-label', zoomed ? 'Zoom out' : 'Zoom in');
+  }
+
+  function update() {
+    var slide = viewer.slides[viewer.activeIndex];
+    current.textContent = viewer.activeIndex + 1;
+    caption.textContent = slide ? slide.getAttribute('data-title') : '';
+    setZoomed(false);
+  }
+
+  function open(index) {
+    opener = document.activeElement;
+    lightbox.hidden = false;
+    document.documentElement.classList.add('gl-lock');
+
+    if (!viewer) {
+      // created on first open, while visible, so Swiper can measure it
+      viewer = new Swiper('.glSwiper', {
+        initialSlide: index,
+        speed: 450,
+        spaceBetween: 30,
+        preloadImages: false,
+        lazy: { loadPrevNext: true },
+        zoom: { maxRatio: 3, toggle: false },
+        keyboard: { enabled: true },
+        navigation: {
+          nextEl: '#glLightbox .gl-next',
+          prevEl: '#glLightbox .gl-prev',
+        },
+        on: {
+          slideChange: function () { if (viewer) update(); },
+          zoomChange: function (scale) { setZoomed(scale > 1); },
+          // single tap / click on the photo zooms in and out
+          click: function (e) { if (e && e.target.tagName === 'IMG') this.zoom.toggle(); },
+        },
+      });
+      update();
+    } else {
+      viewer.update();
+      viewer.slideTo(index, 0);
+      update();
+    }
+
+    requestAnimationFrame(function () { lightbox.classList.add('is-open'); });
+    lightbox.querySelector('.gl-close').focus();
+  }
+
+  function close() {
+    if (viewer) viewer.zoom.out();
+    lightbox.classList.remove('is-open');
+    document.documentElement.classList.remove('gl-lock');
+    setTimeout(function () { lightbox.hidden = true; }, 300);
+    if (opener) opener.focus();
+  }
+
+  $section.on('click', '.gl-item__btn', function () {
+    open(parseInt(this.getAttribute('data-index'), 10));
+  });
+
+  zoomBtn.addEventListener('click', function () { viewer.zoom.toggle(); });
+  lightbox.querySelector('.gl-close').addEventListener('click', close);
+
+  // click on the dark backdrop (outside the photo) closes
+  lightbox.addEventListener('click', function (e) {
+    if (e.target.classList.contains('swiper-slide') && !lightbox.classList.contains('is-zoomed')) close();
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (lightbox.hidden) return;
+    if (e.key === 'Escape') close();
+    // keep keyboard focus inside the viewer
+    if (e.key === 'Tab') {
+      var focusables = lightbox.querySelectorAll('button:not(.swiper-button-disabled)');
+      var first = focusables[0];
+      var last = focusables[focusables.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
+});
+
 // Services: category filter tabs
 $(function () {
   var $section = $('.services-home');
@@ -128,6 +273,74 @@ $(function () {
     }
   }, { rootMargin: '0px 0px -25% 0px' });
   io.observe(steps);
+});
+
+// FAQ page: live search + topic filters, deep links, open tracking
+$(function () {
+  var list = document.getElementById('faqList');
+  if (!list) return;
+  var search = document.getElementById('faqSearch');
+  var empty = document.getElementById('faqEmpty');
+  var filters = document.querySelectorAll('.faq-filter');
+  var groups = list.querySelectorAll('.faq-group');
+  var activeCat = 'all';
+
+  function apply() {
+    var query = search.value.trim().toLowerCase();
+    var anyVisible = false;
+    [].forEach.call(groups, function (group) {
+      var inCat = activeCat === 'all' || group.getAttribute('data-cat') === activeCat;
+      var groupVisible = false;
+      [].forEach.call(group.querySelectorAll('.faq-item'), function (item) {
+        var match = inCat && (!query || item.textContent.toLowerCase().indexOf(query) !== -1);
+        item.classList.toggle('is-hidden', !match);
+        if (match) groupVisible = true;
+      });
+      group.classList.toggle('is-hidden', !groupVisible);
+      if (groupVisible) anyVisible = true;
+    });
+    empty.hidden = anyVisible;
+  }
+
+  var searchTimer = null;
+  search.addEventListener('input', function () {
+    apply();
+    // record what people search for (after they pause typing)
+    clearTimeout(searchTimer);
+    var term = this.value.trim();
+    if (term.length > 2) {
+      searchTimer = setTimeout(function () { window.nlTrack('search', { search_term: term, location: 'faq' }); }, 1200);
+    }
+  });
+
+  [].forEach.call(filters, function (btn) {
+    btn.addEventListener('click', function () {
+      activeCat = this.getAttribute('data-filter');
+      [].forEach.call(filters, function (b) {
+        var on = b === btn;
+        b.classList.toggle('is-active', on);
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+      apply();
+    });
+  });
+
+  // Which questions get opened (GA4)
+  list.addEventListener('show.bs.collapse', function (e) {
+    var item = e.target.closest('.faq-item');
+    if (item) window.nlTrack('faq_open', { question: item.querySelector('.faq-item__q').textContent.trim() });
+  });
+
+  // Deep link (faq.php#faq-is-physiotherapy-painful): open that answer
+  function openFromHash() {
+    var id = decodeURIComponent(window.location.hash.slice(1));
+    var item = id && document.getElementById(id);
+    if (!item || !item.classList.contains('faq-item') || typeof bootstrap === 'undefined') return;
+    bootstrap.Collapse.getOrCreateInstance(item.querySelector('.accordion-collapse'), { toggle: false }).show();
+    setTimeout(function () { item.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 650);
+  }
+  openFromHash();
+  window.addEventListener('hashchange', openFromHash);
 });
 
 // Treatments page: contents highlighting, mobile jump menu, deep links
@@ -846,13 +1059,15 @@ document.addEventListener('DOMContentLoaded', function () {
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 });
 
-// Contact form: client-side validation + AJAX submit (the server re-validates everything)
+// Contact form: client-side validation + AJAX submit to contact-submit.php
+// (the server re-validates everything with the same rules)
 document.addEventListener('DOMContentLoaded', function () {
   var form = document.getElementById('contactForm');
   if (!form) return;
 
   var alertBox = document.getElementById('contactAlert');
   var submitBtn = document.getElementById('contactSubmit');
+  var counter = document.getElementById('ctCount');
 
   var rules = {
     name: function (v) {
@@ -860,32 +1075,44 @@ document.addEventListener('DOMContentLoaded', function () {
       if (v.length < 2 || v.length > 80 || !/^[A-Za-zÀ-ɏऀ-෿][A-Za-zÀ-ɏऀ-෿\s.'-]*$/.test(v)) return 'Please enter a valid name (letters only, 2-80 characters).';
     },
     phone: function (v) {
-      if (!v) return 'Please enter your phone number.';
-      if (!/^\+?\d{10,15}$/.test(v.replace(/[\s().-]/g, ''))) return 'Please enter a valid phone number (10-15 digits).';
+      if (!v) return 'Please enter your mobile number.';
+      var digits = v.replace(/[\s().-]/g, '').replace(/^(?:\+?91|0)(?=\d{10}$)/, '');
+      if (!/^[6-9]\d{9}$/.test(digits)) return 'Please enter a valid 10 digit mobile number.';
     },
     email: function (v) {
-      if (!v) return 'Please enter your email address.';
-      if (v.length > 120 || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)) return 'Please enter a valid email address.';
+      // optional
+      if (v && (v.length > 120 || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v))) return 'Please enter a valid email address, or leave it empty.';
     },
     subject: function (v) {
-      if (!v) return 'Please enter a subject.';
-      if (v.length < 3 || v.length > 120) return 'Subject must be between 3 and 120 characters.';
+      if (!v) return 'Please select a subject.';
     },
     message: function (v) {
       if (!v) return 'Please enter your message.';
-      if (v.length < 10 || v.length > 2000) return 'Message must be between 10 and 2000 characters.';
+      if (v.length < 10) return 'Please write at least 10 characters.';
+      if (v.length > 1000) return 'Please keep your message under 1000 characters.';
+    },
+    consent: function (v) {
+      if (!v) return 'Please agree so we can contact you.';
     }
   };
+
+  function valueOf(name) {
+    var input = form.elements[name];
+    return input.type === 'checkbox' ? (input.checked ? '1' : '') : input.value.trim();
+  }
 
   function showError(name, message) {
     var input = form.elements[name];
     var out = form.querySelector('[data-error-for="' + name + '"]');
-    if (input) input.classList.toggle('is-invalid', !!message);
+    if (input) {
+      input.classList.toggle('is-invalid', !!message);
+      input.setAttribute('aria-invalid', message ? 'true' : 'false');
+    }
     if (out) out.textContent = message || '';
   }
 
   function validateField(name) {
-    var message = rules[name](form.elements[name].value.trim()) || '';
+    var message = rules[name](valueOf(name)) || '';
     showError(name, message);
     return !message;
   }
@@ -896,13 +1123,24 @@ document.addEventListener('DOMContentLoaded', function () {
     alertBox.hidden = false;
   }
 
+  function updateCount() {
+    if (counter) counter.textContent = form.elements.message.value.length;
+  }
+
   Object.keys(rules).forEach(function (name) {
     var input = form.elements[name];
-    input.addEventListener('blur', function () { validateField(name); });
+    input.addEventListener('blur', function () { if (input.type !== 'checkbox') validateField(name); });
+    input.addEventListener('change', function () { validateField(name); });
     input.addEventListener('input', function () {
       if (input.classList.contains('is-invalid')) validateField(name);
     });
   });
+
+  // keep only digits and common separators in the mobile field
+  form.elements.phone.addEventListener('input', function () {
+    this.value = this.value.replace(/[^\d+\s-]/g, '');
+  });
+  form.elements.message.addEventListener('input', updateCount);
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -918,6 +1156,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     submitBtn.disabled = true;
+    submitBtn.classList.add('is-busy');
     fetch(form.action, {
       method: 'POST',
       body: new FormData(form),
@@ -926,18 +1165,232 @@ document.addEventListener('DOMContentLoaded', function () {
       .then(function (res) { return res.json(); })
       .then(function (data) {
         if (data.status === 'success') {
+          window.nlTrack('generate_lead', { form_name: 'contact', subject: form.elements.subject.value });
           form.reset();
+          updateCount();
           Object.keys(rules).forEach(function (name) { showError(name, ''); });
         } else if (data.errors) {
           Object.keys(data.errors).forEach(function (name) { showError(name, data.errors[name]); });
         }
         showAlert(data.status === 'success' ? 'success' : 'error', data.message || 'Something went wrong. Please try again.');
+        alertBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
       })
       .catch(function () {
         showAlert('error', 'Network error. Please check your connection and try again.');
       })
-      .finally(function () { submitBtn.disabled = false; });
+      .finally(function () {
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('is-busy');
+      });
   });
+});
+
+// Free appointment page: booking form validation, open-day / time-slot checks
+// and AJAX submit to appointment.php (the server re-validates everything)
+document.addEventListener('DOMContentLoaded', function () {
+  var form = document.getElementById('bookForm');
+  if (!form) return;
+
+  var alertBox = document.getElementById('bookAlert');
+  var submitBtn = document.getElementById('bookSubmit');
+  var openDays = form.getAttribute('data-open-days').split(',');
+  var dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  var slotItems = form.querySelectorAll('.ap-choice--time .ap-choice__item');
+
+  // "2026-10-12" -> "Monday" (parsed as a local date, no timezone shift)
+  function weekday(value) {
+    var p = value.split('-');
+    return p.length === 3 ? dayNames[new Date(+p[0], p[1] - 1, +p[2]).getDay()] : '';
+  }
+
+  var rules = {
+    patient: function (v) {
+      if (!v) return 'Please choose who the appointment is for.';
+    },
+    name: function (v) {
+      if (!v) return 'Please enter the patient name.';
+      if (v.length < 2 || v.length > 80 || !/^[A-Za-zÀ-ɏऀ-෿][A-Za-zÀ-ɏऀ-෿\s.'-]*$/.test(v)) return 'Please enter a valid name (letters only, 2-80 characters).';
+    },
+    phone: function (v) {
+      if (!v) return 'Please enter your mobile number.';
+      var digits = v.replace(/[\s().-]/g, '').replace(/^(?:\+?91|0)(?=\d{10}$)/, '');
+      if (!/^[6-9]\d{9}$/.test(digits)) return 'Please enter a valid 10 digit mobile number.';
+    },
+    treatment: function (v) {
+      if (!v) return 'Please select a condition or treatment.';
+    },
+    city: function (v) {
+      if (!v) return 'Please select your city.';
+    },
+    date: function (v) {
+      if (!v) return 'Please choose your preferred date.';
+      var input = form.elements.date;
+      if (v < input.min || v > input.max) return 'Please choose a date within the next 60 days.';
+      if (openDays.indexOf(weekday(v)) === -1) return 'The clinic is closed on that day. Please choose another date.';
+    },
+    slot: function (v) {
+      if (!v) return 'Please choose a preferred time.';
+    },
+    email: function (v) {
+      if (v && (v.length > 120 || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v))) return 'Please enter a valid email address, or leave it empty.';
+    },
+    consent: function (v) {
+      if (!v) return 'Please agree so we can contact you.';
+    }
+  };
+
+  function field(name) {
+    return form.elements[name];
+  }
+
+  function valueOf(name) {
+    var input = field(name);
+    if (input.type === 'checkbox') return input.checked ? '1' : '';
+    return (input.value || '').trim(); // RadioNodeList.value for radio groups
+  }
+
+  // element that gets the red outline: the input, or the radio group box
+  function target(name) {
+    var input = field(name);
+    return input.length && !input.tagName ? input[0].closest('.ap-choice') : input;
+  }
+
+  function showError(name, message) {
+    var el = target(name);
+    var out = form.querySelector('[data-error-for="' + name + '"]');
+    if (el) {
+      el.classList.toggle('is-invalid', !!message);
+      if (el.tagName) el.setAttribute('aria-invalid', message ? 'true' : 'false');
+    }
+    if (out) out.textContent = message || '';
+  }
+
+  function validateField(name) {
+    var message = rules[name](valueOf(name)) || '';
+    showError(name, message);
+    return !message;
+  }
+
+  function showAlert(type, message) {
+    alertBox.className = 'contact-alert contact-alert-' + type;
+    alertBox.textContent = message;
+    alertBox.hidden = false;
+  }
+
+  // Grey out the times the clinic is closed on the chosen day (e.g. Sunday evening)
+  function syncSlots() {
+    var day = weekday(field('date').value);
+    Array.prototype.forEach.call(slotItems, function (item) {
+      var available = !day || item.getAttribute('data-days').split(',').indexOf(day) !== -1;
+      var radio = item.querySelector('input');
+      radio.disabled = !available;
+      item.classList.toggle('is-disabled', !available);
+      if (!available && radio.checked) radio.checked = false;
+    });
+  }
+
+  Object.keys(rules).forEach(function (name) {
+    var input = field(name);
+    var inputs = input.length && !input.tagName ? Array.prototype.slice.call(input) : [input];
+    inputs.forEach(function (el) {
+      el.addEventListener('change', function () { validateField(name); });
+      if (el.type !== 'radio' && el.type !== 'checkbox') {
+        el.addEventListener('blur', function () { validateField(name); });
+        el.addEventListener('input', function () {
+          if (el.classList.contains('is-invalid')) validateField(name);
+        });
+      }
+    });
+  });
+
+  field('date').addEventListener('change', syncSlots);
+  field('phone').addEventListener('input', function () {
+    this.value = this.value.replace(/[^\d+\s-]/g, '');
+  });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    alertBox.hidden = true;
+
+    var firstInvalid = null;
+    Object.keys(rules).forEach(function (name) {
+      if (!validateField(name) && !firstInvalid) {
+        var input = field(name);
+        firstInvalid = input.length && !input.tagName ? input[0] : input;
+      }
+    });
+    if (firstInvalid) {
+      firstInvalid.focus();
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.classList.add('is-busy');
+    fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'X-Requested-With': 'XMLHttpRequest' }
+    })
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        if (data.status === 'success') {
+          window.nlTrack('generate_lead', {
+            form_name: 'free_appointment',
+            treatment: field('treatment').value,
+            city: field('city').value
+          });
+          form.reset();
+          syncSlots();
+          Object.keys(rules).forEach(function (name) { showError(name, ''); });
+        } else if (data.errors) {
+          Object.keys(data.errors).forEach(function (name) { showError(name, data.errors[name]); });
+        }
+        showAlert(data.status === 'success' ? 'success' : 'error', data.message || 'Something went wrong. Please try again.');
+        alertBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      })
+      .catch(function () {
+        showAlert('error', 'Network error. Please check your connection and try again.');
+      })
+      .finally(function () {
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('is-busy');
+      });
+  });
+});
+
+// Contact page: highlight today in the timings and show open / closed (clinic time, IST)
+document.addEventListener('DOMContentLoaded', function () {
+  var list = document.getElementById('ctHours');
+  var badge = document.getElementById('ctStatus');
+  if (!list || !badge) return;
+
+  var now;
+  try {
+    var parts = {};
+    new Intl.DateTimeFormat('en-GB', {
+      timeZone: 'Asia/Kolkata', weekday: 'long', hour: '2-digit', minute: '2-digit', hourCycle: 'h23'
+    }).formatToParts(new Date()).forEach(function (p) { parts[p.type] = p.value; });
+    now = { day: parts.weekday, minutes: parseInt(parts.hour, 10) * 60 + parseInt(parts.minute, 10) };
+  } catch (err) {
+    return; // very old browser: just show the table
+  }
+
+  function toMinutes(hhmm) {
+    var t = hhmm.split(':');
+    return parseInt(t[0], 10) * 60 + parseInt(t[1], 10);
+  }
+
+  var row = list.querySelector('[data-day="' + now.day + '"]');
+  if (!row) return;
+  row.classList.add('is-today');
+
+  var open = row.getAttribute('data-slots').split(',').filter(Boolean).some(function (slot) {
+    var range = slot.split('-');
+    return now.minutes >= toMinutes(range[0]) && now.minutes < toMinutes(range[1]);
+  });
+  badge.textContent = open ? 'Open now' : 'Closed now';
+  badge.classList.add(open ? 'is-open' : 'is-closed');
+  badge.hidden = false;
 });
 
 // Free consultation form: client-side validation + AJAX submit (the server re-validates everything)

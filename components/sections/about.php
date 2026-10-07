@@ -70,7 +70,7 @@ $doctor = $site['doctor'];
                             More About Us
                             <span aria-hidden="true"><?= icon('arrow') ?></span>
                         </a>
-                        <a class="about-btn about-btn--ghost" href="<?= e(anchor('appointment')) ?>">Book Free Consultation</a>
+                        <a class="about-btn about-btn--ghost" href="<?= e(booking_url()) ?>">Book Free Consultation</a>
                     </div>
                 </div>
             </div>

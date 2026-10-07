@@ -1,0 +1,348 @@
+// ==========================================
+// GALLERY PAGE
+// Filter tabs (reuse .svc-tabs), a dense photo grid with wide / tall tiles,
+// and a full-screen zoom viewer (Swiper + zoom module, js/custom.js).
+// ==========================================
+$gl-navy: map-get($colors, primary);
+$gl-orange: map-get($colors, secondary);
+
+@mixin gl-icon($size: 22px) {
+  svg {
+    width: $size;
+    height: $size;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+}
+
+.gallery-page {
+  padding: 6.5rem 0;
+  background: linear-gradient(180deg, map-get($colors, white) 0%, map-get($colors, lightgray) 100%);
+
+  @include max(767px) {
+    padding: 4.5rem 0;
+  }
+}
+
+// ---------- Grid ----------
+.gl-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-rows: 220px;
+  grid-auto-flow: dense;
+  gap: 1.1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  @include max(1199px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-auto-rows: 200px;
+  }
+
+  @include max(767px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: 170px;
+    gap: 0.75rem;
+  }
+
+  @include max(400px) {
+    grid-auto-rows: 140px;
+    gap: 0.6rem;
+  }
+}
+
+.gl-item {
+  min-width: 0;
+
+  &.is-hidden {
+    display: none;
+  }
+}
+
+.gl-item--wide {
+  grid-column: span 2;
+}
+
+.gl-item--tall {
+  grid-row: span 2;
+}
+
+.gl-item__btn {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: 20px;
+  background: map-get($colors, lightprimary);
+  box-shadow: 0 18px 40px -30px rgba(11, 38, 87, 0.6);
+  cursor: zoom-in;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+
+  &:hover img,
+  &:focus-visible img {
+    transform: scale(1.08);
+  }
+
+  &:hover .gl-item__overlay,
+  &:focus-visible .gl-item__overlay {
+    opacity: 1;
+  }
+
+  &:hover .gl-item__zoom,
+  &:focus-visible .gl-item__zoom {
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  &:focus-visible {
+    outline: 3px solid $gl-orange;
+    outline-offset: 3px;
+  }
+
+  @include max(767px) {
+    border-radius: 14px;
+  }
+}
+
+.gl-item__overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  padding: 1.1rem 1.2rem;
+  background: linear-gradient(180deg, rgba(7, 26, 61, 0) 35%, rgba(7, 26, 61, 0.85) 100%);
+  color: map-get($colors, white);
+  text-align: left;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+
+  // touch screens have no hover: keep the caption visible
+  @media (hover: none) {
+    opacity: 1;
+    background: linear-gradient(180deg, rgba(7, 26, 61, 0) 55%, rgba(7, 26, 61, 0.8) 100%);
+  }
+
+  @include max(767px) {
+    padding: 0.7rem 0.8rem;
+  }
+}
+
+.gl-item__zoom {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: $gradient-secondary;
+  color: map-get($colors, white);
+  box-shadow: 0 12px 26px -10px rgba(244, 123, 32, 0.7);
+  transform: translate(-50%, -50%) scale(0.6);
+  transition: transform 0.4s ease;
+  @include gl-icon(24px);
+
+  @media (hover: none) {
+    display: none;
+  }
+}
+
+.gl-item__text {
+  strong {
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  small {
+    display: block;
+    color: map-get($colors, amber);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  @include max(767px) {
+    strong {
+      font-size: 13px;
+    }
+
+    small {
+      font-size: 10.5px;
+    }
+  }
+}
+
+// ---------- Zoom viewer ----------
+.gl-lock {
+  overflow: hidden;
+}
+
+.gl-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 10050;
+  display: flex;
+  flex-direction: column;
+  background: rgba(7, 26, 61, 0.96);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+
+  &[hidden] {
+    display: none;
+  }
+
+  &.is-open {
+    opacity: 1;
+  }
+
+  .glSwiper {
+    flex: 1;
+    width: 100%;
+    min-height: 0;
+    transform: scale(0.88);
+    transition: transform 0.35s ease;
+  }
+
+  &.is-open .glSwiper {
+    transform: scale(1);
+  }
+
+  .swiper-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .swiper-zoom-container img {
+    max-width: 92%;
+    max-height: 100%;
+    border-radius: 10px;
+    object-fit: contain;
+    cursor: zoom-in;
+  }
+
+  &.is-zoomed .swiper-zoom-container img {
+    border-radius: 0;
+    cursor: zoom-out;
+  }
+}
+
+.gl-lightbox__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  color: map-get($colors, white);
+}
+
+.gl-lightbox__count {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.gl-lightbox__tools {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.gl-lightbox__btn,
+.gl-lightbox__nav {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  color: map-get($colors, white);
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+
+  &:hover,
+  &:focus-visible {
+    border-color: $gl-orange;
+    background: $gl-orange;
+  }
+
+  &.swiper-button-disabled {
+    opacity: 0.35;
+    pointer-events: none;
+  }
+}
+
+.gl-lightbox__btn {
+  width: 44px;
+  height: 44px;
+  @include gl-icon(20px);
+}
+
+// zoom button shows "out" while zoomed
+.gl-ico-out,
+.gl-lightbox.is-zoomed .gl-ico-in {
+  display: none;
+}
+
+.gl-ico-in,
+.gl-lightbox.is-zoomed .gl-ico-out {
+  display: inline-flex;
+}
+
+.gl-lightbox__nav {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  width: 52px;
+  height: 52px;
+  transform: translateY(-50%);
+  @include gl-icon(24px);
+
+  @include max(575px) {
+    top: auto;
+    bottom: 1rem;
+    width: 44px;
+    height: 44px;
+    transform: none;
+  }
+}
+
+.gl-prev {
+  left: 1.25rem;
+}
+
+.gl-next {
+  right: 1.25rem;
+}
+
+.gl-lightbox__caption {
+  min-height: 3.5rem;
+  margin: 0 !important;
+  padding: 1rem 4.5rem 1.25rem !important;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 15px;
+  font-weight: 500;
+  text-align: center;
+
+  @include max(575px) {
+    padding: 1.4rem 4rem 1.4rem !important;
+    font-size: 13.5px;
+  }
+}
