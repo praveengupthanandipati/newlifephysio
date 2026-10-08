@@ -30,7 +30,7 @@ $site = [
     'email'    => '', // TODO: clinic email ID
 
     'address' => [
-        'street'      => '', // TODO: full street address
+        'street'      => '1st Floor, 5-1/33, Rd No: 6, Beside Olive Mithai, Alkapoor Township, Puppalaguda, Manikonda',
         'city'        => 'Hyderabad',
         'region'      => 'Telangana',
         'region_code' => 'IN-TG',

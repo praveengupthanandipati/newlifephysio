@@ -10,12 +10,7 @@
 /** @var array $contactPage */
 /** @var array $specialities */
 
-$addressLine = implode(', ', array_filter([
-    $site['address']['street'],
-    $site['address']['city'],
-    $site['address']['region'],
-    $site['address']['postal_code'],
-]));
+$addressLine = address_line();
 $mapQuery = map_query();
 $mapEmbed = 'https://www.google.com/maps?q=' . rawurlencode($mapQuery) . '&output=embed';
 $mapDirections = map_directions_url();

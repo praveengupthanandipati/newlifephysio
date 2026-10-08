@@ -32,6 +32,9 @@ $seoPages = [
             'physiotherapy centre {city}', 'physio clinic {city}', 'physiotherapy near me', 'physiotherapist near me',
             'physio near me', 'best physiotherapy clinic near me', 'physiotherapy centre near me',
             'physiotherapy hospital near me', 'physiotherapy clinic open on sunday', 'physiotherapy in {city}',
+            // neighbourhood (clinic is in Alkapoor Township, Puppalaguda, Manikonda)
+            'physiotherapy clinic in Manikonda', 'physiotherapist in Manikonda', 'physiotherapy in Puppalaguda',
+            'physiotherapy near Alkapoor Township', 'physio clinic Manikonda', 'best physiotherapist in Manikonda',
             // problem
             'back pain treatment in {city}', 'neck pain treatment {city}', 'knee pain physiotherapy',
             'shoulder pain treatment', 'joint pain physiotherapy', 'back pain doctor near me',
@@ -254,7 +257,7 @@ $seoPages = [
             // intent
             'book physiotherapy appointment online', 'free physiotherapy consultation {city}', 'physiotherapy appointment {city}',
             'book physiotherapist near me', 'physiotherapy booking online {city}', 'free physio consultation near me',
-            'physiotherapist appointment today',
+            'physiotherapist appointment today', 'physiotherapy appointment Manikonda',
             // timing
             'physiotherapy clinic open sunday {city}', 'evening physiotherapy appointment {city}',
             // condition
@@ -294,6 +297,7 @@ $seoPages = [
             // brand
             'New Life Physiotherapy Clinic address', 'New Life Physiotherapy contact number',
             'New Life Physiotherapy Clinic location', 'physiotherapy clinic contact',
+            'physiotherapy clinic Manikonda address', 'physiotherapist Alkapoor Township Puppalaguda',
         ],
     ],
     'privacy-policy' => [

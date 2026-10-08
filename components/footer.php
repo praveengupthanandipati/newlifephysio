@@ -13,12 +13,7 @@
 /** @var array $footerSpecialities */
 /** @var array $legalLinks */
 
-$addressLine = implode(', ', array_filter([
-    $site['address']['street'], // TODO: set the street address in data.php
-    $site['address']['city'],
-    $site['address']['region'],
-    $site['address']['postal_code'],
-]));
+$addressLine = address_line();
 $footerLegal = array_filter($legalLinks, function ($link) {
     return is_file(__DIR__ . '/../' . $link['url']);
 });

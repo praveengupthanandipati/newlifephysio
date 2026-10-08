@@ -131,17 +131,23 @@ function contact_subjects(): array
     );
 }
 
+/** Clinic address on one line: street, city, region and PIN (empty parts skipped). */
+function address_line(): string
+{
+    $address = $GLOBALS['site']['address'];
+    return implode(', ', array_filter([
+        $address['street'],
+        $address['city'],
+        $address['region'],
+        $address['postal_code'],
+    ]));
+}
+
 /** Google Maps search text for the clinic: $site['map']['query'], else name + address. */
 function map_query(): string
 {
     $site = $GLOBALS['site'];
-    $address = implode(', ', array_filter([
-        $site['address']['street'],
-        $site['address']['city'],
-        $site['address']['region'],
-        $site['address']['postal_code'],
-    ]));
-    return $site['map']['query'] ?: $site['name'] . ', ' . $address;
+    return $site['map']['query'] ?: $site['name'] . ', ' . address_line();
 }
 
 /** Google Maps directions link to the clinic. */
