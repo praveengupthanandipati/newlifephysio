@@ -3,11 +3,11 @@
  * Home: conditions we treat. Filter tabs + cards from $treatments, counts
  * computed per category; filtering is in js/custom.js.
  */
-$counts = ['all' => count($treatments) + 1]; // +1: featured child therapy card
+$counts = ['all' => count($treatments) + 1]; // +1: featured child therapy card (Paediatric)
 foreach ($treatmentCategories as $catId => $catLabel) {
     $counts[$catId] = count(array_filter($treatments, function ($t) use ($catId) {
         return $t['cat'] === $catId;
-    })) + ($catId === 'child' ? 1 : 0);
+    })) + ($catId === 'paeds' ? 1 : 0);
 }
 ?>
 <!-- services -->
@@ -39,7 +39,7 @@ foreach ($treatmentCategories as $catId => $catLabel) {
                 </a>
             </article>
 <?php endforeach; ?>
-            <article class="svc-card svc-card--feature" data-cat="child" data-aos="fade-up">
+            <article class="svc-card svc-card--feature" data-cat="paeds" data-aos="fade-up">
                 <div class="svc-feature">
                     <span class="svc-feature__icon" aria-hidden="true"><?= icon('child') ?></span>
                     <div class="svc-feature__body">

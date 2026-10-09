@@ -72,7 +72,7 @@ $mainPhone = $site['phones'][0];
     <!--/ top info bar -->
 
     <!-- main bar: Bootstrap navbar, the menu becomes an off-canvas drawer below lg -->
-    <nav class="navbar navbar-expand-lg mh-bar" aria-label="Main navigation">
+    <nav class="navbar navbar-expand-xl mh-bar" aria-label="Main navigation">
         <div class="container-90 mh-bar__inner">
             <a class="navbar-brand mh-logo" href="index.php" aria-label="<?= e($site['name']) ?> - Home">
                 <img src="<?= e($site['logo']) ?>" alt="<?= e($site['name'] . ' - ' . $site['tagline']) ?>">
@@ -95,24 +95,31 @@ $mainPhone = $site['phones'][0];
                     <ul class="navbar-nav mh-nav">
 <?php foreach ($nav as $item): ?>
 <?php if (!empty($item['mega'])): ?>
-                        <!-- treatments mega menu -->
+                        <!-- conditions mega menu: first category wide (two columns), the rest stacked beside it -->
                         <li class="nav-item dropdown mh-dropdown mh-dropdown--mega">
                             <a class="nav-link mh-nav__link dropdown-toggle<?= $navActive($item['id']) ?>" href="<?= e($item['url']) ?>" role="button" data-bs-toggle="dropdown" aria-expanded="false"><?= e($item['label']) ?></a>
                             <div class="dropdown-menu mh-mega">
+<?php $catIndex = 0; $lastCat = array_key_last($treatmentCategories); ?>
 <?php foreach ($treatmentCategories as $catId => $catLabel): ?>
 <?php $catItems = array_filter($treatments, function ($t) use ($catId) { return $t['cat'] === $catId; }); ?>
-<?php if (!$catItems) continue; ?>
-                                <div class="mh-mega__col">
-                                    <h6 class="mh-mega__title"><a href="<?= e($item['url']) ?>#cat-<?= e($catId) ?>"><?= e($catLabel) ?></a></h6>
+<?php if ($catIndex === 1): ?>
+                                <div class="mh-mega__stack">
+<?php endif; ?>
+                                <div class="mh-mega__col<?= $catIndex === 0 ? ' mh-mega__col--wide' : '' ?>">
+                                    <h6 class="mh-mega__title"><a href="<?= e($item['url']) ?>#cat-<?= e($catId) ?>"><?= e($catLabel) ?> Conditions</a></h6>
                                     <ul class="mh-drop__list">
 <?php foreach ($catItems as $t): ?>
                                         <li><a class="dropdown-item mh-drop__link" href="treatments.php#<?= e($t['slug']) ?>"><?= e($t['name']) ?></a></li>
 <?php endforeach; ?>
-<?php if ($catId === 'neuro'): ?>
-                                        <li><a class="dropdown-item mh-drop__link mh-drop__link--all" href="<?= e($item['url']) ?>">View all treatments &rarr;</a></li>
+<?php if ($catId === $lastCat): ?>
+                                        <li><a class="dropdown-item mh-drop__link mh-drop__link--all" href="<?= e($item['url']) ?>">View all conditions &rarr;</a></li>
 <?php endif; ?>
                                     </ul>
                                 </div>
+<?php if ($catIndex > 0 && $catId === $lastCat): ?>
+                                </div>
+<?php endif; ?>
+<?php $catIndex++; ?>
 <?php endforeach; ?>
                                 <div class="mh-mega__promo">
                                     <h4><?= e($megaPromo['title']) ?></h4>
@@ -137,13 +144,14 @@ $mainPhone = $site['phones'][0];
 <?php endforeach; ?>
                     </ul>
 
-                    <a class="mh-btn-book" href="<?= e(booking_url()) ?>">
-                        Book Free Appointment
+                    <a class="mh-btn-book" href="<?= e(booking_url()) ?>" aria-label="Book Free Appointment">
+                        <span class="mh-btn-book__full" aria-hidden="true">Book Free Appointment</span>
+                        <span class="mh-btn-book__short" aria-hidden="true">Book Now</span>
                         <span class="mh-btn-book__icon" aria-hidden="true"><?= icon('arrow') ?></span>
                     </a>
 
-                    <!-- drawer footer (below lg only) -->
-                    <div class="mh-offcanvas__foot d-lg-none">
+                    <!-- drawer footer (below xl only) -->
+                    <div class="mh-offcanvas__foot d-xl-none">
                         <a class="mh-topbar__link" href="tel:<?= e(tel($mainPhone)) ?>">
                             <?= icon('phone', 'mh-ico') ?>
                             <?= e(implode(', ', $site['phones'])) ?>

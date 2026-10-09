@@ -1,0 +1,196 @@
+// ==========================================
+// SERVICES PAGE
+// Quick-jump chips and one card per service (anchor #<slug> from the menu).
+// Chips reuse .sp-chip (_speciality-page.scss), the button .why-btn.
+// ==========================================
+$srv-navy: map-get($colors, primary);
+$srv-orange: map-get($colors, secondary);
+$srv-muted: map-get($colors, gray);
+
+@mixin srv-icon($size: 20px) {
+  svg {
+    flex-shrink: 0;
+    width: $size;
+    height: $size;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.9;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+}
+
+.srv-page {
+  padding: 6rem 0;
+  background: linear-gradient(180deg, map-get($colors, white) 0%, map-get($colors, lightgray) 100%);
+
+  @include max(767px) {
+    padding: 4rem 0;
+  }
+}
+
+.srv-jump {
+  margin-bottom: 3rem;
+
+  .sp-chips {
+    justify-content: center;
+  }
+
+  @include max(575px) {
+    margin-bottom: 2rem;
+  }
+}
+
+.srv-list {
+  display: grid;
+  gap: 1.75rem;
+}
+
+.srv-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  overflow: hidden;
+  border: 1px solid rgba(23, 63, 135, 0.08);
+  border-radius: 26px;
+  background: map-get($colors, white);
+  box-shadow: 0 24px 50px -36px rgba(11, 38, 87, 0.5);
+  scroll-margin-top: 130px;
+
+  // highlight the service you jumped to
+  &:target {
+    border-color: rgba(244, 123, 32, 0.55);
+    box-shadow: 0 0 0 3px rgba(244, 123, 32, 0.15), 0 24px 50px -36px rgba(11, 38, 87, 0.5);
+  }
+
+  @include max(991px) {
+    grid-template-columns: 1fr;
+  }
+
+  @include max(575px) {
+    border-radius: 20px;
+  }
+}
+
+.srv-item__main {
+  padding: 2.5rem;
+
+  @include max(575px) {
+    padding: 1.75rem 1.25rem;
+  }
+}
+
+.srv-item__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.srv-item__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 18px;
+  background: $gradient-primary;
+  color: map-get($colors, white);
+  box-shadow: 0 14px 28px -14px rgba(23, 63, 135, 0.7);
+  @include srv-icon(28px);
+}
+
+.srv-item:nth-child(even) .srv-item__icon {
+  background: $gradient-secondary;
+  box-shadow: 0 14px 28px -14px rgba(244, 123, 32, 0.7);
+}
+
+.srv-item__num {
+  color: rgba(23, 63, 135, 0.12);
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.srv-item__title {
+  margin: 0 0 0.9rem;
+  color: $srv-navy;
+  font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.srv-item__text {
+  color: $srv-muted;
+  font-size: 15.5px;
+  line-height: 1.8;
+}
+
+.srv-item__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.5rem;
+  margin-top: 1.75rem;
+}
+
+.srv-item__related {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: $srv-orange;
+  font-size: 14.5px;
+  font-weight: 600;
+  @include srv-icon(16px);
+
+  &:hover {
+    color: map-get($colors, darksecondary);
+  }
+}
+
+.srv-item__side {
+  padding: 2.5rem;
+  background: map-get($colors, lightgray);
+
+  h3 {
+    margin: 0 0 1rem;
+    color: $srv-navy;
+    font-size: 1.05rem;
+    font-weight: 700;
+  }
+
+  h3 + ul + h3 {
+    margin-top: 1.75rem;
+  }
+
+  @include max(575px) {
+    padding: 1.75rem 1.25rem;
+  }
+}
+
+.srv-offer {
+  display: grid;
+  gap: 0.7rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    color: map-get($colors, black);
+    font-size: 15px;
+    line-height: 1.55;
+    @include srv-icon(19px);
+
+    svg {
+      margin-top: 0.1em;
+      color: $srv-orange;
+    }
+  }
+}
+
+.srv-conditions .sp-chip {
+  padding: 0.5rem 0.9rem;
+  font-size: 13.5px;
+}

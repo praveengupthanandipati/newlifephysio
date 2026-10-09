@@ -176,7 +176,7 @@ $svc-ink: map-get($colors, black);
   --accent-soft: #{map-get($colors, lightprimary)};
   --accent-grad: linear-gradient(135deg, #4fb3f0 0%, #1e88e5 100%);
 
-  &[data-cat="joints"] {
+  &[data-cat="paeds"] {
     --accent: #{map-get($colors, secondary)};
     --accent-soft: #{map-get($colors, lightsecondary)};
     --accent-grad: #{$gradient-secondary};

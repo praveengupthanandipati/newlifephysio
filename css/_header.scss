@@ -11,8 +11,8 @@ $orange: map-get($colors, secondary);
 $orange-dark: map-get($colors, darksecondary);
 $ink: map-get($colors, black);
 $muted: map-get($colors, gray);
-$nav-desktop: 992px;
-$nav-mobile: 991px;
+$nav-desktop: 1200px; // full menu from xl up (9 items need the room)
+$nav-mobile: 1199px;
 
 .site-header {
   position: sticky;
@@ -293,7 +293,7 @@ $nav-mobile: 991px;
 }
 
 .mh-drop {
-  --bs-dropdown-min-width: 250px;
+  --bs-dropdown-min-width: 280px;
   --bs-dropdown-padding-x: 0.6rem;
   --bs-dropdown-padding-y: 0.6rem;
 }
@@ -678,11 +678,12 @@ $nav-mobile: 991px;
     > .mh-mega {
       top: 100%;
       left: 50%;
-      width: min(920px, 92vw);
-      margin-left: calc(min(920px, 92vw) / -2);
+      width: min(1040px, 94vw);
+      margin-left: calc(min(1040px, 94vw) / -2);
       display: grid;
-      grid-template-columns: repeat(3, 1fr) 220px;
-      gap: 1rem;
+      // wide first category (two columns) | other categories stacked | promo
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) 220px;
+      gap: 1rem 1.25rem;
       padding: 1.4rem;
 
       &::before {
@@ -690,19 +691,67 @@ $nav-mobile: 991px;
       }
     }
   }
+
+  .mh-mega__col--wide .mh-drop__list {
+    columns: 2;
+    column-gap: 0.5rem;
+
+    li {
+      break-inside: avoid;
+    }
+  }
+
+  .mh-mega__stack {
+    display: grid;
+    align-content: start;
+    gap: 1.1rem;
+  }
 }
 
-@include minMax($nav-desktop, 1199px) {
+// Book button: short label until there is room for the full one
+.mh-btn-book__short {
+  display: none;
+}
+
+// Full menu, compact tiers (widths measured: 9 items + logo + button
+// need ~1530px at full size, so tighten below 1600px)
+@include min($nav-desktop) {
+  .mh-bar__inner {
+    width: 96%;
+    max-width: 96%;
+  }
+}
+
+@include minMax($nav-desktop, 1599px) {
   .mh-bar {
-    --bs-navbar-nav-link-padding-x: 0.7rem;
+    --bs-navbar-nav-link-padding-x: 0.55rem;
     --bs-nav-link-font-size: 14px;
+  }
+  .mh-offcanvas__body {
+    gap: 1rem;
+  }
+  .mh-nav {
+    gap: 0.1rem;
   }
   .mh-btn-book {
     font-size: 14px;
     padding-left: 1rem;
   }
+  .mh-btn-book__full {
+    display: none;
+  }
+  .mh-btn-book__short {
+    display: inline;
+  }
   .mh-logo img {
     height: 64px;
+  }
+}
+
+@include minMax($nav-desktop, 1399px) {
+  .mh-bar {
+    --bs-navbar-nav-link-padding-x: 0.4rem;
+    --bs-nav-link-font-size: 13.5px;
   }
 }
 

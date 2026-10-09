@@ -32,6 +32,7 @@ foreach ($nav as $item) {
 }
 // Pages reached from buttons rather than the menu
 $ids[] = 'free-appointment';
+$ids[] = 'whychooseus';
 
 $urls = [];
 foreach (array_unique($ids) as $id) {

@@ -94,26 +94,37 @@ $seoPages = [
     ],
     'treatments' => [
         'title'       => 'Conditions We Treat | Physiotherapy in {city}',
-        'description' => 'Physiotherapy for spondylosis, disc bulge, sciatica, frozen shoulder, tennis elbow, plantar fasciitis, hemiplegia, Parkinson\'s and more in {city}.',
+        'description' => 'Physiotherapy in {city} for arthritis, frozen shoulder, disc bulge, sciatica, ligament injuries, stroke, Parkinson\'s, cerebral palsy and more.',
         'keywords'    => [
-            // spine & back
-            'spondylosis treatment {city}', 'cervical spondylosis physiotherapy', 'lumbar spondylosis treatment',
-            'ankylosing spondylitis physiotherapy', 'disc bulge treatment without surgery', 'slip disc physiotherapy',
-            'sciatica physiotherapy {city}', 'sciatica pain treatment', 'low back pain physiotherapy',
-            'torticollis treatment', 'stiff neck treatment', 'muscle spasm relief',
-            // joints & sports
-            'ligament injury rehabilitation', 'ACL rehabilitation {city}', 'ankle sprain physiotherapy',
-            'frozen shoulder physiotherapy {city}', 'rheumatoid arthritis physiotherapy', 'joint stiffness treatment',
-            'sports injury rehabilitation {city}', 'tendinitis treatment', 'tennis elbow treatment',
-            'golfer\'s elbow treatment', 'plantar fasciitis treatment', 'heel pain treatment', 'heel spur treatment',
-            // neuro
-            'foot drop physiotherapy', 'wrist drop physiotherapy', 'bell\'s palsy physiotherapy',
-            'facial palsy exercises', 'hemiplegia physiotherapy', 'stroke rehabilitation centre {city}',
-            'paralysis treatment physiotherapy', 'paraplegia rehabilitation', 'quadriplegia physiotherapy',
-            'parkinson\'s physiotherapy', 'muscular dystrophy physiotherapy',
-            // child
-            'child physiotherapy {city}', 'paediatric physiotherapy {city}', 'baby torticollis treatment',
-            'delayed walking in child physiotherapy',
+            // orthopaedic
+            'knee osteoarthritis physiotherapy {city}', 'hip arthritis physiotherapy', 'shoulder arthritis treatment',
+            'rheumatoid arthritis physiotherapy', 'frozen shoulder physiotherapy {city}', 'tennis elbow treatment',
+            'golfer\'s elbow treatment', 'ACL rehabilitation {city}', 'MCL injury physiotherapy', 'ligament injury rehabilitation',
+            'meniscus tear physiotherapy', 'fracture rehabilitation {city}', 'physiotherapy after fracture',
+            'disc bulge treatment without surgery', 'herniated disc physiotherapy', 'sciatica physiotherapy {city}',
+            'cervical spondylosis physiotherapy', 'lumbar spondylosis treatment', 'rotator cuff injury physiotherapy',
+            'plantar fasciitis treatment', 'heel pain treatment', 'carpal tunnel syndrome physiotherapy',
+            'post operative rehabilitation knee hip spine', 'knee replacement physiotherapy {city}',
+            // neurological
+            'stroke rehabilitation centre {city}', 'stroke physiotherapy', 'traumatic brain injury rehabilitation',
+            'spinal cord injury physiotherapy', 'parkinson\'s physiotherapy', 'multiple sclerosis physiotherapy',
+            'guillain barre syndrome physiotherapy', 'neuro physiotherapy {city}',
+            // paediatric
+            'cerebral palsy physiotherapy {city}', 'developmental delay physiotherapy', 'hypotonia physiotherapy',
+            'hypertonia treatment child', 'paediatric physiotherapy {city}', 'child physiotherapy {city}',
+        ],
+    ],
+    'services' => [
+        'title'       => 'Physiotherapy Services in {city} | New Life Physiotherapy',
+        'description' => 'Orthopaedic, neuro, paediatric, sports injury and post-operative physiotherapy, pain management and strength training in {city}. Dr. Y. Abhilash (PT).',
+        'keywords'    => [
+            'physiotherapy services {city}', 'physiotherapy treatment {city}', 'physiotherapy clinic services',
+            'orthopaedic physiotherapy {city}', 'neurological physiotherapy {city}', 'neuro rehabilitation {city}',
+            'paediatric physiotherapy {city}', 'child rehabilitation {city}', 'sports injury rehabilitation {city}',
+            'sports physiotherapist {city}', 'post operative rehabilitation {city}', 'physiotherapy after surgery',
+            'pain management physiotherapy', 'chronic pain treatment without medicines', 'functional rehabilitation',
+            'strength and mobility training', 'balance training for elderly', 'physiotherapy services Manikonda',
+            'New Life Physiotherapy services',
         ],
     ],
     'specialities' => [
@@ -266,6 +277,24 @@ $seoPages = [
             'New Life Physiotherapy appointment', 'Dr. Y. Abhilash appointment',
         ],
     ],
+    'resources' => [
+        'title'       => 'Patient Resources: Physiotherapy Tips & Rehab Guide',
+        'description' => 'Free physiotherapy guidance: posture, safe lifting, ice or heat, home exercises, recovery stages and times, and FAQs from New Life Physiotherapy, {city}.',
+        'keywords'    => [
+            // guidance
+            'physiotherapy tips', 'physiotherapy advice at home', 'good posture at work tips', 'how to lift safely',
+            'ice or heat for injury', 'ice vs heat for back pain', 'best sleeping position for back pain',
+            'neck pain from phone use', 'home exercise tips physiotherapy',
+            // rehabilitation
+            'rehabilitation stages', 'how long does physiotherapy recovery take', 'recovery time after knee replacement',
+            'recovery time sprain', 'frozen shoulder recovery time', 'ACL recovery time return to sport',
+            'pain during exercise physiotherapy', 'what to bring to physiotherapy appointment',
+            // safety
+            'back pain red flags', 'when to see a doctor for back pain',
+            // brand / local
+            'physiotherapy patient information {city}', 'New Life Physiotherapy patient resources',
+        ],
+    ],
     'faq' => [
         'title'       => 'Physiotherapy FAQs | New Life Physiotherapy Clinic',
         'description' => 'Answers to common questions about physiotherapy sessions, treatment duration, what to bring and how to book at New Life Physiotherapy Clinic, {city}.',
@@ -385,7 +414,7 @@ function page_schema(string $page): array
             'name'     => $site['doctor']['name'],
             'jobTitle' => $site['doctor']['role'],
         ],
-        'knowsAbout' => array_merge(array_column($treatments, 'name'), ['Child Therapy']),
+        'knowsAbout' => array_merge(array_column($treatments, 'name'), array_column($GLOBALS['services'], 'name')),
         'sameAs'     => array_values(array_filter($site['social'])),
     ]);
 
@@ -404,7 +433,7 @@ function page_schema(string $page): array
     // Treatments: a medical page about each condition we treat
     if ($page === 'treatments') {
         $conditions = [];
-        foreach (array_merge($treatments, [$GLOBALS['childTreatment']]) as $t) {
+        foreach ($treatments as $t) {
             $conditions[] = array_filter([
                 '@type'       => 'MedicalCondition',
                 'name'        => $t['name'],
@@ -420,6 +449,21 @@ function page_schema(string $page): array
             'about'    => $conditions,
             'audience' => ['@type' => 'Patient'],
         ]);
+    }
+
+    // Patient resources page: its FAQ section
+    if ($page === 'resources') {
+        $graph[] = [
+            '@context'   => 'https://schema.org',
+            '@type'      => 'FAQPage',
+            'mainEntity' => array_map(function ($item) {
+                return [
+                    '@type'          => 'Question',
+                    'name'           => $item['q'],
+                    'acceptedAnswer' => ['@type' => 'Answer', 'text' => $item['a']],
+                ];
+            }, $GLOBALS['resourcesPage']['faq']['items']),
+        ];
     }
 
     // FAQ page: every question and answer

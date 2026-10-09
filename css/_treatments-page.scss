@@ -171,19 +171,13 @@ html:has(.trt-page) {
     margin-top: 3.5rem;
   }
 
-  &[data-cat="joints"] {
-    --accent: #{$tp-orange};
-    --accent-soft: #{map-get($colors, lightsecondary)};
-    --accent-grad: #{$gradient-secondary};
-  }
-
   &[data-cat="neuro"] {
     --accent: #{$tp-navy};
     --accent-soft: #e7ecf8;
     --accent-grad: #{$gradient-primary};
   }
 
-  &[data-cat="child"] {
+  &[data-cat="paeds"] {
     --accent: #{map-get($colors, darksecondary)};
     --accent-soft: #fff4e0;
     --accent-grad: linear-gradient(135deg, #f9a826 0%, #f47b20 100%);

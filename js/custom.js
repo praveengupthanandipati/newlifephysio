@@ -27,7 +27,7 @@ document.addEventListener('click', function (e) {
   }
 });
 
-// Header: Bootstrap offcanvas drawer (below lg) helpers
+// Header: Bootstrap offcanvas drawer (below xl) helpers
 $(function () {
   var drawerEl = document.getElementById('mhOffcanvas');
   if (!drawerEl || typeof bootstrap === 'undefined') return;
@@ -690,7 +690,7 @@ $(function () {
 // Only handle mobile: remove styles on resize to mobile
 $(function () {
   function handleDropdownMobile() {
-    if (window.innerWidth <= 991) {
+    if (window.innerWidth <= 1199) { // drawer menu below xl (see $nav-desktop)
       $(".navbar-nav .dropdown").off('mouseenter mouseleave');
       $(".navbar-nav .dropdown-menu").removeAttr('style');
     }

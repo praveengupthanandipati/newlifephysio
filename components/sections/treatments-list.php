@@ -15,11 +15,10 @@
 /** @var array $treatmentCategories */
 /** @var array $treatmentCategoryInfo */
 /** @var array $treatmentDetails */
-/** @var array $childTreatment */
 
-// All conditions grouped by category, Child Therapy included
+// All conditions grouped by category
 $groups = [];
-foreach (array_merge($treatments, [$childTreatment]) as $t) {
+foreach ($treatments as $t) {
     $groups[$t['cat']][] = $t;
 }
 $mainPhone = $site['phones'][0];

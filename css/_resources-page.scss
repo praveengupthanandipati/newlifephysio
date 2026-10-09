@@ -1,0 +1,525 @@
+// ==========================================
+// PATIENT RESOURCES PAGE
+// Intro cards, guidance tips + red-flag warning, rehab stages, recovery
+// times, exercise-pain guide and checklists. FAQ reuses .sp-faq / .faq-*.
+// ==========================================
+$rs-navy: map-get($colors, primary);
+$rs-orange: map-get($colors, secondary);
+$rs-muted: map-get($colors, gray);
+$rs-red: map-get($colors, red);
+
+@mixin rs-icon($size: 20px) {
+  svg {
+    flex-shrink: 0;
+    width: $size;
+    height: $size;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.9;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+}
+
+.rs-intro,
+.rs-guidance,
+.rs-rehab {
+  padding: 6rem 0;
+  scroll-margin-top: 110px;
+
+  @include max(767px) {
+    padding: 4rem 0;
+  }
+}
+
+.rs-guidance {
+  background: linear-gradient(180deg, map-get($colors, lightgray) 0%, map-get($colors, white) 100%);
+}
+
+#faq {
+  scroll-margin-top: 110px;
+}
+
+// ---------- Intro cards ----------
+.rs-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  @include max(991px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.rs-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 2rem 1.75rem;
+  border: 1px solid rgba(23, 63, 135, 0.08);
+  border-radius: 22px;
+  background: map-get($colors, white);
+  box-shadow: 0 20px 44px -34px rgba(11, 38, 87, 0.55);
+  color: inherit;
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+
+  strong {
+    margin: 1rem 0 0.4rem;
+    color: $rs-navy;
+    font-size: 1.15rem;
+    font-weight: 700;
+  }
+
+  &:hover,
+  &:focus-visible {
+    border-color: rgba(244, 123, 32, 0.4);
+    transform: translateY(-4px);
+    box-shadow: 0 28px 50px -30px rgba(11, 38, 87, 0.6);
+  }
+}
+
+.rs-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: $gradient-primary;
+  color: map-get($colors, white);
+  @include rs-icon(26px);
+}
+
+.rs-cards li:nth-child(2) .rs-card__icon {
+  background: $gradient-secondary;
+}
+
+.rs-card__text {
+  flex: 1;
+  color: $rs-muted;
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.rs-card__more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 1rem;
+  color: $rs-orange;
+  font-size: 14px;
+  font-weight: 600;
+  @include rs-icon(16px);
+}
+
+// ---------- Guidance tips ----------
+.rs-tips {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.25rem;
+
+  @include max(1199px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @include max(575px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.rs-tip {
+  padding: 1.75rem 1.5rem;
+  border: 1px solid rgba(23, 63, 135, 0.08);
+  border-radius: 20px;
+  background: map-get($colors, white);
+  box-shadow: 0 16px 36px -30px rgba(11, 38, 87, 0.55);
+
+  h3 {
+    margin: 1rem 0 0.85rem;
+    color: $rs-navy;
+    font-size: 1.05rem;
+    font-weight: 700;
+  }
+
+  ul {
+    display: grid;
+    gap: 0.55rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    position: relative;
+    padding-left: 1.1rem;
+    color: map-get($colors, black);
+    font-size: 14.5px;
+    line-height: 1.55;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0.55em;
+      left: 0;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: $rs-orange;
+    }
+  }
+}
+
+.rs-tip__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: map-get($colors, lightprimary);
+  color: $rs-navy;
+  @include rs-icon(24px);
+}
+
+.rs-warning {
+  display: flex;
+  gap: 1.25rem;
+  margin-top: 2.5rem;
+  padding: 2rem;
+  border: 1px solid rgba(217, 48, 37, 0.25);
+  border-left: 5px solid $rs-red;
+  border-radius: 20px;
+  background: #fff6f5;
+
+  h3 {
+    margin: 0 0 0.5rem;
+    color: #b3261e;
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+
+  p {
+    color: map-get($colors, black);
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  ul {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.6rem 1.5rem;
+    margin: 1rem 0 0;
+    padding-left: 1.1rem;
+
+    @include max(767px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  li {
+    color: map-get($colors, black);
+    font-size: 14.5px;
+    line-height: 1.55;
+
+    &::marker {
+      color: $rs-red;
+    }
+  }
+
+  @include max(575px) {
+    flex-direction: column;
+    padding: 1.5rem 1.25rem;
+  }
+}
+
+.rs-warning__icon {
+  display: inline-flex;
+  flex: 0 0 52px;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  background: rgba(217, 48, 37, 0.12);
+  color: $rs-red;
+  @include rs-icon(26px);
+}
+
+.rs-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem !important;
+  color: $rs-muted;
+  font-size: 13.5px;
+  text-align: center;
+  @include rs-icon(16px);
+}
+
+// ---------- Rehab stages ----------
+.rs-stages {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin: 0 0 3rem;
+  padding: 0;
+  list-style: none;
+
+  // connecting line behind the step numbers
+  &::before {
+    content: "";
+    position: absolute;
+    top: 26px;
+    left: 12%;
+    right: 12%;
+    height: 2px;
+    background: repeating-linear-gradient(90deg, rgba(244, 123, 32, 0.5) 0 8px, transparent 8px 14px);
+  }
+
+  @include max(991px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    &::before {
+      display: none;
+    }
+  }
+
+  @include max(575px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.rs-stage {
+  position: relative;
+  padding: 0 1.25rem 1.75rem;
+  border-radius: 20px;
+  text-align: center;
+
+  h3 {
+    margin: 1rem 0 0.5rem;
+    color: $rs-navy;
+    font-size: 1.05rem;
+    font-weight: 700;
+  }
+
+  p {
+    color: $rs-muted;
+    font-size: 14.5px;
+    line-height: 1.65;
+  }
+
+  @include max(991px) {
+    padding-top: 1.5rem;
+    border: 1px solid rgba(23, 63, 135, 0.08);
+    background: map-get($colors, white);
+  }
+}
+
+.rs-stage__num {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  border: 4px solid map-get($colors, white);
+  border-radius: 50%;
+  background: $gradient-secondary;
+  color: map-get($colors, white);
+  font-size: 1.2rem;
+  font-weight: 700;
+  box-shadow: 0 10px 22px -10px rgba(244, 123, 32, 0.8);
+}
+
+.rs-stage__icon {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.9rem;
+  color: $rs-navy;
+  @include rs-icon(28px);
+}
+
+// ---------- Panels ----------
+.rs-panel {
+  height: 100%;
+  padding: 2rem;
+  border: 1px solid rgba(23, 63, 135, 0.08);
+  border-radius: 22px;
+  background: map-get($colors, white);
+  box-shadow: 0 20px 44px -36px rgba(11, 38, 87, 0.55);
+
+  h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin: 0 0 1.25rem;
+    color: $rs-navy;
+    font-size: 1.15rem;
+    font-weight: 700;
+    @include rs-icon(22px);
+
+    svg {
+      color: $rs-orange;
+    }
+  }
+
+  @include max(575px) {
+    padding: 1.5rem 1.25rem;
+    border-radius: 18px;
+  }
+}
+
+.rs-panel__note {
+  margin-top: 1rem !important;
+  color: $rs-muted;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.rs-panel__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 1.25rem;
+  color: $rs-orange;
+  font-weight: 600;
+  @include rs-icon(16px);
+}
+
+.rs-times {
+  margin: 0;
+
+  div {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px dashed rgba(23, 63, 135, 0.15);
+
+    &:last-child {
+      border-bottom: 0;
+    }
+  }
+
+  dt {
+    color: map-get($colors, black);
+    font-size: 14.5px;
+    font-weight: 500;
+  }
+
+  dd {
+    margin: 0;
+    color: $rs-navy;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: right;
+  }
+
+  @include max(575px) {
+    div {
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    dd {
+      text-align: left;
+    }
+  }
+}
+
+.rs-pain {
+  p {
+    color: $rs-muted;
+    font-size: 14.5px;
+  }
+
+  ul {
+    display: grid;
+    gap: 0.75rem;
+    margin: 1rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+}
+
+.rs-pain__level {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem 1rem;
+  border-radius: 14px;
+
+  strong {
+    display: block;
+    font-size: 15px;
+  }
+
+  small {
+    display: block;
+    color: $rs-muted;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+}
+
+.rs-pain__range {
+  display: inline-flex;
+  flex: 0 0 56px;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  border-radius: 10px;
+  color: map-get($colors, white);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.rs-pain__level--ok {
+  background: #e8f7ee;
+
+  strong { color: #1e7a45; }
+  .rs-pain__range { background: #1e9e57; }
+}
+
+.rs-pain__level--caution {
+  background: #fff4e0;
+
+  strong { color: #b26a00; }
+  .rs-pain__range { background: map-get($colors, amber); }
+}
+
+.rs-pain__level--stop {
+  background: #fdecea;
+
+  strong { color: #b3261e; }
+  .rs-pain__range { background: $rs-red; }
+}
+
+.rs-check ul {
+  display: grid;
+  gap: 0.7rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    color: map-get($colors, black);
+    font-size: 15px;
+    line-height: 1.55;
+    @include rs-icon(19px);
+
+    svg {
+      margin-top: 0.1em;
+      color: $rs-orange;
+    }
+  }
+}

@@ -83,45 +83,44 @@ $site = [
 ];
 
 // ---------------------------------------------------------------------------
-// Treatments (conditions we treat)
+// Treatments (conditions we treat) — also the "Conditions We Treat" mega menu
 // ---------------------------------------------------------------------------
 $treatmentCategories = [
-    'spine'  => 'Spine & Back',
-    'joints' => 'Joints & Sports',
-    'neuro'  => 'Neuro Rehab',
-    'child'  => 'Child Therapy',
+    'ortho'  => 'Orthopaedic',
+    'neuro'  => 'Neurological',
+    'paeds'  => 'Paediatric',
 ];
 
 $treatments = [
-    ['slug' => 'spondylosis', 'name' => 'Spondylosis', 'cat' => 'spine', 'icon' => 'spine', 'text' => 'Relief for age-related neck and back wear that causes pain and stiffness.'],
-    ['slug' => 'spondylitis', 'name' => 'Spondylitis', 'cat' => 'spine', 'icon' => 'spine', 'text' => 'Ease inflammatory spine pain with mobility and posture work.'],
-    ['slug' => 'ankylosing-spondylitis', 'name' => 'Ankylosing Spondylitis', 'cat' => 'spine', 'icon' => 'back', 'text' => 'Keep the spine flexible and your posture and breathing strong.'],
-    ['slug' => 'disc-bulge', 'name' => 'Disc Bulge', 'cat' => 'spine', 'icon' => 'disc', 'text' => 'Take pressure off irritated nerves and rebuild core support.'],
-    ['slug' => 'sciatica', 'name' => 'Sciatica', 'cat' => 'spine', 'icon' => 'nerve', 'text' => 'Calm shooting pain that runs from the lower back down the leg.'],
-    ['slug' => 'low-back-ache', 'name' => 'Low Back Ache', 'cat' => 'spine', 'icon' => 'back', 'text' => 'Lasting relief through manual therapy and core strengthening.'],
-    ['slug' => 'torticollis', 'name' => 'Torticollis', 'cat' => 'spine', 'icon' => 'neck', 'text' => 'Release a stiff, twisted neck and restore comfortable movement.'],
-    ['slug' => 'muscle-spasm', 'name' => 'Muscle Spasm', 'cat' => 'spine', 'icon' => 'muscle', 'text' => 'Settle tight, cramping muscles and help prevent them returning.'],
-    ['slug' => 'ligament-injuries', 'name' => 'Ligament Injuries', 'cat' => 'joints', 'icon' => 'knee', 'text' => 'Rehab for sprains and ligament tears, before and after surgery.'],
-    ['slug' => 'joint-stiffness', 'name' => 'Joint Stiffness', 'cat' => 'joints', 'icon' => 'knee', 'text' => 'Restore range of motion with targeted joint mobilisation.'],
-    ['slug' => 'adhesive-capsulitis', 'name' => 'Adhesive Capsulitis', 'cat' => 'joints', 'icon' => 'shoulder', 'text' => 'Frozen shoulder care to regain your reach and sleep without pain.'],
-    ['slug' => 'rheumatoid-arthritis', 'name' => 'Rheumatoid Arthritis', 'cat' => 'joints', 'icon' => 'hand', 'text' => 'Protect your joints, reduce pain and keep hands and limbs working.'],
-    ['slug' => 'sports-injuries', 'name' => 'Sports Injuries', 'cat' => 'joints', 'icon' => 'run', 'text' => 'Recover fully and return to your sport stronger and safer.'],
-    ['slug' => 'tendinitis', 'name' => 'Tendinitis', 'cat' => 'joints', 'icon' => 'muscle', 'text' => 'Settle tendon pain with graded loading and laser therapy.'],
-    ['slug' => 'tennis-elbow', 'name' => 'Tennis Elbow', 'cat' => 'joints', 'icon' => 'elbow', 'text' => 'Relief for outer-elbow pain that makes gripping and lifting hard.'],
-    ['slug' => 'golfers-elbow', 'name' => "Golfer's Elbow", 'cat' => 'joints', 'icon' => 'elbow', 'text' => 'Ease inner-elbow pain and strengthen the forearm.'],
-    ['slug' => 'calcaneal-spur', 'name' => 'Calcaneal Spur', 'cat' => 'joints', 'icon' => 'foot', 'text' => 'Heel pain relief with taping, stretching and footwear advice.'],
-    ['slug' => 'plantar-fasciitis', 'name' => 'Plantar Fasciitis', 'cat' => 'joints', 'icon' => 'foot', 'text' => 'Beat that sharp first-step heel pain in the morning.'],
-    ['slug' => 'foot-drop', 'name' => 'Foot Drop', 'cat' => 'neuro', 'icon' => 'foot', 'text' => 'Improve ankle lift, balance and safe, confident walking.'],
-    ['slug' => 'wrist-drop', 'name' => 'Wrist Drop', 'cat' => 'neuro', 'icon' => 'hand', 'text' => 'Retrain wrist and finger lift for everyday tasks.'],
-    ['slug' => 'bells-palsy', 'name' => "Bell's Palsy", 'cat' => 'neuro', 'icon' => 'face', 'text' => 'Facial exercises and stimulation to restore expression.'],
-    ['slug' => 'hemiplegia', 'name' => 'Hemiplegia', 'cat' => 'neuro', 'icon' => 'brain', 'text' => 'Stroke rehab to regain movement and control on the affected side.'],
-    ['slug' => 'paraplegia', 'name' => 'Paraplegia', 'cat' => 'neuro', 'icon' => 'wheelchair', 'text' => 'Strength, transfer and mobility training for independence.'],
-    ['slug' => 'quadriplegia', 'name' => 'Quadriplegia', 'cat' => 'neuro', 'icon' => 'wheelchair', 'text' => 'Structured rehab to maximise function, comfort and care.'],
+    // Orthopaedic
+    ['slug' => 'osteoarthritis', 'name' => 'Osteoarthritis – Knee, Hip & Shoulder', 'cat' => 'ortho', 'icon' => 'knee', 'text' => 'Ease joint pain and stiffness and keep knees, hips and shoulders moving.'],
+    ['slug' => 'rheumatoid-arthritis', 'name' => 'Rheumatoid Arthritis', 'cat' => 'ortho', 'icon' => 'hand', 'text' => 'Protect your joints, reduce pain and keep hands and limbs working.'],
+    ['slug' => 'frozen-shoulder', 'name' => 'Frozen Shoulder', 'cat' => 'ortho', 'icon' => 'shoulder', 'text' => 'Regain your reach and sleep without shoulder pain.'],
+    ['slug' => 'tennis-golfers-elbow', 'name' => "Tennis Elbow / Golfer's Elbow", 'cat' => 'ortho', 'icon' => 'elbow', 'text' => 'Relief for elbow pain that makes gripping and lifting hard.'],
+    ['slug' => 'ligament-injuries', 'name' => 'Ligament Injuries – ACL, MCL, etc.', 'cat' => 'ortho', 'icon' => 'knee', 'text' => 'Rehab for sprains and ligament tears, with or without surgery.'],
+    ['slug' => 'meniscus-tears', 'name' => 'Meniscus Tears', 'cat' => 'ortho', 'icon' => 'knee', 'text' => 'Settle knee pain, locking and swelling and rebuild knee strength.'],
+    ['slug' => 'fracture-rehabilitation', 'name' => 'Fracture Rehabilitation', 'cat' => 'ortho', 'icon' => 'recover', 'text' => 'Restore movement and strength after a fracture or plaster.'],
+    ['slug' => 'disc-bulge', 'name' => 'Disc Bulge / Herniated Disc', 'cat' => 'ortho', 'icon' => 'disc', 'text' => 'Take pressure off irritated nerves and rebuild core support.'],
+    ['slug' => 'sciatica', 'name' => 'Sciatica', 'cat' => 'ortho', 'icon' => 'nerve', 'text' => 'Calm shooting pain that runs from the lower back down the leg.'],
+    ['slug' => 'spondylosis', 'name' => 'Spondylosis – Cervical / Lumbar', 'cat' => 'ortho', 'icon' => 'spine', 'text' => 'Relief for neck and back wear that causes pain and stiffness.'],
+    ['slug' => 'rotator-cuff-injuries', 'name' => 'Rotator Cuff Injuries', 'cat' => 'ortho', 'icon' => 'shoulder', 'text' => 'Heal shoulder tendon strains and tears and lift without pain.'],
+    ['slug' => 'plantar-fasciitis', 'name' => 'Plantar Fasciitis', 'cat' => 'ortho', 'icon' => 'foot', 'text' => 'Beat that sharp first-step heel pain in the morning.'],
+    ['slug' => 'carpal-tunnel-syndrome', 'name' => 'Carpal Tunnel Syndrome', 'cat' => 'ortho', 'icon' => 'hand', 'text' => 'Ease hand tingling, numbness and weak grip.'],
+    ['slug' => 'post-operative-rehabilitation', 'name' => 'Post-Operative Rehabilitation – Knee / Hip / Spine', 'cat' => 'ortho', 'icon' => 'clipboard-plus', 'text' => 'Safe, steady recovery after joint replacement and spine surgery.'],
+    // Neurological
+    ['slug' => 'stroke', 'name' => 'Stroke (CVA)', 'cat' => 'neuro', 'icon' => 'brain', 'text' => 'Regain movement, balance and independence after a stroke.'],
+    ['slug' => 'traumatic-brain-injury', 'name' => 'Traumatic Brain Injury (TBI)', 'cat' => 'neuro', 'icon' => 'brain', 'text' => 'Rebuild movement, coordination and daily function after a head injury.'],
+    ['slug' => 'spinal-cord-injury', 'name' => 'Spinal Cord Injury (SCI)', 'cat' => 'neuro', 'icon' => 'wheelchair', 'text' => 'Strength, transfer and mobility training for greater independence.'],
     ['slug' => 'parkinsons-disease', 'name' => "Parkinson's Disease", 'cat' => 'neuro', 'icon' => 'brain', 'text' => 'Improve balance, walking and ease of daily movement.'],
-    ['slug' => 'muscular-dystrophy', 'name' => 'Muscular Dystrophy', 'cat' => 'neuro', 'icon' => 'muscle', 'text' => 'Maintain strength, mobility and quality of life.'],
+    ['slug' => 'multiple-sclerosis', 'name' => 'Multiple Sclerosis', 'cat' => 'neuro', 'icon' => 'nerve', 'text' => 'Manage fatigue and keep strength, balance and mobility.'],
+    ['slug' => 'guillain-barre-syndrome', 'name' => 'Guillain-Barré Syndrome', 'cat' => 'neuro', 'icon' => 'nerve', 'text' => 'Step-by-step rehab to rebuild strength and walking.'],
+    // Paediatric
+    ['slug' => 'cerebral-palsy', 'name' => 'Cerebral Palsy (CP)', 'cat' => 'paeds', 'icon' => 'child', 'text' => 'Play-based therapy for movement, posture and independence.'],
+    ['slug' => 'developmental-delay', 'name' => 'Developmental Delay', 'cat' => 'paeds', 'icon' => 'child', 'text' => 'Help your child reach sitting, crawling and walking milestones.'],
+    ['slug' => 'hypotonia-hypertonia', 'name' => 'Hypotonia / Hypertonia', 'cat' => 'paeds', 'icon' => 'muscle', 'text' => 'Balance low or high muscle tone for better control and movement.'],
 ];
 
-// Featured card at the end of the services grid
+// Featured card at the end of the home services grid (shown under Paediatric)
 $childTherapy = [
     'tag'   => 'Child Therapy',
     'title' => 'Gentle, play-based physiotherapy for children',
@@ -129,8 +128,8 @@ $childTherapy = [
     'cta'   => 'Book a Child Assessment',
 ];
 
-// Extra choices in the booking form's treatment dropdown
-$bookingExtraOptions = ['Pre / Post Operative Rehab', 'Child Therapy', 'Other / Not sure'];
+// Extra choices in the booking forms' condition dropdown
+$bookingExtraOptions = ['Back / Neck Pain', 'Sports Injury', 'Other / Not sure'];
 
 // Treatments page
 $treatmentsPage = [
@@ -142,155 +141,140 @@ $treatmentsPage = [
     ],
 ];
 
-// Treatments page: Child Therapy entry (the 26 above + this one)
-$childTreatment = ['slug' => 'child-therapy', 'name' => 'Child Therapy', 'cat' => 'child', 'icon' => 'child'];
-
 // Treatments page: intro for each category group
 $treatmentCategoryInfo = [
-    'spine'  => ['icon' => 'spine', 'text' => 'Neck and back problems — from wear-and-tear and disc issues to nerve pain and muscle spasm.'],
-    'joints' => ['icon' => 'knee', 'text' => 'Joint, ligament and tendon problems, sports injuries and foot pain that hold you back.'],
-    'neuro'  => ['icon' => 'brain', 'text' => 'Rehabilitation after stroke, nerve injury and neurological conditions to rebuild movement and independence.'],
-    'child'  => ['icon' => 'child', 'text' => 'Gentle, play-based physiotherapy for babies and children.'],
+    'ortho' => ['icon' => 'knee', 'text' => 'Bone, joint, muscle, ligament and spine problems — from arthritis and sports injuries to disc problems and recovery after surgery.'],
+    'neuro' => ['icon' => 'brain', 'text' => 'Rehabilitation after stroke, brain and spinal cord injury, and for progressive neurological conditions — to rebuild movement and independence.'],
+    'paeds' => ['icon' => 'child', 'text' => 'Gentle, play-based physiotherapy that helps babies and children move, grow and reach their milestones.'],
 ];
 
 // Treatments page: detail for each condition, keyed by slug.
 // signs = what patients notice, care = how physiotherapy helps.
 $treatmentDetails = [
+    // ---------- Orthopaedic ----------
+    'osteoarthritis' => [
+        'overview' => 'Wear of the cartilage that cushions the joints, most often in the knees, hips and shoulders. It causes pain, stiffness and swelling, and makes walking, climbing stairs or lifting the arm harder.',
+        'signs'    => ['Pain on walking, stairs or lifting the arm', 'Morning stiffness that eases with movement', 'Swelling or a grinding feeling in the joint', 'Reduced range of movement'],
+        'care'     => ['Joint mobilisation & manual therapy', 'Strengthening of the muscles around the joint', 'Laser therapy for pain relief', 'Activity, weight and footwear advice'],
+    ],
+    'rheumatoid-arthritis' => [
+        'overview' => 'An autoimmune condition that inflames the lining of the joints, often the hands, wrists and feet on both sides. Physiotherapy protects the joints and keeps you active alongside your medical treatment.',
+        'signs'    => ['Painful, swollen joints on both sides', 'Morning stiffness lasting over 30 minutes', 'Weak grip', 'Tiredness'],
+        'care'     => ['Gentle range-of-motion exercises', 'Joint protection techniques', 'Strengthening & hand therapy', 'Pain relief with laser and heat'],
+    ],
+    'frozen-shoulder' => [
+        'overview' => 'Adhesive capsulitis: the capsule around the shoulder joint becomes thick and tight, causing pain and a gradual loss of movement. It is more common in people with diabetes and after an injury.',
+        'signs'    => ['Shoulder pain, often worse at night', 'Difficulty reaching up or behind your back', 'Trouble dressing or combing hair', 'Movement that slowly gets stiffer'],
+        'care'     => ['Joint mobilisation (Maitland, Mulligan)', 'Stretching & range-of-motion exercises', 'Laser therapy for pain', 'Home exercise programme'],
+    ],
+    'tennis-golfers-elbow' => [
+        'overview' => 'Overuse of the forearm tendons that attach at the elbow — on the outer side in tennis elbow and the inner side in golfer\'s elbow. Common with repetitive gripping, typing, lifting and sport.',
+        'signs'    => ['Pain on the outer or inner elbow', 'Pain when gripping, lifting or twisting', 'Weak grip', 'Tenderness over the elbow bone'],
+        'care'     => ['Graded tendon strengthening', 'Soft tissue release', 'Taping or an elbow strap', 'Activity and ergonomic advice'],
+    ],
+    'ligament-injuries' => [
+        'overview' => 'Sprains and tears of the ligaments that hold a joint together — such as the ACL and MCL of the knee or the ligaments of the ankle — usually from a twist, fall or sports injury.',
+        'signs'    => ['Pain and swelling after a twist or fall', 'Knee or ankle "giving way"', 'Difficulty putting weight on the leg', 'Bruising around the joint'],
+        'care'     => ['Swelling control & early movement', 'Progressive strengthening', 'Balance & stability training', 'Return-to-sport rehab, with or without surgery'],
+    ],
+    'meniscus-tears' => [
+        'overview' => 'A tear in the C-shaped cartilage that cushions the knee, often from twisting on a bent knee or from wear with age. Many tears improve well with the right physiotherapy.',
+        'signs'    => ['Knee pain on twisting or squatting', 'Swelling or stiffness', 'Catching or locking of the knee', 'Feeling the knee may give way'],
+        'care'     => ['Swelling and pain management', 'Quadriceps & hip strengthening', 'Balance and movement retraining', 'Rehab before or after arthroscopy'],
+    ],
+    'fracture-rehabilitation' => [
+        'overview' => 'After a broken bone has been fixed with plaster, plates or rods, the nearby joints and muscles are often stiff and weak. Rehabilitation restores movement, strength and confidence.',
+        'signs_label' => 'When to see us',
+        'signs'    => ['Stiffness after the plaster is removed', 'Weakness or muscle wasting', 'Difficulty walking or using the arm', 'Swelling around the old fracture'],
+        'care'     => ['Joint mobilisation for stiffness', 'Progressive strengthening', 'Walking & balance training', 'Scar and soft tissue care'],
+    ],
+    'disc-bulge' => [
+        'overview' => 'The soft disc between two vertebrae bulges or herniates and can press on a nerve, causing back or neck pain that may spread into the arm or leg. Most cases improve without surgery.',
+        'signs'    => ['Back or neck pain', 'Pain radiating into the arm or leg', 'Numbness or tingling', 'Pain on bending, sitting or coughing'],
+        'care'     => ['Pain relief & positions of ease', 'McKenzie and spinal mobilisation', 'Core stabilisation', 'Posture and lifting advice'],
+    ],
+    'sciatica' => [
+        'overview' => 'Irritation of the sciatic nerve, often from a disc problem or tight muscles in the lower back and buttock, causing pain that travels down the back of the leg.',
+        'signs'    => ['Shooting pain down the leg', 'Numbness or tingling in the foot', 'Pain worse on sitting', 'Weakness in the leg'],
+        'care'     => ['Neural mobilisation', 'Manual therapy for the lower back', 'Core & hip strengthening', 'Laser therapy for nerve pain'],
+    ],
     'spondylosis' => [
         'overview' => 'Age-related wear of the discs and joints of the spine, in the neck (cervical) or lower back (lumbar). It can cause stiffness, pain and sometimes pressure on the nerves.',
         'signs'    => ['Neck or back stiffness', 'Pain that worsens with long sitting', 'Tingling or numbness in arms or legs', 'Headaches starting from the neck'],
         'care'     => ['Manual therapy & mobilisation', 'Posture correction', 'Strengthening & stretching', 'Ergonomic advice'],
     ],
-    'spondylitis' => [
-        'overview' => 'Inflammation of the joints of the spine that causes pain and stiffness — often worse after rest and better with movement.',
-        'signs'    => ['Morning stiffness', 'Pain that eases with activity', 'Reduced spinal movement', 'Tiredness'],
-        'care'     => ['Spinal mobility exercises', 'Laser therapy for pain relief', 'Postural training', 'Home exercise programme'],
-    ],
-    'ankylosing-spondylitis' => [
-        'overview' => 'A long-term inflammatory arthritis that mainly affects the spine and pelvic joints. Regular, guided exercise is key to keeping the spine flexible.',
-        'signs'    => ['Low back and buttock pain', 'Morning stiffness lasting over 30 minutes', 'Stooping posture over time', 'Reduced chest expansion'],
-        'care'     => ['Spinal mobility programme', 'Breathing exercises', 'Posture training', 'Strength & flexibility work'],
-    ],
-    'disc-bulge' => [
-        'overview' => 'When a spinal disc pushes outward it can press on nearby nerves, causing back or neck pain that may spread into the arm or leg. Many cases improve with targeted physiotherapy.',
-        'signs'    => ['Back or neck pain', 'Pain spreading into an arm or leg', 'Numbness or tingling', 'Pain on bending or sitting'],
-        'care'     => ['Directional & core exercises', 'Manual therapy', 'Nerve mobilisation', 'Posture & lifting advice'],
-    ],
-    'sciatica' => [
-        'overview' => 'Pain along the sciatic nerve — from the lower back through the buttock and down the leg — often caused by a disc bulge or tight muscles pressing on the nerve.',
-        'signs'    => ['Shooting pain down the leg', 'Numbness or tingling in the leg or foot', 'Weakness in the leg', 'Pain worse on sitting'],
-        'care'     => ['Nerve gliding exercises', 'Manual therapy', 'Core strengthening', 'Laser therapy for pain relief'],
-    ],
-    'low-back-ache' => [
-        'overview' => 'One of the most common problems we see — often linked to posture, weak core muscles, strain or long hours of sitting.',
-        'signs'    => ['Dull or sharp lower back pain', 'Stiffness on waking', 'Pain on bending or lifting', 'Muscle tightness'],
-        'care'     => ['Manual therapy', 'Core strengthening', 'Kinesio taping', 'Posture & ergonomic advice'],
-    ],
-    'torticollis' => [
-        'overview' => 'A twisted or tilted neck caused by tight or spasming neck muscles. It can affect adults, and babies can be born with it (congenital torticollis).',
-        'signs'    => ['Head tilted to one side', 'Chin turned the other way', 'Neck pain or stiffness', 'Limited neck rotation'],
-        'care'     => ['Gentle stretching', 'Soft-tissue release', 'Positioning advice for infants', 'Neck strengthening'],
-    ],
-    'muscle-spasm' => [
-        'overview' => 'A sudden, involuntary tightening of a muscle — often in the back or neck — triggered by strain, poor posture or fatigue.',
-        'signs'    => ['Sudden sharp pain', 'A hard knot in the muscle', 'Limited movement', 'Recurring cramps'],
-        'care'     => ['Soft-tissue release', 'Laser therapy', 'Stretching', 'Load management advice'],
-    ],
-    'ligament-injuries' => [
-        'overview' => 'Sprains and tears of the ligaments that stabilise joints such as the knee (ACL, MCL) and ankle — from sport, falls or twisting.',
-        'signs'    => ['Swelling after an injury', 'Joint feels unstable or gives way', 'Pain when putting weight on it', 'Bruising'],
-        'care'     => ['Pain & swelling management', 'Progressive strengthening', 'Balance & proprioception training', 'Pre & post-surgery rehab'],
-    ],
-    'joint-stiffness' => [
-        'overview' => 'Reduced joint movement after injury, surgery, a period in plaster or arthritis, making everyday tasks harder.',
-        'signs'    => ['Restricted range of motion', 'Stiffness after rest', 'Pain at the end of movement', 'Weakness around the joint'],
-        'care'     => ['Joint mobilisation', 'Stretching', 'Strengthening', 'Home exercise programme'],
-    ],
-    'adhesive-capsulitis' => [
-        'overview' => 'Frozen shoulder: the shoulder capsule thickens and tightens, causing pain and a gradual loss of movement. It passes through phases, and guided physiotherapy helps restore movement.',
-        'signs'    => ['Shoulder pain, worse at night', 'Difficulty reaching overhead or behind the back', 'Gradual loss of movement', 'Pain lying on that side'],
-        'care'     => ['Joint mobilisation', 'Stretching programme', 'Laser therapy', 'Home exercise plan'],
-    ],
-    'rheumatoid-arthritis' => [
-        'overview' => 'An autoimmune condition that inflames the joints, commonly the hands, wrists and feet. Physiotherapy helps manage pain and keep the joints moving.',
-        'signs'    => ['Swollen, painful joints', 'Morning stiffness', 'Reduced grip strength', 'Fatigue'],
-        'care'     => ['Gentle range-of-motion exercise', 'Strengthening', 'Joint protection advice', 'Pain relief modalities'],
-    ],
-    'sports-injuries' => [
-        'overview' => 'Sprains, strains and overuse injuries from sport and exercise, treated with a clear plan to get you back to your activity safely.',
-        'signs'    => ['Pain during or after activity', 'Swelling', 'Drop in performance', 'Recurring niggles'],
-        'care'     => ['Injury assessment', 'Sports taping', 'Strength & conditioning', 'Return-to-sport planning'],
-    ],
-    'tendinitis' => [
-        'overview' => 'Irritation of a tendon from overuse or repetitive strain — common in the shoulder, elbow, knee and Achilles.',
-        'signs'    => ['Pain with movement', 'Tenderness over the tendon', 'Mild swelling', 'Stiffness'],
-        'care'     => ['Graded tendon loading', 'Laser therapy', 'Kinesio taping', 'Activity modification'],
-    ],
-    'tennis-elbow' => [
-        'overview' => 'Lateral epicondylitis: overuse of the forearm muscles that causes pain on the outer side of the elbow — and not just in tennis players.',
-        'signs'    => ['Outer elbow pain', 'Weak grip', 'Pain lifting or twisting', 'Pain when shaking hands'],
-        'care'     => ['Eccentric strengthening', 'Soft-tissue release', 'Taping & brace advice', 'Laser therapy'],
-    ],
-    'golfers-elbow' => [
-        'overview' => 'Medial epicondylitis: overuse of the forearm muscles that causes pain on the inner side of the elbow.',
-        'signs'    => ['Inner elbow pain', 'Pain when gripping', 'Elbow stiffness', 'Weakness in the wrist or hand'],
-        'care'     => ['Strengthening', 'Stretching', 'Soft-tissue release', 'Kinesio taping'],
-    ],
-    'calcaneal-spur' => [
-        'overview' => 'A bony growth on the heel bone, often linked with plantar fasciitis. Physiotherapy eases the pain by treating the tissues around it.',
-        'signs'    => ['Sharp heel pain on standing', 'Pain after rest', 'Tenderness under the heel', 'Pain worse on hard floors'],
-        'care'     => ['Kinesio taping', 'Calf & foot stretching', 'Laser therapy', 'Footwear advice'],
+    'rotator-cuff-injuries' => [
+        'overview' => 'Strains, inflammation or tears of the four rotator cuff tendons that keep the shoulder stable — from overuse, lifting, a fall or age-related wear.',
+        'signs'    => ['Pain when lifting the arm', 'Pain lying on the shoulder at night', 'Weakness reaching overhead', 'Clicking or catching in the shoulder'],
+        'care'     => ['Rotator cuff strengthening', 'Shoulder blade (scapular) control', 'Manual therapy & taping', 'Rehab after rotator cuff repair'],
     ],
     'plantar-fasciitis' => [
-        'overview' => 'Irritation of the thick band of tissue under the foot — the classic sharp heel pain with your first steps in the morning.',
-        'signs'    => ['Heel pain with the first steps of the day', 'Pain after long standing', 'Tenderness along the arch', 'Tight calves'],
-        'care'     => ['Stretching programme', 'Kinesio taping', 'Foot & calf strengthening', 'Laser therapy'],
+        'overview' => 'Irritation of the thick band of tissue under the foot, causing heel pain — classically sharp with the first steps in the morning. Often linked with heel spurs, standing for long hours and unsupportive footwear.',
+        'signs'    => ['Sharp heel pain on first steps', 'Pain after long standing', 'Tenderness under the heel', 'Pain that eases with walking, then returns'],
+        'care'     => ['Stretching of the calf and foot', 'Taping & footwear advice', 'Laser therapy', 'Foot and calf strengthening'],
     ],
-    'foot-drop' => [
-        'overview' => 'Difficulty lifting the front of the foot, often caused by nerve injury, stroke or spinal problems, so the toes drag while walking.',
-        'signs'    => ['Toes catch or drag', 'High-stepping walk', 'Frequent tripping', 'Weak ankle lift'],
-        'care'     => ['Muscle stimulation & strengthening', 'Gait training', 'Balance work', 'Advice on ankle supports'],
+    'carpal-tunnel-syndrome' => [
+        'overview' => 'Pressure on the median nerve as it passes through the wrist, causing tingling, numbness and weakness in the thumb and fingers. Common with repetitive hand use and in pregnancy.',
+        'signs'    => ['Tingling in the thumb and first fingers', 'Symptoms worse at night', 'Weak grip, dropping objects', 'Numbness when typing or holding a phone'],
+        'care'     => ['Nerve and tendon gliding exercises', 'Wrist splinting advice', 'Laser therapy', 'Ergonomic and activity advice'],
     ],
-    'wrist-drop' => [
-        'overview' => 'Weakness in lifting the wrist and fingers, usually from an injury to the radial nerve, making gripping and daily tasks difficult.',
-        'signs'    => ['Unable to lift the wrist', 'Weak grip', 'Difficulty straightening the fingers', 'Numbness on the back of the hand'],
-        'care'     => ['Nerve & muscle stimulation', 'Strengthening', 'Functional hand training', 'Splinting advice'],
+    'post-operative-rehabilitation' => [
+        'overview' => 'Physiotherapy after knee or hip replacement, ACL reconstruction, arthroscopy and spine surgery to restore movement, strength and walking — following your surgeon\'s protocol.',
+        'signs_label' => 'When to see us',
+        'signs'    => ['After knee or hip replacement', 'After spine or disc surgery', 'After ligament or arthroscopic surgery', 'Stiffness or weakness after an operation'],
+        'care'     => ['Pain and swelling control', 'Range-of-motion recovery', 'Progressive strengthening', 'Walking & balance training'],
     ],
-    'bells-palsy' => [
-        'overview' => 'Sudden weakness of the muscles on one side of the face caused by inflammation of the facial nerve. Most people recover, and physiotherapy supports that recovery.',
-        'signs'    => ['Drooping on one side of the face', 'Difficulty closing the eye', 'Trouble smiling or eating', 'Changes in taste'],
-        'care'     => ['Facial exercises', 'Electrical stimulation', 'Facial massage', 'Home exercise guidance'],
+
+    // ---------- Neurological ----------
+    'stroke' => [
+        'overview' => 'A stroke (cerebrovascular accident) damages part of the brain and often weakens one side of the body (hemiplegia). Early, regular physiotherapy helps the brain relearn movement.',
+        'signs'    => ['Weakness on one side of the body', 'Difficulty walking or balancing', 'Stiffness or spasticity', 'Reduced hand and arm use'],
+        'care'     => ['Task-based movement training', 'Balance & walking practice', 'Spasticity management', 'Family training for home exercises'],
     ],
-    'hemiplegia' => [
-        'overview' => 'Weakness or paralysis of one side of the body, most often after a stroke. Rehab focuses on regaining movement, balance and independence.',
-        'signs'    => ['Weakness on one side', 'Difficulty walking', 'Poor balance', 'Muscle stiffness (spasticity)'],
-        'care'     => ['Neuro rehabilitation exercises', 'Gait & balance training', 'Spasticity management', 'Daily-living skills'],
+    'traumatic-brain-injury' => [
+        'overview' => 'Injury to the brain from a fall, accident or blow to the head can affect movement, balance, coordination and stamina. Rehabilitation is tailored to each person\'s stage of recovery.',
+        'signs'    => ['Poor balance and coordination', 'Weakness or stiffness in the limbs', 'Fatigue', 'Difficulty with daily activities'],
+        'care'     => ['Balance and coordination training', 'Strengthening & mobility', 'Functional task practice', 'Gradual endurance building'],
     ],
-    'paraplegia' => [
-        'overview' => 'Paralysis of the lower body, usually from a spinal cord injury or disease. Physiotherapy builds strength, mobility and independence.',
-        'signs'    => ['Loss of leg movement or feeling', 'Difficulty with sitting balance', 'Muscle stiffness', 'Risk of pressure sores'],
-        'care'     => ['Upper-body strengthening', 'Transfer training', 'Wheelchair skills', 'Stretching & positioning'],
-    ],
-    'quadriplegia' => [
-        'overview' => 'Paralysis affecting all four limbs, usually after an injury to the spinal cord in the neck. Rehab maximises function and comfort and supports carers.',
-        'signs'    => ['Weakness in the arms and legs', 'Breathing difficulty', 'Muscle stiffness', 'Needing help with daily tasks'],
-        'care'     => ['Breathing exercises', 'Positioning & stretching', 'Functional training', 'Guidance for carers'],
+    'spinal-cord-injury' => [
+        'overview' => 'Damage to the spinal cord can cause weakness or paralysis below the injury — in the legs (paraplegia) or in the arms and legs (quadriplegia). Rehab focuses on independence and preventing complications.',
+        'signs'    => ['Weakness or paralysis', 'Loss of sensation', 'Muscle stiffness or spasms', 'Difficulty with transfers and mobility'],
+        'care'     => ['Strengthening of working muscles', 'Transfer & wheelchair skills', 'Standing and walking training where possible', 'Stretching to prevent contractures'],
     ],
     'parkinsons-disease' => [
-        'overview' => 'A progressive neurological condition that affects movement. Regular physiotherapy helps maintain mobility, balance and confidence.',
-        'signs'    => ['Tremor', 'Slowness of movement', 'Stiffness', 'Balance problems or falls'],
-        'care'     => ['Gait & balance training', 'Large-amplitude movement practice', 'Strength & flexibility', 'Fall prevention'],
+        'overview' => 'A progressive condition that affects movement, causing slowness, stiffness, tremor and balance problems. Regular exercise helps people stay mobile and independent for longer.',
+        'signs'    => ['Slow, shuffling steps', 'Stiffness', 'Freezing when walking', 'Balance problems and falls'],
+        'care'     => ['Big-movement & gait training', 'Balance and falls prevention', 'Cueing strategies for freezing', 'Flexibility & strength'],
     ],
-    'muscular-dystrophy' => [
-        'overview' => 'A group of genetic conditions that cause progressive muscle weakness. Physiotherapy helps maintain strength, mobility and quality of life.',
-        'signs'    => ['Progressive weakness', 'Frequent falls', 'Difficulty climbing stairs', 'Muscle tightness'],
-        'care'     => ['Gentle strengthening', 'Stretching to prevent contractures', 'Advice on mobility aids', 'Breathing exercises'],
+    'multiple-sclerosis' => [
+        'overview' => 'A long-term condition in which the immune system affects the nerves of the brain and spinal cord, causing fatigue, weakness, stiffness and balance problems that can come and go.',
+        'signs'    => ['Fatigue', 'Weakness or heaviness in the legs', 'Balance problems', 'Stiffness or spasms'],
+        'care'     => ['Energy-saving strategies', 'Strength and balance training', 'Stretching for spasticity', 'Walking and mobility aids advice'],
     ],
-    'child-therapy' => [
-        'overview' => 'Physiotherapy for babies and children with delayed milestones, posture problems, torticollis, injuries or neurological conditions — delivered through play.',
+    'guillain-barre-syndrome' => [
+        'overview' => 'A rare condition in which the immune system attacks the nerves, causing weakness that can spread quickly. Most people recover well with time and structured rehabilitation.',
+        'signs'    => ['Weakness starting in the legs', 'Tingling in the hands and feet', 'Difficulty walking', 'Fatigue'],
+        'care'     => ['Gentle, graded strengthening', 'Breathing exercises', 'Walking and balance retraining', 'Fatigue management'],
+    ],
+
+    // ---------- Paediatric ----------
+    'cerebral-palsy' => [
+        'overview' => 'A group of conditions caused by changes in the developing brain that affect movement, muscle tone and posture. Physiotherapy helps children move as freely and independently as possible.',
+        'signs_label' => 'What we see',
+        'signs'    => ['Stiff or floppy muscles', 'Delayed sitting, crawling or walking', 'Poor balance', 'Unusual posture or walking pattern'],
+        'care'     => ['Play-based movement therapy', 'Stretching & positioning', 'Balance and walking training', 'Home programme for parents'],
+    ],
+    'developmental-delay' => [
+        'overview' => 'When a baby or child reaches motor milestones — such as head control, sitting, crawling or walking — later than expected. Early physiotherapy makes a real difference.',
         'signs_label' => 'When to see us',
-        'signs'    => ['Late sitting, crawling or walking', 'Poor balance or frequent falls', 'Head tilt or flat spot on the head', 'Pain or injury from sport or play'],
-        'care'     => ['Play-based exercises', 'Developmental milestone training', 'Posture & balance work', 'Home programme for parents'],
+        'signs'    => ['Late head control or sitting', 'Not crawling or walking on time', 'Frequent falls or clumsiness', 'Using one side more than the other'],
+        'care'     => ['Milestone-based play therapy', 'Strength and balance activities', 'Posture work', 'Guidance for parents at home'],
+    ],
+    'hypotonia-hypertonia' => [
+        'overview' => 'Hypotonia is low muscle tone ("floppy" muscles); hypertonia is high muscle tone (stiff, tight muscles). Both affect posture, movement and milestones, and respond well to targeted therapy.',
+        'signs_label' => 'What we see',
+        'signs'    => ['Floppy or very stiff muscles', 'Poor head and trunk control', 'Delayed milestones', 'Tight joints or toe-walking'],
+        'care'     => ['Tone-specific exercises', 'Stretching or strengthening as needed', 'Positioning & handling advice', 'Play-based motor training'],
     ],
 ];
 
@@ -303,8 +287,79 @@ $specialities = [
     ['slug' => 'laser-therapy', 'name' => 'Laser Therapy', 'page' => true],
     ['slug' => 'taping-techniques', 'name' => 'Taping Techniques', 'page' => true],
     ['slug' => 'strength-training', 'name' => 'Strength Training', 'page' => true],
-    ['slug' => 'pre-post-operative-care', 'name' => 'Pre & Post Operative Care', 'page' => true],
-    ['slug' => 'advance-joint-mobilization', 'name' => 'Advanced Joint Mobilization', 'page' => true],
+    ['slug' => 'pre-post-operative-care', 'name' => 'Pre & Post-Operative Management', 'page' => true],
+    ['slug' => 'advance-joint-mobilization', 'name' => 'Advanced Joint Mobilizations', 'page' => true],
+];
+
+// ---------------------------------------------------------------------------
+// Services (services.php, one section each at #<slug>)
+//   conditions: slugs from $treatments, shown as links on the services page
+//   related:    slug of a speciality page to link to ('' = none)
+// ---------------------------------------------------------------------------
+$services = [
+    [
+        'slug' => 'orthopaedic-physiotherapy', 'name' => 'Orthopaedic Physiotherapy', 'icon' => 'knee',
+        'text' => 'Assessment and treatment of bone, joint, muscle, ligament and spine problems — from arthritis and stiff joints to back pain and injuries. We find the cause of your pain and restore pain-free movement with hands-on therapy and targeted exercise.',
+        'offer' => ['Detailed musculoskeletal assessment', 'Manual therapy & joint mobilisation', 'Strengthening and flexibility programmes', 'Posture and ergonomic correction', 'Laser therapy and taping for pain relief'],
+        'conditions' => ['osteoarthritis', 'frozen-shoulder', 'spondylosis', 'disc-bulge', 'sciatica', 'tennis-golfers-elbow', 'plantar-fasciitis', 'rheumatoid-arthritis'],
+        'related' => 'manual-therapy',
+    ],
+    [
+        'slug' => 'neurological-physiotherapy', 'name' => 'Neurological Physiotherapy', 'icon' => 'brain',
+        'text' => 'Rehabilitation for conditions of the brain, spinal cord and nerves. We help you regain movement, balance and independence through task-based training, and teach your family how to support your progress at home.',
+        'offer' => ['Movement and motor control retraining', 'Balance, gait and falls-prevention training', 'Spasticity and stiffness management', 'Transfer and mobility skills', 'Home programme and family training'],
+        'conditions' => ['stroke', 'traumatic-brain-injury', 'spinal-cord-injury', 'parkinsons-disease', 'multiple-sclerosis', 'guillain-barre-syndrome'],
+        'related' => 'strength-training',
+    ],
+    [
+        'slug' => 'paediatric-physiotherapy', 'name' => 'Paediatric Physiotherapy / Child Rehabilitation', 'icon' => 'child',
+        'text' => 'Gentle, play-based physiotherapy for babies and children with delayed milestones, muscle tone problems and neurological conditions. Therapy feels like play, and parents learn simple activities to continue at home.',
+        'offer' => ['Developmental milestone assessment', 'Play-based motor therapy', 'Posture, balance and walking training', 'Positioning and handling advice', 'Parent guidance and home programme'],
+        'conditions' => ['cerebral-palsy', 'developmental-delay', 'hypotonia-hypertonia'],
+        'related' => '',
+    ],
+    [
+        'slug' => 'sports-injury-rehabilitation', 'name' => 'Sports Injury Rehabilitation', 'icon' => 'run',
+        'text' => 'Complete rehab for sprains, strains, ligament and tendon injuries — from the first days after injury to a safe, confident return to your sport, stronger than before.',
+        'offer' => ['Early injury and swelling management', 'Sports taping and support', 'Progressive strength and power training', 'Agility, balance and sport-specific drills', 'Injury-prevention advice'],
+        'conditions' => ['ligament-injuries', 'meniscus-tears', 'rotator-cuff-injuries', 'tennis-golfers-elbow', 'plantar-fasciitis'],
+        'related' => 'taping-techniques',
+    ],
+    [
+        'slug' => 'post-operative-rehabilitation', 'name' => 'Post-Operative Rehabilitation', 'icon' => 'clipboard-plus',
+        'text' => 'Physiotherapy before and after surgery — joint replacement, ligament reconstruction, fracture fixation and spine surgery — following your surgeon\'s protocol for a safe, faster recovery.',
+        'offer' => ['Pre-surgery strengthening (prehab)', 'Pain and swelling control', 'Range-of-motion recovery', 'Progressive strengthening', 'Walking, balance and return to activity'],
+        'conditions' => ['post-operative-rehabilitation', 'fracture-rehabilitation', 'ligament-injuries', 'meniscus-tears', 'rotator-cuff-injuries'],
+        'related' => 'pre-post-operative-care',
+    ],
+    [
+        'slug' => 'pain-management', 'name' => 'Pain Management & Functional Rehabilitation', 'icon' => 'bolt',
+        'text' => 'Drug-free relief for acute and long-standing pain — back, neck, joint and nerve pain — combined with rehabilitation that gets you back to work, home and daily activities.',
+        'offer' => ['Laser therapy and manual therapy', 'Taping and soft tissue release', 'Graded activity and exercise', 'Posture and body-mechanics training', 'Self-management strategies'],
+        'conditions' => ['disc-bulge', 'sciatica', 'spondylosis', 'osteoarthritis', 'carpal-tunnel-syndrome', 'frozen-shoulder'],
+        'related' => 'laser-therapy',
+    ],
+    [
+        'slug' => 'functional-training', 'name' => 'Mobility, Strength & Functional Training', 'icon' => 'muscle',
+        'text' => 'Supervised exercise programmes that rebuild mobility, strength, balance and stamina — for recovery after illness or injury, healthy ageing and falls prevention.',
+        'offer' => ['Mobility and flexibility work', 'Progressive strength training', 'Balance and falls-prevention training', 'Functional tasks — stairs, lifting, getting up', 'Home exercise programme'],
+        'conditions' => ['osteoarthritis', 'fracture-rehabilitation', 'stroke', 'parkinsons-disease', 'multiple-sclerosis'],
+        'related' => 'strength-training',
+    ],
+];
+
+// Services page
+$servicesPage = [
+    'banner' => [
+        'title'     => 'Our',
+        'highlight' => 'Services',
+        'lead'      => 'Complete physiotherapy for adults and children — orthopaedic, neurological, paediatric, sports and post-operative rehabilitation.',
+        'image'     => 'banner01',
+    ],
+    'eyebrow'   => 'What We Offer',
+    'title'     => 'Physiotherapy Services for',
+    'highlight' => 'Every Stage of Recovery',
+    'lead'      => 'Every service starts with a detailed assessment and a plan built around you. Choose a service to learn more.',
 ];
 
 // ---------------------------------------------------------------------------
@@ -313,20 +368,24 @@ $specialities = [
 // ---------------------------------------------------------------------------
 $nav = [
     ['id' => 'home', 'label' => 'Home', 'url' => 'index.php'],
-    ['id' => 'about', 'label' => 'About Us', 'url' => 'about.php', 'children' => [
-        ['label' => 'About the Clinic', 'url' => 'about.php'],
-        // 'id' marks a child that is its own page: highlights "About Us" there
-        // and builds the breadcrumb Home › About Us › Dr. Y. Abhilash (PT)
-        ['id' => 'doctors', 'label' => 'Dr. Y. Abhilash (PT)', 'url' => 'doctors.php'],
-        ['id' => 'whychooseus', 'label' => 'Why Choose Us', 'url' => 'whychooseus.php'],
-    ]],
-    ['id' => 'treatments', 'label' => 'Treatments', 'url' => 'treatments.php', 'mega' => true],
+    ['id' => 'about', 'label' => 'About Us', 'url' => 'about.php'],
+    ['id' => 'doctors', 'label' => 'Our Doctor', 'url' => 'doctors.php'],
+    ['id' => 'services', 'label' => 'Services', 'url' => 'services.php', 'children' => array_map(function ($s) {
+        return ['label' => $s['name'], 'url' => 'services.php#' . $s['slug']];
+    }, $services)],
+    ['id' => 'treatments', 'label' => 'Conditions We Treat', 'url' => 'treatments.php', 'mega' => true],
     ['id' => 'specialities', 'label' => 'Specialities', 'url' => 'specialities.php', 'children' => array_map(function ($s) {
         return !empty($s['page'])
             ? ['id' => $s['slug'], 'label' => $s['name'], 'url' => $s['slug'] . '.php']
             : ['label' => $s['name'], 'url' => 'specialities.php#' . $s['slug']];
     }, $specialities)],
-    ['id' => 'faq', 'label' => "FAQ's", 'url' => 'faq.php'],
+    // 'id' marks a child that is its own page: highlights the parent there
+    // and builds the breadcrumb, e.g. Home › Patient Resources › FAQs
+    ['id' => 'resources', 'label' => 'Patient Resources', 'url' => 'resources.php', 'children' => [
+        ['label' => 'Basic Physiotherapy Guidance', 'url' => 'resources.php#guidance'],
+        ['label' => 'Rehabilitation Information', 'url' => 'resources.php#rehabilitation'],
+        ['id' => 'faq', 'label' => 'FAQs', 'url' => 'faq.php'],
+    ]],
     ['id' => 'gallery', 'label' => 'Gallery', 'url' => 'gallery.php'],
     ['id' => 'contact', 'label' => 'Contact Us', 'url' => 'contact.php'],
 ];
@@ -359,7 +418,7 @@ $heroSlides = [
         'title'  => 'Recover Stronger After',
         'highlight' => 'Injury & Surgery',
         'lead'   => 'Manual therapy, laser therapy, taping and guided strength training to get you back to work, play and everyday life.',
-        'link'   => ['label' => 'Our Specialities', 'url' => 'specialities.php'],
+        'link'   => ['label' => 'Our Services', 'url' => 'services.php'],
     ],
     [
         'image'  => 'banner03',
@@ -368,8 +427,8 @@ $heroSlides = [
         'badges' => [['clock', 'Open 7 Days a Week'], ['heart', 'Neuro Rehabilitation']],
         'title'  => 'Regain Strength &',
         'highlight' => 'Independence',
-        'lead'   => "Dedicated rehab for hemiplegia, paraplegia, Parkinson's disease, Bell's palsy, foot drop and more.",
-        'link'   => ['label' => 'Neuro Rehab', 'url' => 'treatments.php#hemiplegia'],
+        'lead'   => "Dedicated rehab after stroke, brain and spinal cord injury, and for Parkinson's disease, multiple sclerosis and more.",
+        'link'   => ['label' => 'Neuro Rehab', 'url' => 'services.php#neurological-physiotherapy'],
     ],
 ];
 
@@ -480,12 +539,10 @@ $doctorPage = [
         'lead'      => 'Hands-on experience across the full range of conditions treated at the clinic.',
         // 'cat' pulls the matching conditions from $treatments; 'items' lists them by hand
         'areas' => [
-            ['cat' => 'spine', 'icon' => 'spine', 'title' => 'Spine & Back Rehabilitation', 'text' => 'Assessment and rehab for neck and back pain, disc problems and nerve pain.'],
-            ['cat' => 'joints', 'icon' => 'knee', 'title' => 'Joint & Sports Injuries', 'text' => 'Restoring movement and strength after joint, ligament and sports injuries.'],
+            ['cat' => 'ortho', 'icon' => 'knee', 'title' => 'Orthopaedic Rehabilitation', 'text' => 'Assessment and rehab for joint, spine, ligament and sports injuries, and recovery after surgery.'],
             ['cat' => 'neuro', 'icon' => 'brain', 'title' => 'Neurological Rehabilitation', 'text' => 'Long-term rehab to rebuild movement, balance and independence.'],
-            ['icon' => 'clipboard-plus', 'title' => 'Pre & Post Operative Care', 'text' => 'Preparing the body for surgery and guiding a safe, steady recovery afterwards.', 'items' => ['Pre-surgery conditioning', 'Post-surgery rehab', 'Joint mobilisation', 'Strength training']],
-            ['icon' => 'child', 'title' => 'Child Therapy', 'text' => 'Gentle, play-based physiotherapy that helps children move, grow and thrive.', 'items' => ['Play-based therapy', 'Posture & movement', 'Parent guidance']],
-        ],
+            ['cat' => 'paeds', 'icon' => 'child', 'title' => 'Paediatric Rehabilitation', 'text' => 'Gentle, play-based physiotherapy that helps children move, grow and thrive.'],
+            ['icon' => 'clipboard-plus', 'title' => 'Pre & Post Operative Care', 'text' => 'Preparing the body for surgery and guiding a safe, steady recovery afterwards.', 'items' => ['Pre-surgery conditioning', 'Post-surgery rehab', 'Joint mobilisation', 'Strength training']],        ],
         // TODO: career history, newest first. Shown as a timeline once filled:
         //   ['period' => '2019 – Present', 'title' => 'Physiotherapist', 'place' => 'New Life Physiotherapy Clinic, Hyderabad'],
         'timeline' => [],
@@ -610,8 +667,8 @@ $faqPage = [
          'a' => 'Your care is led by ' . $site['doctor']['name'] . ', a registered physiotherapist (Regd. No. ' . $site['doctor']['reg_no'] . ').',
          'link' => ['label' => 'Meet the doctor', 'url' => 'doctors.php']],
         ['cat' => 'start', 'q' => 'Do you treat children?',
-         'a' => 'Yes. We offer gentle, play-based physiotherapy for babies and children — for delayed milestones, posture problems, torticollis, injuries and neurological conditions.',
-         'link' => ['label' => 'About child therapy', 'url' => 'treatments.php#child-therapy']],
+         'a' => 'Yes. We offer gentle, play-based physiotherapy for babies and children — for developmental delay, cerebral palsy, low or high muscle tone, posture problems and injuries.',
+         'link' => ['label' => 'Paediatric physiotherapy', 'url' => 'services.php#paediatric-physiotherapy']],
         ['cat' => 'start', 'q' => 'Is the first consultation free?', // REVIEW: confirm the free-consultation offer
          'a' => 'Yes — you can book a free consultation to talk through your problem and find out how physiotherapy can help before you start treatment.'],
 
@@ -641,7 +698,7 @@ $faqPage = [
          'a' => 'No — keep taking your medicines as prescribed by your doctor. Just let us know what you are taking so we can plan your treatment safely.'],
         ['cat' => 'treatment', 'q' => 'What treatments and techniques do you use?',
          'a' => 'Depending on your needs: manual therapy, laser therapy, kinesio taping, joint mobilisation, strength training and pre & post operative rehabilitation, always combined with guided exercise.',
-         'link' => ['label' => 'Our specialities', 'url' => 'specialities.php']],
+         'link' => ['label' => 'Our services', 'url' => 'services.php']],
 
         // Conditions
         ['cat' => 'conditions', 'q' => 'Can physiotherapy help a disc bulge or sciatica without surgery?',
@@ -650,7 +707,7 @@ $faqPage = [
         ['cat' => 'conditions', 'q' => 'Do you provide rehab before and after surgery?',
          'a' => 'Yes. Pre-surgery conditioning helps you go into an operation stronger, and post-surgery rehab helps you regain movement, strength and confidence safely afterwards.'],
         ['cat' => 'conditions', 'q' => 'Do you treat stroke and other neurological conditions?',
-         'a' => 'Yes. We provide rehabilitation for hemiplegia after stroke, paraplegia, quadriplegia, Parkinson\'s disease, Bell\'s palsy, foot drop and more — focused on movement, balance and independence.',
+         'a' => 'Yes. We provide rehabilitation after stroke, traumatic brain injury and spinal cord injury, and for Parkinson\'s disease, multiple sclerosis and Guillain-Barré syndrome — focused on movement, balance and independence.',
          'link' => ['label' => 'Neuro rehabilitation', 'url' => 'treatments.php#cat-neuro']],
         ['cat' => 'conditions', 'q' => 'My condition isn\'t listed — can you still help?',
          'a' => 'Possibly. Call or WhatsApp us and describe your problem. If physiotherapy can help, we will explain how; if not, we will point you in the right direction.'],
@@ -707,10 +764,10 @@ $specialityPages['manual-therapy'] = [
         'highlight' => 'Manual Therapy',
         'lead'      => 'Manual therapy is effective for a wide range of muscle, joint and nerve problems. Tap a condition to learn more.',
         // slugs from $treatments; label/link built in the section
-        'conditions' => ['low-back-ache', 'spondylosis', 'disc-bulge', 'sciatica', 'torticollis', 'muscle-spasm',
-                         'adhesive-capsulitis', 'joint-stiffness', 'ligament-injuries', 'sports-injuries',
-                         'tennis-elbow', 'golfers-elbow', 'tendinitis', 'plantar-fasciitis'],
-        'extra' => ['Headaches from neck tension', 'Posture-related pain', 'Stiffness after fractures & surgery', 'Jaw (TMJ) pain'],
+        'conditions' => ['spondylosis', 'disc-bulge', 'sciatica', 'frozen-shoulder', 'osteoarthritis', 'tennis-golfers-elbow',
+                         'ligament-injuries', 'meniscus-tears', 'rotator-cuff-injuries', 'plantar-fasciitis',
+                         'carpal-tunnel-syndrome', 'fracture-rehabilitation'],
+        'extra' => ['Low back & neck pain', 'Headaches from neck tension', 'Posture-related pain', 'Jaw (TMJ) pain'],
         'benefits_title' => 'Benefits of Manual Therapy',
         'benefits' => [
             'Fast relief from pain and muscle tightness',
@@ -804,11 +861,10 @@ $specialityPages['laser-therapy'] = [
         'title'     => 'Conditions Treated With',
         'highlight' => 'Laser Therapy',
         'lead'      => 'Laser therapy can help a wide range of painful muscle, joint, tendon and nerve problems. Tap a condition to learn more.',
-        'conditions' => ['low-back-ache', 'spondylosis', 'sciatica', 'disc-bulge', 'muscle-spasm',
-                         'adhesive-capsulitis', 'rheumatoid-arthritis', 'joint-stiffness', 'ligament-injuries',
-                         'sports-injuries', 'tendinitis', 'tennis-elbow', 'golfers-elbow',
-                         'plantar-fasciitis', 'calcaneal-spur'],
-        'extra' => ['Knee osteoarthritis pain', 'Carpal tunnel & wrist pain', 'Swelling after surgery', 'Slow-healing soft tissue injuries'],
+        'conditions' => ['spondylosis', 'sciatica', 'disc-bulge', 'osteoarthritis', 'frozen-shoulder',
+                         'rheumatoid-arthritis', 'tennis-golfers-elbow', 'rotator-cuff-injuries', 'ligament-injuries',
+                         'plantar-fasciitis', 'carpal-tunnel-syndrome'],
+        'extra' => ['Low back pain', 'Muscle spasm', 'Tendinitis', 'Swelling after surgery', 'Slow-healing soft tissue injuries'],
         'benefits_title' => 'Benefits of Laser Therapy',
         'benefits' => [
             'Completely painless — most people feel only mild warmth',
@@ -902,10 +958,9 @@ $specialityPages['taping-techniques'] = [
         'title'     => 'Conditions Treated With',
         'highlight' => 'Taping',
         'lead'      => 'Taping helps athletes, office workers, older adults and neuro patients alike. Tap a condition to learn more.',
-        'conditions' => ['sports-injuries', 'ligament-injuries', 'tendinitis', 'tennis-elbow', 'golfers-elbow',
-                         'plantar-fasciitis', 'calcaneal-spur', 'adhesive-capsulitis', 'joint-stiffness',
-                         'low-back-ache', 'muscle-spasm', 'torticollis', 'hemiplegia', 'foot-drop', 'wrist-drop'],
-        'extra' => ['Ankle sprain', 'Knee cap (patellar) pain', 'Swelling & bruising', 'Poor posture', 'Pregnancy back pain'],
+        'conditions' => ['ligament-injuries', 'meniscus-tears', 'tennis-golfers-elbow', 'plantar-fasciitis',
+                         'frozen-shoulder', 'rotator-cuff-injuries', 'osteoarthritis', 'stroke', 'cerebral-palsy'],
+        'extra' => ['Ankle sprain', 'Knee cap (patellar) pain', 'Low back pain', 'Swelling & bruising', 'Poor posture', 'Pregnancy back pain'],
         'benefits_title' => 'Benefits of Taping',
         'benefits' => [
             'Reduces pain without medicines',
@@ -999,11 +1054,10 @@ $specialityPages['strength-training'] = [
         'title'     => 'Conditions Treated With',
         'highlight' => 'Strength Training',
         'lead'      => 'Strengthening is part of almost every recovery plan we create. Tap a condition to learn more.',
-        'conditions' => ['low-back-ache', 'disc-bulge', 'spondylosis', 'sciatica', 'ankylosing-spondylitis',
-                         'ligament-injuries', 'sports-injuries', 'adhesive-capsulitis', 'joint-stiffness',
-                         'rheumatoid-arthritis', 'tendinitis', 'tennis-elbow', 'hemiplegia', 'parkinsons-disease',
-                         'muscular-dystrophy', 'foot-drop'],
-        'extra' => ['Knee osteoarthritis', 'After fracture & surgery', 'Knee & hip replacement', 'Age-related weakness', 'Falls prevention'],
+        'conditions' => ['osteoarthritis', 'disc-bulge', 'spondylosis', 'sciatica', 'ligament-injuries',
+                         'meniscus-tears', 'rotator-cuff-injuries', 'fracture-rehabilitation', 'post-operative-rehabilitation',
+                         'rheumatoid-arthritis', 'stroke', 'parkinsons-disease', 'multiple-sclerosis', 'guillain-barre-syndrome'],
+        'extra' => ['Low back pain', 'Sports injuries', 'Age-related weakness', 'Falls prevention'],
         'benefits_title' => 'Benefits of Strength Training',
         'benefits' => [
             'Reduces pain by supporting joints and the spine',
@@ -1097,8 +1151,8 @@ $specialityPages['pre-post-operative-care'] = [
         'title'     => 'Surgeries & Conditions We',
         'highlight' => 'Rehabilitate',
         'lead'      => 'We provide rehab for most orthopaedic and spine operations, and for the conditions that lead to them.',
-        'conditions' => ['ligament-injuries', 'sports-injuries', 'disc-bulge', 'spondylosis', 'sciatica',
-                         'adhesive-capsulitis', 'joint-stiffness', 'rheumatoid-arthritis'],
+        'conditions' => ['post-operative-rehabilitation', 'fracture-rehabilitation', 'ligament-injuries', 'meniscus-tears',
+                         'rotator-cuff-injuries', 'osteoarthritis', 'disc-bulge', 'spondylosis'],
         'extra' => ['Knee replacement (TKR)', 'Hip replacement (THR)', 'ACL reconstruction', 'Knee & shoulder arthroscopy',
                     'Fracture fixation (plates, nails, screws)', 'Spine surgery (discectomy, fusion)',
                     'Rotator cuff repair', 'Tendon & ligament repair'],
@@ -1195,10 +1249,10 @@ $specialityPages['advance-joint-mobilization'] = [
         'title'     => 'Conditions Treated With',
         'highlight' => 'Joint Mobilization',
         'lead'      => 'Joint mobilization is most helpful when stiffness or a "stuck" joint is causing pain. Tap a condition to learn more.',
-        'conditions' => ['adhesive-capsulitis', 'joint-stiffness', 'spondylosis', 'low-back-ache', 'torticollis',
-                         'disc-bulge', 'sciatica', 'ankylosing-spondylitis', 'ligament-injuries', 'sports-injuries',
-                         'tennis-elbow', 'rheumatoid-arthritis', 'plantar-fasciitis'],
-        'extra' => ['Knee osteoarthritis', 'Stiffness after fracture or plaster', 'Stiffness after surgery', 'Ankle stiffness after sprain', 'Wrist & hand stiffness', 'Jaw (TMJ) stiffness'],
+        'conditions' => ['frozen-shoulder', 'osteoarthritis', 'spondylosis', 'disc-bulge', 'sciatica',
+                         'ligament-injuries', 'fracture-rehabilitation', 'tennis-golfers-elbow', 'rheumatoid-arthritis',
+                         'plantar-fasciitis', 'carpal-tunnel-syndrome'],
+        'extra' => ['Low back & neck stiffness', 'Stiffness after surgery', 'Ankle stiffness after sprain', 'Jaw (TMJ) stiffness'],
         'benefits_title' => 'Benefits of Joint Mobilization',
         'benefits' => [
             'Restores range of motion in stiff joints',
@@ -1253,6 +1307,175 @@ $specialityPages['advance-joint-mobilization'] = [
 // ---------------------------------------------------------------------------
 // Free appointment page (form posts to appointment.php)
 // ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
+// Patient Resources page (resources.php): guidance, rehab information, FAQs
+// General information only — the page shows a "not a substitute" note.
+// ---------------------------------------------------------------------------
+$resourcesPage = [
+    'banner' => [
+        'title'     => 'Patient',
+        'highlight' => 'Resources',
+        'lead'      => 'Simple, trustworthy physiotherapy guidance to help you look after your body and get the most from your recovery.',
+        'image'     => 'banner03',
+    ],
+    'intro' => [
+        'eyebrow'   => 'Learn & Recover',
+        'title'     => 'Helpful Information for',
+        'highlight' => 'Patients & Families',
+        'lead'      => 'Everyday advice from our physiotherapy team — what to do when pain strikes, how rehabilitation works and answers to common questions.',
+        'cards' => [
+            ['anchor' => 'guidance', 'icon' => 'heart', 'title' => 'Basic Physiotherapy Guidance', 'text' => 'Posture, lifting, ice or heat, sleep and staying active safely.'],
+            ['anchor' => 'rehabilitation', 'icon' => 'recover', 'title' => 'Rehabilitation Information', 'text' => 'The stages of recovery, typical timelines and your home programme.'],
+            ['anchor' => 'faq', 'icon' => 'assess', 'title' => 'FAQs', 'text' => 'Quick answers about pain, exercise and recovery.'],
+        ],
+    ],
+
+    'guidance' => [
+        'eyebrow'   => 'Basic Physiotherapy Guidance',
+        'title'     => 'Everyday Tips to',
+        'highlight' => 'Protect Your Body',
+        'lead'      => 'Small daily habits make a big difference to pain and recovery. Here is the advice we give our patients most often.',
+        'items' => [
+            ['icon' => 'spine', 'title' => 'Good Posture at Work', 'tips' => [
+                'Keep the top of your screen at eye level',
+                'Sit back in the chair with your feet flat on the floor',
+                'Keep elbows close to your body, wrists straight',
+                'Stand up and move every 30–45 minutes',
+            ]],
+            ['icon' => 'back', 'title' => 'Lifting Safely', 'tips' => [
+                'Bend your knees and hips, not your back',
+                'Hold the load close to your body',
+                'Turn with your feet — avoid twisting your back',
+                'Ask for help or split heavy loads',
+            ]],
+            ['icon' => 'thermometer', 'title' => 'Ice or Heat?', 'tips' => [
+                'Ice for a fresh injury or swelling (first 48–72 hours)',
+                'Heat for stiffness and long-standing muscle tightness',
+                '15–20 minutes at a time, wrapped in a cloth',
+                'Never put ice or heat directly on the skin',
+            ]],
+            ['icon' => 'clock', 'title' => 'Stay Active, Pace Yourself', 'tips' => [
+                'Gentle movement usually helps more than bed rest',
+                'Break tasks into smaller parts with short rests',
+                'Increase activity a little at a time',
+                'Short, regular walks are one of the best medicines',
+            ]],
+            ['icon' => 'moon', 'title' => 'Sleep Comfortably', 'tips' => [
+                'Side-lying: a pillow between the knees',
+                'On your back: a pillow under the knees',
+                'Use a pillow that keeps your neck level',
+                'Avoid sleeping on your stomach with neck pain',
+            ]],
+            ['icon' => 'run', 'title' => 'Doing Your Home Exercises', 'tips' => [
+                'Little and often beats a lot once a week',
+                'Move slowly and with control — quality over quantity',
+                'Mild discomfort is okay; sharp pain is not',
+                'Keep a simple log of what you did',
+            ]],
+            ['icon' => 'foot', 'title' => 'Footwear & Walking', 'tips' => [
+                'Choose cushioned, supportive shoes for daily use',
+                'Avoid flat, worn-out slippers for long walks',
+                'Start new walking routines gradually',
+                'Walk on even ground when recovering from injury',
+            ]],
+            ['icon' => 'hand', 'title' => 'Using Phones & Laptops', 'tips' => [
+                'Bring the phone up to eye level instead of looking down',
+                'Use a stand or external keyboard with a laptop',
+                'Take regular breaks to stretch your neck and hands',
+                'Switch hands and avoid long one-handed typing',
+            ]],
+        ],
+        // Red flags: always shown with a "seek medical help" message
+        'warning' => [
+            'title' => 'When to See a Doctor Urgently',
+            'text'  => 'Physiotherapy is safe for most aches and injuries, but some symptoms need urgent medical attention. Go to a doctor or emergency department straight away if you have:',
+            'items' => [
+                'Numbness around the groin or buttocks, or new problems controlling bladder or bowel',
+                'Sudden weakness, drooping face or slurred speech',
+                'Severe pain after a fall or accident, or a deformed limb',
+                'Back pain with fever, unexplained weight loss or a history of cancer',
+                'A hot, swollen, painful calf, or sudden breathlessness or chest pain',
+                'Pain that is getting rapidly worse, or keeps you awake every night',
+            ],
+        ],
+        'note' => 'This information is general advice and does not replace a personal assessment. If you are unsure, ask us.',
+    ],
+
+    'rehab' => [
+        'eyebrow'   => 'Rehabilitation Information',
+        'title'     => 'How Recovery',
+        'highlight' => 'Usually Works',
+        'lead'      => 'Most rehabilitation follows a similar path. Knowing what to expect helps you stay motivated and recover safely.',
+        'stages' => [
+            ['icon' => 'heart', 'title' => 'Protect & Calm', 'text' => 'Reduce pain and swelling, protect healing tissue and keep gentle, safe movement going.'],
+            ['icon' => 'knee', 'title' => 'Restore Movement', 'text' => 'Regain flexibility and range of motion with hands-on therapy and guided exercises.'],
+            ['icon' => 'muscle', 'title' => 'Rebuild Strength', 'text' => 'Progressive strengthening, balance and control so the area can handle everyday loads.'],
+            ['icon' => 'run', 'title' => 'Return to Activity', 'text' => 'Practise work, sport and daily tasks, and learn how to prevent the problem returning.'],
+        ],
+        // REVIEW: typical ranges — every recovery is different
+        'timeline_title' => 'Typical Recovery Times',
+        'timeline_note'  => 'These are general ranges. Your own timeline depends on your condition, age, general health and how regularly you do your exercises.',
+        'timeline' => [
+            ['label' => 'Muscle strain or mild sprain', 'time' => '2–6 weeks'],
+            ['label' => 'Acute low back or neck pain', 'time' => '2–8 weeks'],
+            ['label' => 'Tennis elbow, plantar fasciitis, tendon pain', 'time' => '6–12 weeks'],
+            ['label' => 'Frozen shoulder', 'time' => '6–18 months (improves in stages)'],
+            ['label' => 'Fracture rehabilitation', 'time' => '6–12 weeks after the bone heals'],
+            ['label' => 'Knee or hip replacement', 'time' => '3–6 months'],
+            ['label' => 'ACL reconstruction (return to sport)', 'time' => '9–12 months'],
+            ['label' => 'Stroke and neurological rehab', 'time' => 'Months — steady, long-term progress'],
+        ],
+        'pain' => [
+            'title' => 'Exercise Pain: A Simple Guide',
+            'text'  => 'Rate your pain from 0 (none) to 10 (worst) while and after you exercise:',
+            'levels' => [
+                ['level' => 'ok', 'range' => '0–3', 'label' => 'Safe to continue', 'text' => 'Mild discomfort is normal while tissues get stronger.'],
+                ['level' => 'caution', 'range' => '4–5', 'label' => 'Ease off', 'text' => 'Reduce repetitions, range or weight, and tell us at your next visit.'],
+                ['level' => 'stop', 'range' => '6+', 'label' => 'Stop & contact us', 'text' => 'Or if pain is still worse the next morning.'],
+            ],
+        ],
+        'tips_title' => 'Getting the Most From Your Rehab',
+        'tips' => [
+            'Attend sessions regularly — consistency matters most',
+            'Do your home exercises as prescribed',
+            'Tell us honestly how you are feeling each visit',
+            'Ask questions — understanding helps recovery',
+            'Get enough sleep, water and good food',
+            'Set small goals and celebrate progress',
+        ],
+        'bring_title' => 'What to Bring to Your First Visit',
+        'bring' => [
+            'X-rays, MRI or scan reports',
+            'Doctor\'s or surgeon\'s notes and discharge summary',
+            'A list of your current medicines',
+            'Loose, comfortable clothing (shorts for knee problems)',
+            'Your questions and goals',
+        ],
+    ],
+
+    'faq' => [
+        'eyebrow'   => 'FAQs',
+        'title'     => 'Questions About',
+        'highlight' => 'Pain & Recovery',
+        'items' => [
+            ['q' => 'Should I rest completely when I have back pain?',
+             'a' => 'Usually not. For most back pain, gentle movement and staying as active as you comfortably can helps you recover faster than bed rest. Avoid only the movements that clearly make it much worse, and see us if it does not improve within a few days.'],
+            ['q' => 'Is it normal to feel sore after physiotherapy?',
+             'a' => 'Mild soreness for a day or so after treatment or new exercises is normal, similar to after a workout. It should settle within 24–48 hours. If pain is sharp or keeps increasing, let us know.'],
+            ['q' => 'How often should I do my home exercises?',
+             'a' => 'Follow the plan your physiotherapist gives you — often once or twice a day. Short, regular sessions work better than one long session a week.'],
+            ['q' => 'Should I use ice or heat for my injury?',
+             'a' => 'Ice is best for a new injury or swelling in the first 2–3 days. Heat helps stiffness and long-standing muscle tightness. Use either for 15–20 minutes, wrapped in a cloth, never directly on the skin.'],
+            ['q' => 'Can physiotherapy help me avoid surgery?',
+             'a' => 'For many conditions — such as disc bulges, knee osteoarthritis, rotator cuff and meniscus problems — a good physiotherapy programme can reduce pain and improve function enough that surgery is not needed. We will advise you honestly if a specialist opinion is the better step.'],
+            ['q' => 'When can I go back to sport or the gym?',
+             'a' => 'When you have full, pain-free movement, good strength compared with the other side and confidence in sport-specific movements. We test these with you before giving the all-clear.'],
+            ['q' => 'Can family members help with my rehabilitation?',
+             'a' => 'Yes — especially after a stroke, surgery or for children. We are happy to teach family members how to assist safely with exercises and daily activities at home.'],
+        ],
+    ],
+];
+
 $appointmentPage = [
     'banner' => [
         'title'     => 'Book a Free',

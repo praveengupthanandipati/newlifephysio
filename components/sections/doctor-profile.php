@@ -88,7 +88,7 @@ $stats = array_filter([
                         <span class="doc-chips__label">Specialities</span>
                         <ul>
 <?php foreach ($specialities as $speciality): ?>
-                            <li><a href="specialities.php#<?= e($speciality['slug']) ?>"><?= e($speciality['name']) ?></a></li>
+                            <li><a href="<?= e($speciality['slug']) ?>.php"><?= e($speciality['name']) ?></a></li>
 <?php endforeach; ?>
                         </ul>
                     </div>
