@@ -74,18 +74,42 @@ var heroSwiper = new Swiper('.heroSwiper', {
     delay: 6000,
     disableOnInteraction: false,
   },
-  pagination: {
-    el: '.home-carousel .hero-pagination',
-    clickable: true,
-  },
-  navigation: {
-    nextEl: '.home-carousel .hero-next',
-    prevEl: '.home-carousel .hero-prev',
-  },
   keyboard: {
     enabled: true,
   },
+  on: {
+    init: heroInertSlides,
+    slideChange: heroInertSlides,
+  },
 });
+
+// Hero controls sit inside every slide (under the buttons), so they are wired
+// by delegation; each slide's dots already mark that slide as current.
+var heroRefocus = null; // control to focus on the new slide (keyboard users)
+$('.home-carousel').on('click', '.hero-prev', function () { heroRefocus = '.hero-prev'; heroSwiper.slidePrev(); })
+  .on('click', '.hero-next', function () { heroRefocus = '.hero-next'; heroSwiper.slideNext(); })
+  .on('click', '.hero-dot', function () {
+    var index = this.getAttribute('data-slide');
+    heroRefocus = '.hero-dot[data-slide="' + index + '"]';
+    heroSwiper.slideToLoop(+index);
+  });
+
+// Faded-out slides stay in the DOM: keep their links and buttons out of the
+// tab order, and carry focus over to the same control on the new slide
+function heroInertSlides() {
+  var swiper = this;
+  if (!swiper || !swiper.slides) return;
+  Array.prototype.forEach.call(swiper.slides, function (slide, i) {
+    var hidden = i !== swiper.activeIndex;
+    slide.toggleAttribute('inert', hidden);
+    slide.setAttribute('aria-hidden', hidden ? 'true' : 'false');
+  });
+  if (heroRefocus) {
+    var target = swiper.slides[swiper.activeIndex].querySelector(heroRefocus);
+    if (target && document.activeElement === document.body) target.focus({ preventScroll: true });
+    heroRefocus = null;
+  }
+}
 
 // Home testimonials carousel: 1 / 2 / 3 cards per view
 var tmSwiper = new Swiper('.tmSwiper', {

@@ -1164,35 +1164,37 @@ a {
 }
 
 .hero-controls {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 2.25rem;
-  z-index: 3;
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 0.9rem;
+  gap: 0.6rem;
+  margin-top: 2rem;
+}
+@media (max-width: 575px) {
+  .hero-controls {
+    margin-top: 1.5rem;
+  }
 }
 
 .hero-arrow {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
+  width: 34px;
+  height: 34px;
   padding: 0;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.35);
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.08);
   color: #fff;
   transition: background-color 0.25s ease, border-color 0.25s ease;
 }
 .hero-arrow svg {
-  width: 18px;
-  height: 18px;
+  width: 14px;
+  height: 14px;
   fill: none;
   stroke: currentColor;
-  stroke-width: 2.2;
+  stroke-width: 2.4;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
@@ -1201,22 +1203,26 @@ a {
   border-color: #f47b20;
 }
 
-.hero-pagination {
+.hero-dots {
   display: flex;
   align-items: center;
-  gap: 0.45rem;
+  gap: 0.35rem;
 }
-.hero-pagination .swiper-pagination-bullet {
-  width: 10px;
-  height: 10px;
-  margin: 0;
-  border-radius: 10px;
+
+.hero-dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
   background: rgba(255, 255, 255, 0.45);
-  opacity: 1;
   transition: width 0.35s ease, background-color 0.35s ease;
 }
-.hero-pagination .swiper-pagination-bullet-active {
-  width: 32px;
+.hero-dot:hover, .hero-dot:focus-visible {
+  background: rgba(255, 255, 255, 0.8);
+}
+.hero-dot.is-active {
+  width: 22px;
   background: linear-gradient(135deg, #f9a826 0%, #f47b20 55%, #e8650f 100%);
 }
 
@@ -1406,10 +1412,7 @@ a {
     height: clamp(560px, 80vh, 660px);
   }
   .hero-slide__inner {
-    padding-bottom: 150px;
-  }
-  .hero-controls {
-    bottom: 100px;
+    padding-bottom: 100px;
   }
   .hero-form-wrap {
     position: relative;
@@ -1424,6 +1427,16 @@ a {
   .hero-form {
     width: 100%;
     max-width: 560px;
+  }
+}
+@media (max-width: 767px) {
+  .hero-badges,
+  .hero-slide__lead,
+  .hero-slide .hero-btn--call {
+    display: none;
+  }
+  .heroSwiper {
+    height: 460px;
   }
 }
 @media (max-width: 575px) {
@@ -8349,6 +8362,4 @@ textarea.ct-input {
   to {
     transform: rotate(360deg);
   }
-}
-
-/*# sourceMappingURL=style.css.map */
+}/*# sourceMappingURL=style.css.map */

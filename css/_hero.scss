@@ -189,36 +189,39 @@ $hero-form-width: 390px;
 }
 
 // ---------- Controls ----------
+// In the text flow under the buttons (each slide has its own copy, wired in
+// js/custom.js), kept small so they don't compete with the calls to action.
 .hero-controls {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 2.25rem;
-  z-index: 3;
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 0.9rem;
+  gap: 0.6rem;
+  margin-top: 2rem;
+
+  @include max(575px) {
+    margin-top: 1.5rem;
+  }
 }
 
 .hero-arrow {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
+  width: 34px;
+  height: 34px;
   padding: 0;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.35);
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.08);
   color: map-get($colors, white);
   transition: background-color 0.25s ease, border-color 0.25s ease;
 
   svg {
-    width: 18px;
-    height: 18px;
+    width: 14px;
+    height: 14px;
     fill: none;
     stroke: currentColor;
-    stroke-width: 2.2;
+    stroke-width: 2.4;
     stroke-linecap: round;
     stroke-linejoin: round;
   }
@@ -230,23 +233,28 @@ $hero-form-width: 390px;
   }
 }
 
-.hero-pagination {
+.hero-dots {
   display: flex;
   align-items: center;
-  gap: 0.45rem;
+  gap: 0.35rem;
+}
 
-  .swiper-pagination-bullet {
-    width: 10px;
-    height: 10px;
-    margin: 0;
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.45);
-    opacity: 1;
-    transition: width 0.35s ease, background-color 0.35s ease;
+.hero-dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.45);
+  transition: width 0.35s ease, background-color 0.35s ease;
+
+  &:hover,
+  &:focus-visible {
+    background: rgba(255, 255, 255, 0.8);
   }
 
-  .swiper-pagination-bullet-active {
-    width: 32px;
+  &.is-active {
+    width: 22px;
     background: $gradient-secondary;
   }
 }
@@ -461,11 +469,7 @@ $hero-form-width: 390px;
   }
 
   .hero-slide__inner {
-    padding-bottom: 150px;
-  }
-
-  .hero-controls {
-    bottom: 100px;
+    padding-bottom: 100px; // room for the booking card overlap
   }
 
   .hero-form-wrap {
@@ -483,6 +487,20 @@ $hero-form-width: 390px;
   .hero-form {
     width: 100%;
     max-width: 560px;
+  }
+}
+
+// Phones: keep only the heading, the slide's link button and the controls
+@include max(767px) {
+  .hero-badges,
+  .hero-slide__lead,
+  .hero-slide .hero-btn--call {
+    display: none;
+  }
+
+  // less content, so a shorter slider (the booking card still overlaps its foot)
+  .heroSwiper {
+    height: 460px;
   }
 }
 

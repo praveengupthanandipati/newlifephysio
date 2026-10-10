@@ -3,6 +3,14 @@
  * Home hero: Swiper carousel ($heroSlides) + fixed booking card.
  * Booking form field names match the validation in js/custom.js.
  */
+
+// Provided by data.php via init.php (declared for the editor)
+/** @var array $site */
+/** @var array $heroSlides */
+/** @var array $treatments */
+/** @var array $treatmentCategories */
+/** @var array $bookingExtraOptions */
+
 $mainPhone = $site['phones'][0];
 ?>
 <!-- carousel -->
@@ -30,17 +38,21 @@ $mainPhone = $site['phones'][0];
                             </a>
                             <a class="hero-btn hero-btn--ghost" href="<?= e($slide['link']['url']) ?>"><?= e($slide['link']['label']) ?></a>
                         </div>
+
+                        <!-- controls: in the text flow under the buttons; wired in js/custom.js -->
+                        <div class="hero-controls">
+                            <button class="hero-arrow hero-prev" type="button" aria-label="Previous slide"><?= icon('chevron-left') ?></button>
+                            <div class="hero-dots">
+<?php foreach ($heroSlides as $j => $dot): ?>
+                                <button class="hero-dot<?= $j === $i ? ' is-active' : '' ?>" type="button" data-slide="<?= $j ?>" aria-label="Go to slide <?= $j + 1 ?>"<?= $j === $i ? ' aria-current="true"' : '' ?>></button>
+<?php endforeach; ?>
+                            </div>
+                            <button class="hero-arrow hero-next" type="button" aria-label="Next slide"><?= icon('chevron-right') ?></button>
+                        </div>
                     </div>
                 </div>
             </div>
 <?php endforeach; ?>
-        </div>
-
-        <!-- controls -->
-        <div class="container-90 hero-controls">
-            <button class="hero-arrow hero-prev" type="button" aria-label="Previous slide"><?= icon('chevron-left') ?></button>
-            <div class="hero-pagination"></div>
-            <button class="hero-arrow hero-next" type="button" aria-label="Next slide"><?= icon('chevron-right') ?></button>
         </div>
     </div>
 
