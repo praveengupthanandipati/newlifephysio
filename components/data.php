@@ -607,7 +607,6 @@ $faqHours = implode('; ', array_map(function ($group) {
 //   image: file in img/ without extension; img/<image>.jpg is the full size
 //          shown in the zoom viewer, img/<image>-1024.jpg the grid thumbnail.
 //          null = placeholder slot until a real clinic photo is added.
-//   size:  'wide' / 'tall' spans two grid cells on larger screens.
 // ---------------------------------------------------------------------------
 $galleryPage = [
     'banner' => [
@@ -627,18 +626,18 @@ $galleryPage = [
     ],
     // TODO: replace the null images with real clinic photos (img/gallery/<name>.jpg + <name>-1024.jpg)
     'items' => [
-        ['image' => 'banner01', 'cat' => 'rehab', 'size' => 'wide', 'title' => 'Assisted Leg Stretch', 'alt' => 'Physiotherapist guiding a patient through an assisted leg stretch'],
-        ['image' => null, 'cat' => 'clinic', 'size' => 'tall', 'title' => 'Reception & Waiting Area', 'alt' => 'Reception and waiting area of New Life Physiotherapy Clinic'],
-        ['image' => 'banner02', 'cat' => 'treatment', 'size' => '', 'title' => 'Sling Suspension Therapy', 'alt' => 'Physiotherapist supporting a patient during sling suspension therapy'],
-        ['image' => null, 'cat' => 'treatment', 'size' => '', 'title' => 'Manual Therapy Session', 'alt' => 'Physiotherapist performing manual therapy'],
-        ['image' => 'banner03', 'cat' => 'rehab', 'size' => '', 'title' => 'Shoulder Strengthening', 'alt' => 'Physiotherapist guiding a patient through a shoulder strengthening exercise'],
-        ['image' => null, 'cat' => 'clinic', 'size' => '', 'title' => 'Treatment Room', 'alt' => 'Private treatment room at the clinic'],
-        ['image' => null, 'cat' => 'treatment', 'size' => 'wide', 'title' => 'Laser Therapy', 'alt' => 'Laser therapy for pain relief'],
-        ['image' => null, 'cat' => 'treatment', 'size' => '', 'title' => 'Kinesio Taping', 'alt' => 'Kinesio tape applied to a patient\'s knee'],
-        ['image' => null, 'cat' => 'rehab', 'size' => 'tall', 'title' => 'Balance Training', 'alt' => 'Patient doing balance training exercises'],
-        ['image' => null, 'cat' => 'clinic', 'size' => '', 'title' => 'Exercise & Rehab Area', 'alt' => 'Exercise and rehabilitation area with equipment'],
-        ['image' => null, 'cat' => 'rehab', 'size' => '', 'title' => 'Child Therapy', 'alt' => 'Play-based physiotherapy session with a child'],
-        ['image' => null, 'cat' => 'rehab', 'size' => 'wide', 'title' => 'Post-Surgery Rehab', 'alt' => 'Patient walking with support during post-operative rehabilitation'],
+        ['image' => 'banner01', 'cat' => 'rehab', 'title' => 'Assisted Leg Stretch', 'alt' => 'Physiotherapist guiding a patient through an assisted leg stretch'],
+        ['image' => null, 'cat' => 'clinic', 'title' => 'Reception & Waiting Area', 'alt' => 'Reception and waiting area of New Life Physiotherapy Clinic'],
+        ['image' => 'banner02', 'cat' => 'treatment', 'title' => 'Sling Suspension Therapy', 'alt' => 'Physiotherapist supporting a patient during sling suspension therapy'],
+        ['image' => null, 'cat' => 'treatment', 'title' => 'Manual Therapy Session', 'alt' => 'Physiotherapist performing manual therapy'],
+        ['image' => 'banner03', 'cat' => 'rehab', 'title' => 'Shoulder Strengthening', 'alt' => 'Physiotherapist guiding a patient through a shoulder strengthening exercise'],
+        ['image' => null, 'cat' => 'clinic', 'title' => 'Treatment Room', 'alt' => 'Private treatment room at the clinic'],
+        ['image' => null, 'cat' => 'treatment', 'title' => 'Laser Therapy', 'alt' => 'Laser therapy for pain relief'],
+        ['image' => null, 'cat' => 'treatment', 'title' => 'Kinesio Taping', 'alt' => 'Kinesio tape applied to a patient\'s knee'],
+        ['image' => null, 'cat' => 'rehab', 'title' => 'Balance Training', 'alt' => 'Patient doing balance training exercises'],
+        ['image' => null, 'cat' => 'clinic', 'title' => 'Exercise & Rehab Area', 'alt' => 'Exercise and rehabilitation area with equipment'],
+        ['image' => null, 'cat' => 'rehab', 'title' => 'Child Therapy', 'alt' => 'Play-based physiotherapy session with a child'],
+        ['image' => null, 'cat' => 'rehab', 'title' => 'Post-Surgery Rehab', 'alt' => 'Patient walking with support during post-operative rehabilitation'],
     ],
 ];
 

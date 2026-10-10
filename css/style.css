@@ -6449,8 +6449,6 @@ html:has(.trt-page) {
 .gl-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  grid-auto-rows: 220px;
-  grid-auto-flow: dense;
   gap: 1.1rem;
   margin: 0;
   padding: 0;
@@ -6459,36 +6457,26 @@ html:has(.trt-page) {
 @media (max-width: 1199px) {
   .gl-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    grid-auto-rows: 200px;
   }
 }
 @media (max-width: 767px) {
   .gl-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-auto-rows: 170px;
     gap: 0.75rem;
   }
 }
 @media (max-width: 400px) {
   .gl-grid {
-    grid-auto-rows: 140px;
     gap: 0.6rem;
   }
 }
 
 .gl-item {
   min-width: 0;
+  aspect-ratio: 4/3;
 }
 .gl-item.is-hidden {
   display: none;
-}
-
-.gl-item--wide {
-  grid-column: span 2;
-}
-
-.gl-item--tall {
-  grid-row: span 2;
 }
 
 .gl-item__btn {
@@ -8362,4 +8350,6 @@ textarea.ct-input {
   to {
     transform: rotate(360deg);
   }
-}/*# sourceMappingURL=style.css.map */
+}
+
+/*# sourceMappingURL=style.css.map */

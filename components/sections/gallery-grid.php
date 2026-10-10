@@ -42,7 +42,7 @@ foreach ($galleryPage['categories'] as $catId => $catLabel) {
 
         <ul class="gl-grid">
 <?php foreach ($photos as $i => $photo): ?>
-            <li class="gl-item<?= $photo['size'] ? ' gl-item--' . e($photo['size']) : '' ?>" data-cat="<?= e($photo['cat']) ?>" data-aos="zoom-in" data-aos-delay="<?= ($i % 4) * 80 ?>">
+            <li class="gl-item" data-cat="<?= e($photo['cat']) ?>" data-aos="zoom-in" data-aos-delay="<?= ($i % 4) * 80 ?>">
                 <button class="gl-item__btn" type="button" data-index="<?= $i ?>" aria-label="View larger: <?= e($photo['title']) ?>">
                     <img src="<?= e($photo['thumb']) ?>" alt="<?= e($photo['alt']) ?>" loading="lazy">
                     <span class="gl-item__overlay">

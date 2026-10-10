@@ -1,6 +1,6 @@
 // ==========================================
 // GALLERY PAGE
-// Filter tabs (reuse .svc-tabs), a dense photo grid with wide / tall tiles,
+// Filter tabs (reuse .svc-tabs), a grid of equal-size photo tiles,
 // and a full-screen zoom viewer (Swiper + zoom module, js/custom.js).
 // ==========================================
 $gl-navy: map-get($colors, primary);
@@ -31,8 +31,6 @@ $gl-orange: map-get($colors, secondary);
 .gl-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  grid-auto-rows: 220px;
-  grid-auto-flow: dense;
   gap: 1.1rem;
   margin: 0;
   padding: 0;
@@ -40,35 +38,26 @@ $gl-orange: map-get($colors, secondary);
 
   @include max(1199px) {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    grid-auto-rows: 200px;
   }
 
   @include max(767px) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-auto-rows: 170px;
     gap: 0.75rem;
   }
 
   @include max(400px) {
-    grid-auto-rows: 140px;
     gap: 0.6rem;
   }
 }
 
+// Every tile the same shape; photos are cropped to fit (object-fit: cover)
 .gl-item {
   min-width: 0;
+  aspect-ratio: 4 / 3;
 
   &.is-hidden {
     display: none;
   }
-}
-
-.gl-item--wide {
-  grid-column: span 2;
-}
-
-.gl-item--tall {
-  grid-row: span 2;
 }
 
 .gl-item__btn {
