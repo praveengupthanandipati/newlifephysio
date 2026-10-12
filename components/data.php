@@ -437,7 +437,6 @@ $heroSlides = [
 // ---------------------------------------------------------------------------
 $aboutFeatures = [
     ['icon' => 'family', 'title' => 'Adult & Child Rehab', 'text' => 'Care for every age'],
-    ['icon' => 'hand', 'title' => 'Manual & Laser Therapy', 'text' => 'Hands-on, targeted relief'],
     ['icon' => 'clipboard-plus', 'title' => 'Pre & Post Operative', 'text' => 'Rehab around your surgery'],
     ['icon' => 'clock', 'title' => 'Open 7 Days', 'text' => 'Mon–Sat all day, Sun mornings'],
 ];

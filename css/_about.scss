@@ -236,6 +236,11 @@ $about-orange: map-get($colors, secondary);
       background: map-get($colors, lightsecondary);
       color: map-get($colors, darksecondary);
     }
+
+    // an odd number of highlights: the last one fills the row
+    &:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+    }
   }
 
   strong {

@@ -2707,6 +2707,9 @@ a {
   background: #fff1e4;
   color: #d9600b;
 }
+.about-features li:last-child:nth-child(odd) {
+  grid-column: 1/-1;
+}
 .about-features strong {
   display: block;
   color: #173f87;
@@ -8350,6 +8353,4 @@ textarea.ct-input {
   to {
     transform: rotate(360deg);
   }
-}
-
-/*# sourceMappingURL=style.css.map */
+}/*# sourceMappingURL=style.css.map */
