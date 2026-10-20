@@ -27,14 +27,14 @@ $site = [
 
     'phones'   => ['+91 86883 71118', '+91 81069 83290'],
     'whatsapp' => '+91 86883 71118',
-    'email'    => '', // TODO: clinic email ID
+    'email'    => 'info@newlifephysiotherapyclinic.com', // receives all website form submissions
 
     'address' => [
-        'street'      => '1st Floor, 5-1/33, Rd No: 6, Beside Olive Mithai, Alkapoor Township, Puppalaguda, Manikonda',
+        'street'      => 'Road No. 25, Beside Crayons School Street, Opposite RR Village Pointe, Alkapur Township, Manikonda',
         'city'        => 'Hyderabad',
         'region'      => 'Telangana',
         'region_code' => 'IN-TG',
-        'postal_code' => '', // TODO
+        'postal_code' => '500089',
         'country'     => 'IN',
     ],
 
@@ -155,17 +155,17 @@ $treatmentDetails = [
     'osteoarthritis' => [
         'overview' => 'Wear of the cartilage that cushions the joints, most often in the knees, hips and shoulders. It causes pain, stiffness and swelling, and makes walking, climbing stairs or lifting the arm harder.',
         'signs'    => ['Pain on walking, stairs or lifting the arm', 'Morning stiffness that eases with movement', 'Swelling or a grinding feeling in the joint', 'Reduced range of movement'],
-        'care'     => ['Joint mobilisation & manual therapy', 'Strengthening of the muscles around the joint', 'Laser therapy for pain relief', 'Activity, weight and footwear advice'],
+        'care'     => ['Joint mobilisation & manual therapy', 'Strengthening of the muscles around the joint', 'Taping for joint support and pain relief', 'Activity, weight and footwear advice'],
     ],
     'rheumatoid-arthritis' => [
         'overview' => 'An autoimmune condition that inflames the lining of the joints, often the hands, wrists and feet on both sides. Physiotherapy protects the joints and keeps you active alongside your medical treatment.',
         'signs'    => ['Painful, swollen joints on both sides', 'Morning stiffness lasting over 30 minutes', 'Weak grip', 'Tiredness'],
-        'care'     => ['Gentle range-of-motion exercises', 'Joint protection techniques', 'Strengthening & hand therapy', 'Pain relief with laser and heat'],
+        'care'     => ['Gentle range-of-motion exercises', 'Joint protection techniques', 'Strengthening & hand therapy', 'Pain relief with heat and gentle movement'],
     ],
     'frozen-shoulder' => [
         'overview' => 'Adhesive capsulitis: the capsule around the shoulder joint becomes thick and tight, causing pain and a gradual loss of movement. It is more common in people with diabetes and after an injury.',
         'signs'    => ['Shoulder pain, often worse at night', 'Difficulty reaching up or behind your back', 'Trouble dressing or combing hair', 'Movement that slowly gets stiffer'],
-        'care'     => ['Joint mobilisation (Maitland, Mulligan)', 'Stretching & range-of-motion exercises', 'Laser therapy for pain', 'Home exercise programme'],
+        'care'     => ['Joint mobilisation (Maitland, Mulligan)', 'Stretching & range-of-motion exercises', 'Soft tissue release for pain', 'Home exercise programme'],
     ],
     'tennis-golfers-elbow' => [
         'overview' => 'Overuse of the forearm tendons that attach at the elbow — on the outer side in tennis elbow and the inner side in golfer\'s elbow. Common with repetitive gripping, typing, lifting and sport.',
@@ -196,7 +196,7 @@ $treatmentDetails = [
     'sciatica' => [
         'overview' => 'Irritation of the sciatic nerve, often from a disc problem or tight muscles in the lower back and buttock, causing pain that travels down the back of the leg.',
         'signs'    => ['Shooting pain down the leg', 'Numbness or tingling in the foot', 'Pain worse on sitting', 'Weakness in the leg'],
-        'care'     => ['Neural mobilisation', 'Manual therapy for the lower back', 'Core & hip strengthening', 'Laser therapy for nerve pain'],
+        'care'     => ['Neural mobilisation', 'Manual therapy for the lower back', 'Core & hip strengthening', 'Posture and nerve pain advice'],
     ],
     'spondylosis' => [
         'overview' => 'Age-related wear of the discs and joints of the spine, in the neck (cervical) or lower back (lumbar). It can cause stiffness, pain and sometimes pressure on the nerves.',
@@ -211,12 +211,12 @@ $treatmentDetails = [
     'plantar-fasciitis' => [
         'overview' => 'Irritation of the thick band of tissue under the foot, causing heel pain — classically sharp with the first steps in the morning. Often linked with heel spurs, standing for long hours and unsupportive footwear.',
         'signs'    => ['Sharp heel pain on first steps', 'Pain after long standing', 'Tenderness under the heel', 'Pain that eases with walking, then returns'],
-        'care'     => ['Stretching of the calf and foot', 'Taping & footwear advice', 'Laser therapy', 'Foot and calf strengthening'],
+        'care'     => ['Stretching of the calf and foot', 'Taping & footwear advice', 'Soft tissue release for the heel', 'Foot and calf strengthening'],
     ],
     'carpal-tunnel-syndrome' => [
         'overview' => 'Pressure on the median nerve as it passes through the wrist, causing tingling, numbness and weakness in the thumb and fingers. Common with repetitive hand use and in pregnancy.',
         'signs'    => ['Tingling in the thumb and first fingers', 'Symptoms worse at night', 'Weak grip, dropping objects', 'Numbness when typing or holding a phone'],
-        'care'     => ['Nerve and tendon gliding exercises', 'Wrist splinting advice', 'Laser therapy', 'Ergonomic and activity advice'],
+        'care'     => ['Nerve and tendon gliding exercises', 'Wrist splinting advice', 'Soft tissue release for the wrist', 'Ergonomic and activity advice'],
     ],
     'post-operative-rehabilitation' => [
         'overview' => 'Physiotherapy after knee or hip replacement, ACL reconstruction, arthroscopy and spine surgery to restore movement, strength and walking — following your surgeon\'s protocol.',
@@ -284,7 +284,6 @@ $treatmentDetails = [
 // 'page' => true: the speciality has its own page, <slug>.php
 $specialities = [
     ['slug' => 'manual-therapy', 'name' => 'Manual Therapy', 'page' => true],
-    ['slug' => 'laser-therapy', 'name' => 'Laser Therapy', 'page' => true],
     ['slug' => 'taping-techniques', 'name' => 'Taping Techniques', 'page' => true],
     ['slug' => 'strength-training', 'name' => 'Strength Training', 'page' => true],
     ['slug' => 'pre-post-operative-care', 'name' => 'Pre & Post-Operative Management', 'page' => true],
@@ -300,7 +299,7 @@ $services = [
     [
         'slug' => 'orthopaedic-physiotherapy', 'name' => 'Orthopaedic Physiotherapy', 'icon' => 'knee',
         'text' => 'Assessment and treatment of bone, joint, muscle, ligament and spine problems — from arthritis and stiff joints to back pain and injuries. We find the cause of your pain and restore pain-free movement with hands-on therapy and targeted exercise.',
-        'offer' => ['Detailed musculoskeletal assessment', 'Manual therapy & joint mobilisation', 'Strengthening and flexibility programmes', 'Posture and ergonomic correction', 'Laser therapy and taping for pain relief'],
+        'offer' => ['Detailed musculoskeletal assessment', 'Manual therapy & joint mobilisation', 'Strengthening and flexibility programmes', 'Posture and ergonomic correction', 'Taping and soft tissue release for pain relief'],
         'conditions' => ['osteoarthritis', 'frozen-shoulder', 'spondylosis', 'disc-bulge', 'sciatica', 'tennis-golfers-elbow', 'plantar-fasciitis', 'rheumatoid-arthritis'],
         'related' => 'manual-therapy',
     ],
@@ -335,9 +334,9 @@ $services = [
     [
         'slug' => 'pain-management', 'name' => 'Pain Management & Functional Rehabilitation', 'icon' => 'bolt',
         'text' => 'Drug-free relief for acute and long-standing pain — back, neck, joint and nerve pain — combined with rehabilitation that gets you back to work, home and daily activities.',
-        'offer' => ['Laser therapy and manual therapy', 'Taping and soft tissue release', 'Graded activity and exercise', 'Posture and body-mechanics training', 'Self-management strategies'],
+        'offer' => ['Manual therapy and joint mobilisation', 'Taping and soft tissue release', 'Graded activity and exercise', 'Posture and body-mechanics training', 'Self-management strategies'],
         'conditions' => ['disc-bulge', 'sciatica', 'spondylosis', 'osteoarthritis', 'carpal-tunnel-syndrome', 'frozen-shoulder'],
-        'related' => 'laser-therapy',
+        'related' => 'manual-therapy',
     ],
     [
         'slug' => 'functional-training', 'name' => 'Mobility, Strength & Functional Training', 'icon' => 'muscle',
@@ -417,7 +416,7 @@ $heroSlides = [
         'badges' => [['bolt', 'Sports Injury Care'], ['shield', 'Pre & Post Operative Rehab']],
         'title'  => 'Recover Stronger After',
         'highlight' => 'Injury & Surgery',
-        'lead'   => 'Manual therapy, laser therapy, taping and guided strength training to get you back to work, play and everyday life.',
+        'lead'   => 'Manual therapy, taping, joint mobilisation and guided strength training to get you back to work, play and everyday life.',
         'link'   => ['label' => 'Our Services', 'url' => 'services.php'],
     ],
     [
@@ -449,7 +448,7 @@ $journeySteps = [
     ['icon' => 'calendar', 'title' => 'Book Your Visit', 'text' => 'Call, WhatsApp or book online.', 'show_hours' => true],
     ['icon' => 'assess', 'title' => 'Detailed Assessment', 'text' => 'We examine your posture, movement, strength and pain to find the real cause — not just the symptoms.'],
     ['icon' => 'plan', 'title' => 'Personalised Plan', 'text' => 'A treatment plan with clear goals, built around your condition, routine and lifestyle.'],
-    ['icon' => 'treat', 'title' => 'Hands-on Treatment', 'text' => 'Manual therapy, laser therapy, taping, joint mobilisation and guided strength training.'],
+    ['icon' => 'treat', 'title' => 'Hands-on Treatment', 'text' => 'Manual therapy, taping, joint mobilisation and guided strength training.'],
     ['icon' => 'recover', 'title' => 'Recover & Stay Strong', 'text' => 'Progress reviews and a home exercise programme to keep you pain-free for the long run.'],
 ];
 
@@ -492,6 +491,20 @@ $aboutPage = [
         'image'   => 'banner01',
     ],
 
+    // Meet our founder: philosophy, three focus cards, and the mission quote
+    'founder' => [
+        'eyebrow'    => 'Meet Our Founder',
+        'title'      => 'Treating the Cause,',
+        'highlight'  => 'Not Just the Symptoms',
+        'philosophy' => 'His clinical philosophy is centred on identifying the underlying cause of dysfunction rather than merely treating symptoms. He believes that effective rehabilitation begins with a comprehensive assessment, a clear understanding of the patient’s condition, and an individualised treatment plan tailored to their functional goals, lifestyle, and recovery needs.',
+        'points' => [
+            ['icon' => 'hand', 'title' => 'Clinical Expertise', 'text' => 'With expertise in hands-on manual therapy, advanced joint mobilisation techniques, kinesiology taping, and evidence-based therapeutic exercise, Dr. Abhilash focuses on reducing pain, improving movement, restoring functional independence, and supporting long-term recovery.'],
+            ['icon' => 'assess', 'title' => 'Areas of Clinical Practice', 'text' => 'His areas of clinical practice include spine and joint disorders, musculoskeletal pain, sports injuries, pre- and post-operative rehabilitation, stroke rehabilitation, neurological conditions, and paediatric physiotherapy for children with developmental delays and movement difficulties. His paediatric approach incorporates goal-oriented, play-based interventions designed to encourage motor development, improve functional abilities, and enhance participation in daily activities.'],
+            ['icon' => 'family', 'title' => 'Patient-Centred Care', 'text' => 'Known for his patient-centred approach and compassionate guidance, Dr. Abhilash prioritises individual attention, patient education, and active family involvement throughout the rehabilitation journey. He also provides personalised home exercise programmes to support continuity of care and encourage lasting functional improvements beyond the clinic.'],
+        ],
+        'mission' => 'His mission is to deliver personalised, evidence-based physiotherapy that helps individuals of all ages overcome physical limitations, regain mobility and independence, and achieve a healthier, more active life.',
+    ],
+
     'apart' => [
         'eyebrow'   => 'Why Choose Us',
         'title'     => 'What Sets',
@@ -501,7 +514,7 @@ $aboutPage = [
             ['icon' => 'shield', 'title' => 'Registered Physiotherapist', 'text' => 'Your care is led by Dr. Y. Abhilash (PT), Regd. No. 08928 — qualified, accountable and focused on your recovery.'],
             ['icon' => 'assess', 'title' => 'Root-Cause Assessment', 'text' => 'We look beyond the pain to how you move, sit and work, so treatment targets the real problem.'],
             ['icon' => 'plan', 'title' => 'Personalised Plans', 'text' => 'No one-size-fits-all routines — every plan is built around your condition, goals and daily life.'],
-            ['icon' => 'hand', 'title' => 'Hands-on Techniques', 'text' => 'Manual therapy, laser therapy, taping and joint mobilisation, combined with guided exercise.'],
+            ['icon' => 'hand', 'title' => 'Hands-on Techniques', 'text' => 'Manual therapy, taping and joint mobilisation, combined with guided exercise.'],
             ['icon' => 'family', 'title' => 'Adults & Children', 'text' => 'From sports injuries and stroke rehab to child therapy — specialised care for every age.'],
             ['icon' => 'clock', 'title' => 'Open 7 Days', 'text' => 'Mornings and evenings Monday to Saturday, plus Sunday mornings — care that fits around work and school.'],
         ],
@@ -523,10 +536,13 @@ $doctorPage = [
     'profile' => [
         'photo'            => '', // TODO: e.g. 'img/dr-abhilash.jpg' (portrait, ~800x1000); initials show until set
         'qualifications'   => '', // TODO: e.g. 'BPT, MPT (Orthopaedics)'
-        'experience_years' => 0,  // TODO: e.g. 10 -> shows "10+ Years Experience"
-        'languages'        => '', // TODO: e.g. 'English, Telugu, Hindi'
+        'designation'      => 'Founder & Registered Physiotherapist',
+        'experience_years' => 5,  // shows "5+ Years Experience"
+        'languages'        => 'Telugu, Hindi, English',
+        'specialization'   => 'Ortho, Neuro & Paeds Rehab',
+        'google_rating'    => 5, // 0 hides the rating tile
         'bio' => [
-            'Dr. Y. Abhilash (PT) is a registered physiotherapist (Regd. No. 08928) who leads care at New Life Physiotherapy Clinic.',
+            'Dr. Y. Abhilash (PT) is the Founder of New Life Physiotherapy Clinic and a Registered Physiotherapist (Regd. No. 08928) with over 5 years of clinical experience in Orthopaedic, Neurological, and Paediatric Rehabilitation.',
             'His approach is simple: find the real cause of pain, explain it clearly, and treat it with hands-on therapy and targeted exercise. He works with adults and children across orthopaedic, sports and neurological conditions — from back pain and frozen shoulder to stroke rehabilitation and Parkinson\'s disease.',
         ],
     ],
@@ -554,7 +570,7 @@ $doctorPage = [
         'points'    => [
             ['icon' => 'shield', 'title' => 'Registered & Accountable', 'text' => 'Registered physiotherapist, Regd. No. 08928 — your care is in qualified hands.'],
             ['icon' => 'assess', 'title' => 'A Diagnosis You Understand', 'text' => 'Your condition explained in plain language, with a clear plan and milestones.'],
-            ['icon' => 'hand', 'title' => 'Hands-on Expertise', 'text' => 'Manual therapy, laser therapy, taping and joint mobilisation tailored to your body.'],
+            ['icon' => 'hand', 'title' => 'Hands-on Expertise', 'text' => 'Manual therapy, taping and joint mobilisation tailored to your body.'],
             ['icon' => 'family', 'title' => 'Adults & Children', 'text' => 'Experience across orthopaedic, sports, neurological and child physiotherapy.'],
             ['icon' => 'plan', 'title' => 'Home Exercise Programme', 'text' => 'Simple exercises to do at home so your progress continues between visits.'],
             ['icon' => 'clock', 'title' => 'Flexible Timings', 'text' => 'Morning and evening slots six days a week, plus Sunday mornings.'],
@@ -623,20 +639,18 @@ $galleryPage = [
         'treatment' => 'Treatments',
         'rehab'     => 'Rehab & Exercise',
     ],
-    // TODO: replace the null images with real clinic photos (img/gallery/<name>.jpg + <name>-1024.jpg)
+    // Photos live in img/gallery/<name>.jpg with a <name>-1024.jpg thumbnail beside each
     'items' => [
-        ['image' => 'banner01', 'cat' => 'rehab', 'title' => 'Assisted Leg Stretch', 'alt' => 'Physiotherapist guiding a patient through an assisted leg stretch'],
-        ['image' => null, 'cat' => 'clinic', 'title' => 'Reception & Waiting Area', 'alt' => 'Reception and waiting area of New Life Physiotherapy Clinic'],
-        ['image' => 'banner02', 'cat' => 'treatment', 'title' => 'Sling Suspension Therapy', 'alt' => 'Physiotherapist supporting a patient during sling suspension therapy'],
-        ['image' => null, 'cat' => 'treatment', 'title' => 'Manual Therapy Session', 'alt' => 'Physiotherapist performing manual therapy'],
-        ['image' => 'banner03', 'cat' => 'rehab', 'title' => 'Shoulder Strengthening', 'alt' => 'Physiotherapist guiding a patient through a shoulder strengthening exercise'],
-        ['image' => null, 'cat' => 'clinic', 'title' => 'Treatment Room', 'alt' => 'Private treatment room at the clinic'],
-        ['image' => null, 'cat' => 'treatment', 'title' => 'Laser Therapy', 'alt' => 'Laser therapy for pain relief'],
-        ['image' => null, 'cat' => 'treatment', 'title' => 'Kinesio Taping', 'alt' => 'Kinesio tape applied to a patient\'s knee'],
-        ['image' => null, 'cat' => 'rehab', 'title' => 'Balance Training', 'alt' => 'Patient doing balance training exercises'],
-        ['image' => null, 'cat' => 'clinic', 'title' => 'Exercise & Rehab Area', 'alt' => 'Exercise and rehabilitation area with equipment'],
-        ['image' => null, 'cat' => 'rehab', 'title' => 'Child Therapy', 'alt' => 'Play-based physiotherapy session with a child'],
-        ['image' => null, 'cat' => 'rehab', 'title' => 'Post-Surgery Rehab', 'alt' => 'Patient walking with support during post-operative rehabilitation'],
+        ['image' => 'gallery/gallery01', 'cat' => 'treatment', 'title' => 'Neck Pain Treatment', 'alt' => 'Physiotherapist applying manual therapy to a seated patient\'s neck'],
+        ['image' => 'gallery/gallery02', 'cat' => 'treatment', 'title' => 'Neck & Shoulder Release', 'alt' => 'Physiotherapist releasing tension in a patient\'s neck and shoulder'],
+        ['image' => 'gallery/gallery03', 'cat' => 'treatment', 'title' => 'Knee Mobilisation', 'alt' => 'Physiotherapist mobilising the knee of a patient lying on the treatment table'],
+        ['image' => 'gallery/gallery04', 'cat' => 'rehab', 'title' => 'Foam Roller Therapy', 'alt' => 'Physiotherapist guiding a patient through a foam roller exercise for the leg'],
+        ['image' => 'gallery/gallery05', 'cat' => 'rehab', 'title' => 'Knee Rehab Exercise', 'alt' => 'Physiotherapist supporting a patient during a standing knee raise exercise'],
+        ['image' => 'gallery/gallery06', 'cat' => 'rehab', 'title' => 'Shoulder Strengthening', 'alt' => 'Physiotherapist guiding a patient\'s arm through a dumbbell strengthening exercise'],
+        ['image' => 'gallery/gallery07', 'cat' => 'rehab', 'title' => 'Hamstring Stretch', 'alt' => 'Physiotherapist performing an assisted hamstring stretch with an older patient'],
+        ['image' => 'gallery/gallery08', 'cat' => 'rehab', 'title' => 'Assisted Back Stretch', 'alt' => 'Physiotherapist assisting a patient with a seated forward stretch'],
+        ['image' => 'gallery/gallery09', 'cat' => 'treatment', 'title' => 'Shoulder Assessment', 'alt' => 'Physiotherapist assessing a patient\'s shoulder range of movement'],
+        ['image' => 'gallery/gallery10', 'cat' => 'treatment', 'title' => 'Straight Leg Raise', 'alt' => 'Physiotherapist lifting a patient\'s leg to assess hip and hamstring mobility'],
     ],
 ];
 
@@ -695,7 +709,7 @@ $faqPage = [
         ['cat' => 'treatment', 'q' => 'Should I stop my medicines during physiotherapy?',
          'a' => 'No — keep taking your medicines as prescribed by your doctor. Just let us know what you are taking so we can plan your treatment safely.'],
         ['cat' => 'treatment', 'q' => 'What treatments and techniques do you use?',
-         'a' => 'Depending on your needs: manual therapy, laser therapy, kinesio taping, joint mobilisation, strength training and pre & post operative rehabilitation, always combined with guided exercise.',
+         'a' => 'Depending on your needs: manual therapy, kinesio taping, joint mobilisation, strength training and pre & post operative rehabilitation, always combined with guided exercise.',
          'link' => ['label' => 'Our services', 'url' => 'services.php']],
 
         // Conditions
@@ -812,103 +826,6 @@ $specialityPages['manual-therapy'] = [
              'a' => 'Yes. Techniques are chosen carefully after checking your health, bone strength and medical history. Gentle mobilisation is very effective for age-related stiffness and arthritis.'],
             ['q' => 'Do I need a doctor\'s referral for manual therapy?',
              'a' => 'No referral is needed. You can book directly with us. If you have scans, X-rays or reports, please bring them to your first visit.'],
-        ],
-    ],
-];
-
-$specialityPages['laser-therapy'] = [
-    'banner' => [
-        'title'     => 'Laser',
-        'highlight' => 'Therapy',
-        'lead'      => 'Painless, non-invasive laser treatment that eases pain and inflammation and helps injured tissue heal faster.',
-        'image'     => 'banner02',
-    ],
-
-    'intro' => [
-        'eyebrow'   => 'What Is Laser Therapy?',
-        'title'     => 'Light-Powered',
-        'highlight' => 'Healing & Pain Relief',
-        'image'     => 'banner03',
-        'image_alt' => 'Physiotherapist guiding a patient through a shoulder strengthening exercise',
-        'paragraphs' => [
-            'Laser therapy — also called low-level laser therapy (LLLT) or photobiomodulation — uses focused light energy to treat pain and injury. The light passes through the skin into muscles, tendons, ligaments and joints, where it boosts cell energy, improves blood flow and calms inflammation, helping the body repair itself faster.',
-            'At New Life Physiotherapy Clinic, Dr. Y. Abhilash (PT) uses laser therapy as part of a complete treatment plan, together with manual therapy and exercise. It is especially useful when pain is too high to start exercise, or when an injury is slow to heal.',
-        ],
-        'points' => ['Painless & non-invasive', 'No medicines or injections', 'Quick sessions, no downtime', 'Safe with proper protection'],
-    ],
-
-    'techniques' => [
-        'eyebrow'   => 'How It Works',
-        'title'     => 'How Laser Therapy',
-        'highlight' => 'Helps You Heal',
-        'lead'      => 'Laser light works at the level of the cells, which is why it helps with both fresh injuries and long-standing pain.',
-        'items' => [
-            ['icon' => 'bolt', 'title' => 'Reduces Pain', 'text' => 'Calms irritated nerve endings and reduces pain signals, giving relief that often starts within the first few sessions.'],
-            ['icon' => 'heart', 'title' => 'Controls Inflammation', 'text' => 'Lowers inflammation in joints, tendons and soft tissue — useful in arthritis, tendinitis and repetitive strain.'],
-            ['icon' => 'recover', 'title' => 'Speeds Up Tissue Repair', 'text' => 'Boosts cell energy so damaged muscles, ligaments and tendons can repair faster after injury or surgery.'],
-            ['icon' => 'target', 'title' => 'Improves Circulation', 'text' => 'Increases local blood flow, bringing more oxygen and nutrients to the injured area and clearing waste products.'],
-            ['icon' => 'muscle', 'title' => 'Relaxes Muscle Spasm', 'text' => 'Helps tight, guarded muscles let go, so movement becomes easier and exercise more comfortable.'],
-            ['icon' => 'nerve', 'title' => 'Eases Nerve Pain', 'text' => 'Can reduce burning, tingling and radiating pain from irritated nerves, such as in sciatica.'],
-            ['icon' => 'shield', 'title' => 'Reduces Swelling', 'text' => 'Supports drainage of excess fluid around sprains, strains and post-operative areas.'],
-            ['icon' => 'treat', 'title' => 'Supports Faster Recovery', 'text' => 'Used alongside manual therapy and exercise, it helps you progress through rehab sooner.'],
-        ],
-    ],
-
-    'helps' => [
-        'eyebrow'   => 'Who It Helps',
-        'title'     => 'Conditions Treated With',
-        'highlight' => 'Laser Therapy',
-        'lead'      => 'Laser therapy can help a wide range of painful muscle, joint, tendon and nerve problems. Tap a condition to learn more.',
-        'conditions' => ['spondylosis', 'sciatica', 'disc-bulge', 'osteoarthritis', 'frozen-shoulder',
-                         'rheumatoid-arthritis', 'tennis-golfers-elbow', 'rotator-cuff-injuries', 'ligament-injuries',
-                         'plantar-fasciitis', 'carpal-tunnel-syndrome'],
-        'extra' => ['Low back pain', 'Muscle spasm', 'Tendinitis', 'Swelling after surgery', 'Slow-healing soft tissue injuries'],
-        'benefits_title' => 'Benefits of Laser Therapy',
-        'benefits' => [
-            'Completely painless — most people feel only mild warmth',
-            'Non-invasive: no needles, cuts or medicines',
-            'Short sessions of just a few minutes per area',
-            'No downtime — return to work straight after',
-            'Reduces the need for painkillers',
-            'Works well with manual therapy and exercise',
-            'Suitable for fresh injuries and chronic pain',
-            'Can help avoid or delay injections and surgery',
-        ],
-    ],
-
-    'process' => [
-        'eyebrow'   => 'Your Session',
-        'title'     => 'What to Expect During',
-        'highlight' => 'Laser Therapy',
-        'lead'      => 'Each session is quick, comfortable and supervised one-to-one by Dr. Y. Abhilash (PT).',
-        'image'     => 'banner01',
-        'image_alt' => 'Physiotherapist guiding a patient through an assisted leg stretch',
-        'badge'     => ['title' => 'Safe & Supervised', 'text' => 'Eye protection every session'],
-        'items' => [
-            ['title' => 'Assessment & Safety Check', 'text' => 'We examine the problem area and review your medical history to make sure laser therapy is right and safe for you.'],
-            ['title' => 'Laser Application', 'text' => 'You wear protective glasses while the laser probe is placed over the treatment points — usually a few minutes per area.'],
-            ['title' => 'Combined Treatment', 'text' => 'Laser is followed by manual therapy, taping or exercises as needed, so you get relief and lasting improvement.'],
-            ['title' => 'Progress Review', 'text' => 'We track your pain and movement every visit and adjust the dose and plan until your goals are met.'],
-        ],
-    ],
-
-    'faq' => [
-        'eyebrow'   => 'FAQs',
-        'title'     => 'Laser Therapy',
-        'highlight' => 'Questions Answered',
-        'items' => [
-            ['q' => 'What is laser therapy in physiotherapy?',
-             'a' => 'Laser therapy (low-level laser therapy or photobiomodulation) uses focused light to reduce pain and inflammation and help damaged tissue heal. It is non-invasive and used alongside manual therapy and exercise.'],
-            ['q' => 'Is laser therapy painful?',
-             'a' => 'No. Most patients feel nothing at all or only a gentle warmth over the treated area. There are no needles or cuts involved.'],
-            ['q' => 'Is laser therapy safe?',
-             'a' => 'Yes, when given by a trained physiotherapist. You wear protective glasses during treatment, and we check your medical history first. It is not used over the eyes, over cancerous areas, over the abdomen in pregnancy, or on people taking light-sensitising medicines.'],
-            ['q' => 'How many laser therapy sessions will I need?',
-             'a' => 'Many patients notice less pain within 3–5 sessions. A typical course is 6–10 sessions depending on how long you have had the problem; we explain your plan after the assessment.'],
-            ['q' => 'How long does a laser therapy session take?',
-             'a' => 'The laser itself usually takes 5–10 minutes per area. With manual therapy and exercises, a full physiotherapy session is around 30–45 minutes.'],
-            ['q' => 'Can laser therapy be combined with other treatments?',
-             'a' => 'Yes, and it works best that way. Laser reduces pain and inflammation, so manual therapy and strengthening exercises can start sooner and be more effective.'],
         ],
     ],
 ];
@@ -1135,7 +1052,7 @@ $specialityPages['pre-post-operative-care'] = [
         'items' => [
             ['icon' => 'muscle', 'title' => 'Prehab Strengthening', 'text' => 'Targeted exercises before surgery to build the muscles around the joint, which is linked to quicker recovery afterwards.'],
             ['icon' => 'plan', 'title' => 'Pre-Surgery Education', 'text' => 'We teach you the exercises, walker or crutch use and home safety tips you will need, so you know what to expect.'],
-            ['icon' => 'heart', 'title' => 'Pain & Swelling Control', 'text' => 'Ice, elevation, gentle movement, taping and laser therapy to ease post-operative pain and swelling.'],
+            ['icon' => 'heart', 'title' => 'Pain & Swelling Control', 'text' => 'Ice, elevation, gentle movement and taping to ease post-operative pain and swelling.'],
             ['icon' => 'recover', 'title' => 'Breathing & Circulation', 'text' => 'Breathing exercises and ankle pumps after surgery to protect your lungs and keep blood flowing in the legs.'],
             ['icon' => 'knee', 'title' => 'Range of Motion Recovery', 'text' => 'Guided stretching and joint mobilisation to regain bending and straightening and prevent stiffness.'],
             ['icon' => 'bolt', 'title' => 'Progressive Strengthening', 'text' => 'Exercises that start gently and progress safely to rebuild the strength lost before and after surgery.'],

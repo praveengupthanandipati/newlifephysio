@@ -60,6 +60,190 @@ $dp-muted: map-get($colors, gray);
   line-height: 1.8;
 }
 
+// ---------- Highlights strip (overlaps the banner) ----------
+// extra room at the bottom of the banner for the overlapping strip
+.page-banner:has(+ .doc-highlights) {
+  padding-bottom: 7.5rem;
+}
+
+.doc-highlights {
+  position: relative;
+  z-index: 3;
+  margin-top: -3.5rem;
+
+  + .doc-profile {
+    padding-top: 4.5rem;
+  }
+}
+
+.doc-highlights__list {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin: 0;
+  padding: 1.6rem 1.2rem;
+  overflow: hidden;
+  list-style: none;
+  border: 1px solid rgba(23, 63, 135, 0.08);
+  border-radius: 24px;
+  background: map-get($colors, white);
+  box-shadow: 0 26px 50px -30px rgba(11, 38, 87, 0.55);
+
+  // brand hairline along the top edge
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: $gradient-brand;
+  }
+}
+
+.doc-highlights__item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.4rem 1.2rem;
+
+  // divider between tiles
+  + .doc-highlights__item::before {
+    content: "";
+    position: absolute;
+    top: 15%;
+    bottom: 15%;
+    left: 0;
+    width: 1px;
+    background: linear-gradient(180deg, rgba(23, 63, 135, 0) 0%, rgba(23, 63, 135, 0.16) 50%, rgba(23, 63, 135, 0) 100%);
+  }
+
+  &:hover .doc-highlights__icon {
+    background: $gradient-primary;
+    color: map-get($colors, white);
+    transform: translateY(-3px);
+  }
+
+  // alternate the logo's orange
+  &:nth-child(even) {
+    .doc-highlights__icon {
+      background: map-get($colors, lightsecondary);
+      color: map-get($colors, darksecondary);
+    }
+
+    &:hover .doc-highlights__icon {
+      background: $gradient-secondary;
+      color: map-get($colors, white);
+    }
+  }
+}
+
+.doc-highlights__icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  background: map-get($colors, lightprimary);
+  color: $dp-navy;
+  transition: background 0.35s ease, color 0.35s ease, transform 0.35s ease;
+
+  svg {
+    width: 26px;
+    height: 26px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+}
+
+.doc-highlights__body {
+  min-width: 0;
+
+  strong {
+    display: block;
+    color: $dp-navy;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+}
+
+.doc-highlights__value {
+  display: block;
+  margin-top: 0.2rem;
+  color: $dp-muted;
+  font-size: 13.5px;
+  line-height: 1.4;
+}
+
+.doc-highlights__rating {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.15rem 0.45rem;
+}
+
+.doc-highlights__stars {
+  display: inline-flex;
+  gap: 1px;
+
+  svg {
+    width: 14px;
+    height: 14px;
+    fill: $dp-amber;
+    stroke: none;
+  }
+}
+
+@include max(1199px) {
+  .doc-highlights__list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.8rem;
+    padding: 1.6rem 1rem 1rem;
+  }
+
+  // tiles instead of dividers once the strip wraps
+  .doc-highlights__item {
+    padding: 0.8rem;
+    border-radius: 16px;
+    background: #f5f9fe;
+
+    + .doc-highlights__item::before {
+      display: none;
+    }
+  }
+}
+
+@include max(767px) {
+  .doc-highlights__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .doc-highlights__item:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+}
+
+@include max(575px) {
+  .doc-highlights {
+    margin-top: -2.5rem;
+  }
+
+  .page-banner:has(+ .doc-highlights) {
+    padding-bottom: 6rem;
+  }
+
+  .doc-highlights__list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 // ---------- Profile ----------
 .doc-profile {
   position: relative;

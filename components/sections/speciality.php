@@ -1,6 +1,6 @@
 <?php
 /**
- * Speciality page body (Manual Therapy, Laser Therapy, ...), all content
+ * Speciality page body (Manual Therapy, Taping Techniques, ...), all content
  * from $specialityPages[$activePage] in data.php.
  * Reuses the About page intro / card styles (who-*, why-*), the Why Choose Us
  * numbered list (promise-*) and the FAQ accordion (faq-*); the conditions +

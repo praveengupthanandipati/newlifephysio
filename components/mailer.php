@@ -84,7 +84,8 @@ function send_site_mail(string $subject, string $body, string $replyName = '', s
     $oneLine = function ($v) {
         return str_replace(["\r", "\n"], ' ', $v);
     };
-    $host = parse_url(absolute_url() ?? '', PHP_URL_HOST) ?: preg_replace('/:\d+$/', '', $_SERVER['HTTP_HOST'] ?? 'localhost');
+    // send from the clinic's own domain so the host's SPF/DKIM covers it
+    $host = substr(strrchr($site['email'], '@'), 1);
 
     $headers = [
         'From: ' . $oneLine($site['name']) . ' Website <no-reply@' . $host . '>',

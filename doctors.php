@@ -13,6 +13,7 @@ require __DIR__ . '/components/head.php';
 /** @var array $doctorPage  from data.php via init.php */
 $banner = $doctorPage['banner'];
 require __DIR__ . '/components/sections/page-banner.php';
+require __DIR__ . '/components/sections/doctor-highlights.php';
 require __DIR__ . '/components/sections/doctor-profile.php';
 require __DIR__ . '/components/sections/doctor-experience.php';
 require __DIR__ . '/components/sections/doctor-advantages.php';

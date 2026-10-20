@@ -1,9 +1,9 @@
 <?php
 /**
- * Inner-page banner: photo + navy overlay, breadcrumb and page title.
+ * Inner-page banner: brand gradient background, breadcrumb and page title.
  * Set $banner before including:
  *   ['title' => 'About', 'highlight' => 'New Life Physiotherapy',
- *    'lead' => '...', 'image' => 'banner02']   // image = img/<name>.jpg + -1024.jpg
+ *    'lead' => '...']
  * The breadcrumb follows the page's place in $nav (nav_trail), so child
  * pages read e.g. Home › About Us › Dr. Y. Abhilash (PT).
  */
@@ -17,7 +17,6 @@ $lastCrumb = count($trail) - 1;
 ?>
 <!-- page banner -->
 <section class="page-banner">
-    <img class="page-banner__img" src="img/<?= e($banner['image']) ?>.jpg" srcset="img/<?= e($banner['image']) ?>-1024.jpg 1024w, img/<?= e($banner['image']) ?>.jpg 1920w" sizes="100vw" alt="">
     <div class="container-90 page-banner__inner">
         <nav class="page-banner__crumbs" aria-label="Breadcrumb">
             <ol>

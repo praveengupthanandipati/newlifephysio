@@ -73,7 +73,7 @@ $subjects = contact_subjects(); // same list contact-submit.php accepts
                     <h2 class="svc-title" id="ctFormTitle"><?= e($contactPage['form']['title']) ?> <span><?= e($contactPage['form']['highlight']) ?></span></h2>
                     <p class="svc-lead"><?= e($contactPage['form']['lead']) ?></p>
 
-                    <form class="ct-form" id="contactForm" action="contact-submit.php" method="post" novalidate>
+                    <form class="ct-form" id="contactForm" action="contact-submit.php" method="post" data-success-title="Message sent successfully" novalidate>
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <label class="ct-label" for="ctName">Full name <span aria-hidden="true">*</span></label>

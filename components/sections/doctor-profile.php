@@ -17,7 +17,7 @@ $mainPhone = $site['phones'][0];
 
 // Credential rows: label => value; empty values are skipped
 $credentials = array_filter([
-    'Designation'     => $doctor['role'] . ' (PT)',
+    'Designation'     => $profile['designation'] . ', ' . $site['name'],
     'Registration No.' => $doctor['reg_no'],
     'Qualifications'  => $profile['qualifications'],
     'Experience'      => $profile['experience_years'] ? $profile['experience_years'] . '+ years' : '',
@@ -50,7 +50,7 @@ $stats = array_filter([
                     </div>
                     <div class="doc-card__body">
                         <p class="doc-card__name"><?= e($doctor['name']) ?></p>
-                        <p class="doc-card__role"><?= e($doctor['role']) ?><?= $profile['qualifications'] ? ' &middot; ' . e($profile['qualifications']) : '' ?></p>
+                        <p class="doc-card__role"><?= e($profile['designation']) ?><?=$profile['qualifications'] ? ' &middot; ' . e($profile['qualifications']) : '' ?></p>
 
                         <ul class="doc-card__stats">
 <?php foreach ($stats as [$value, $suffix, $label]): ?>

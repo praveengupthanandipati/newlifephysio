@@ -1,0 +1,101 @@
+// "Thank you" popup shown after a form is sent (home, free appointment and
+// contact forms; built by nlFormSuccess() in js/custom.js)
+.form-success {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(7, 26, 61, 0.6);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+
+  &.is-open {
+    opacity: 1;
+  }
+
+  &.is-open &__card {
+    transform: none;
+  }
+
+  &__card {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    padding: 2.25rem 1.75rem 1.75rem;
+    border-radius: 18px;
+    background: map-get($colors, white);
+    box-shadow: 0 24px 60px rgba(7, 26, 61, 0.3);
+    text-align: center;
+    transform: translateY(16px) scale(0.97);
+    transition: transform 0.25s ease;
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 1.1rem;
+    border-radius: 50%;
+    background: #e8f7ee;
+    color: #1e7a45;
+
+    svg {
+      width: 36px;
+      height: 36px;
+    }
+  }
+
+  &__title {
+    margin-bottom: 0.5rem;
+    color: map-get($colors, darkprimary);
+    font-size: 24px;
+  }
+
+  &__text {
+    color: map-get($colors, gray);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  &__btn {
+    margin-top: 1.5rem;
+    padding: 0.7rem 2.25rem;
+    border: 0;
+    border-radius: 50px;
+    background: $gradient-secondary;
+    color: map-get($colors, white);
+    font-weight: 600;
+
+    &:hover,
+    &:focus-visible {
+      background: map-get($colors, darksecondary);
+    }
+  }
+
+  &__close {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    width: 36px;
+    height: 36px;
+    border: 0;
+    border-radius: 50%;
+    background: map-get($colors, lightgray);
+    color: map-get($colors, gray);
+    font-size: 22px;
+    line-height: 1;
+
+    &:hover {
+      color: map-get($colors, black);
+    }
+  }
+}
+
+body.form-success-open {
+  overflow: hidden;
+}

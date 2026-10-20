@@ -40,7 +40,7 @@ $openDays = array_merge(...array_column($site['hours'], 'days'));
                     <h2 class="svc-title" id="apFormTitle"><?= e($ap['form']['title']) ?> <span><?= e($ap['form']['highlight']) ?></span></h2>
                     <p class="svc-lead"><?= e($ap['form']['lead']) ?></p>
 
-                    <form class="ct-form" id="bookForm" action="appointment.php" method="post" novalidate data-open-days="<?= e(implode(',', $openDays)) ?>">
+                    <form class="ct-form" id="bookForm" action="appointment.php" method="post" data-success-title="Appointment request received" novalidate data-open-days="<?= e(implode(',', $openDays)) ?>">
                         <input type="hidden" name="source" value="page">
                         <div class="row g-3">
                             <div class="col-12">

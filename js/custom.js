@@ -1083,6 +1083,47 @@ document.addEventListener('DOMContentLoaded', function () {
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 });
 
+// "Thank you" popup after a form is sent (contact, free appointment and home
+// forms). Title comes from the form's data-success-title, text from the server.
+window.nlFormSuccess = function (form, message) {
+  var returnFocus = document.activeElement;
+  var popup = document.createElement('div');
+  popup.className = 'form-success';
+  popup.innerHTML =
+    '<div class="form-success__card" role="dialog" aria-modal="true" aria-labelledby="formSuccessTitle" aria-describedby="formSuccessText">' +
+      '<button class="form-success__close" type="button" aria-label="Close">&times;</button>' +
+      '<div class="form-success__icon" aria-hidden="true">' +
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>' +
+      '</div>' +
+      '<h3 class="form-success__title" id="formSuccessTitle"></h3>' +
+      '<p class="form-success__text" id="formSuccessText"></p>' +
+      '<button class="form-success__btn" type="button">Okay</button>' +
+    '</div>';
+  popup.querySelector('.form-success__title').textContent = form.getAttribute('data-success-title') || 'Thank you!';
+  popup.querySelector('.form-success__text').textContent = message;
+
+  function close() {
+    document.removeEventListener('keydown', onKey);
+    popup.classList.remove('is-open');
+    document.body.classList.remove('form-success-open');
+    setTimeout(function () { popup.remove(); }, 250);
+    if (returnFocus && returnFocus.focus) returnFocus.focus();
+  }
+  function onKey(e) {
+    if (e.key === 'Escape') close();
+    if (e.key === 'Tab') { e.preventDefault(); popup.querySelector('.form-success__btn').focus(); }
+  }
+
+  popup.addEventListener('click', function (e) {
+    if (e.target === popup || e.target.closest('.form-success__close, .form-success__btn')) close();
+  });
+  document.addEventListener('keydown', onKey);
+  document.body.appendChild(popup);
+  document.body.classList.add('form-success-open');
+  requestAnimationFrame(function () { popup.classList.add('is-open'); });
+  popup.querySelector('.form-success__btn').focus();
+};
+
 // Contact form: client-side validation + AJAX submit to contact-submit.php
 // (the server re-validates everything with the same rules)
 document.addEventListener('DOMContentLoaded', function () {
@@ -1196,8 +1237,12 @@ document.addEventListener('DOMContentLoaded', function () {
         } else if (data.errors) {
           Object.keys(data.errors).forEach(function (name) { showError(name, data.errors[name]); });
         }
-        showAlert(data.status === 'success' ? 'success' : 'error', data.message || 'Something went wrong. Please try again.');
-        alertBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        if (data.status === 'success') {
+          window.nlFormSuccess(form, data.message);
+        } else {
+          showAlert('error', data.message || 'Something went wrong. Please try again.');
+          alertBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
       })
       .catch(function () {
         showAlert('error', 'Network error. Please check your connection and try again.');
@@ -1369,8 +1414,12 @@ document.addEventListener('DOMContentLoaded', function () {
         } else if (data.errors) {
           Object.keys(data.errors).forEach(function (name) { showError(name, data.errors[name]); });
         }
-        showAlert(data.status === 'success' ? 'success' : 'error', data.message || 'Something went wrong. Please try again.');
-        alertBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        if (data.status === 'success') {
+          window.nlFormSuccess(form, data.message);
+        } else {
+          showAlert('error', data.message || 'Something went wrong. Please try again.');
+          alertBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
       })
       .catch(function () {
         showAlert('error', 'Network error. Please check your connection and try again.');
@@ -1509,8 +1558,12 @@ document.addEventListener('DOMContentLoaded', function () {
         } else if (data.errors) {
           Object.keys(data.errors).forEach(function (name) { showError(name, data.errors[name]); });
         }
-        showAlert(data.status === 'success' ? 'success' : 'error', data.message || 'Something went wrong. Please try again.');
-        alertBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        if (data.status === 'success') {
+          window.nlFormSuccess(form, data.message);
+        } else {
+          showAlert('error', data.message || 'Something went wrong. Please try again.');
+          alertBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
       })
       .catch(function () {
         showAlert('error', 'Network error. Please check your connection and try again.');

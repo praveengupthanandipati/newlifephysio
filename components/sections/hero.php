@@ -64,7 +64,7 @@ $mainPhone = $site['phones'][0];
                     <h3>Book <span>FREE</span> Consultation</h3>
                     <p>We'll call you back to confirm your slot.</p>
                 </div>
-                <form class="hero-form__body" id="apptForm" action="appointment.php" method="post" novalidate>
+                <form class="hero-form__body" id="apptForm" action="appointment.php" method="post" data-success-title="Consultation request received" novalidate>
                     <div class="hero-field">
                         <label class="visually-hidden" for="apptName">Full name</label>
                         <input class="form-control" id="apptName" type="text" name="name" placeholder="Enter your full name" autocomplete="name" maxlength="80">

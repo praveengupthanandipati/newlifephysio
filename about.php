@@ -14,6 +14,7 @@ require __DIR__ . '/components/head.php';
 $banner = $aboutPage['banner'];
 require __DIR__ . '/components/sections/page-banner.php';
 require __DIR__ . '/components/sections/who-we-are.php';
+require __DIR__ . '/components/sections/founder.php';
 require __DIR__ . '/components/sections/why-us.php';
 ?>
 </main>

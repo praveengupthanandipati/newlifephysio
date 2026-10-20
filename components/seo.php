@@ -43,7 +43,7 @@ $seoPages = [
             'sciatica treatment', 'frozen shoulder treatment', 'sports injury physiotherapy',
             'stroke rehabilitation {city}', 'paralysis physiotherapy', 'neuro physiotherapy {city}',
             'child physiotherapy {city}', 'paediatric physiotherapy', 'post operative physiotherapy',
-            'manual therapy {city}', 'laser therapy for pain {city}', 'kinesio taping',
+            'manual therapy {city}', 'kinesio taping',
             // brand
             'New Life Physiotherapy Clinic', 'New Life Physiotherapy {city}', 'Dr. Y. Abhilash physiotherapist',
         ],
@@ -128,11 +128,11 @@ $seoPages = [
         ],
     ],
     'specialities' => [
-        'title'       => 'Manual Therapy, Laser & Taping | New Life Physiotherapy',
-        'description' => 'Manual therapy, laser therapy, taping, strength training, joint mobilisation and pre & post operative rehab at New Life Physiotherapy Clinic, {city}.',
+        'title'       => 'Manual Therapy, Taping & Rehab | New Life Physiotherapy',
+        'description' => 'Manual therapy, taping, strength training, joint mobilisation and pre & post operative rehab at New Life Physiotherapy Clinic, {city}.',
         'keywords'    => [
             'physiotherapy treatments {city}', 'physiotherapy techniques', 'advanced physiotherapy {city}',
-            'manual therapy {city}', 'laser therapy for pain {city}', 'low level laser therapy physiotherapy',
+            'manual therapy {city}',
             'kinesio taping {city}', 'sports taping', 'strength training physiotherapy',
             'joint mobilisation therapy', 'advanced joint mobilization', 'pre operative physiotherapy',
             'post operative physiotherapy {city}', 'physiotherapy after surgery', 'knee replacement physiotherapy',
@@ -157,27 +157,6 @@ $seoPages = [
             'stiff joint treatment without surgery', 'muscle tightness treatment', 'pain relief without medicines',
             // brand
             'New Life Physiotherapy manual therapy', 'Dr. Y. Abhilash manual therapy',
-        ],
-    ],
-    'laser-therapy' => [
-        'title'       => 'Laser Therapy for Pain in {city} | New Life Physiotherapy',
-        'description' => 'Painless laser therapy (LLLT) in {city} for back pain, frozen shoulder, tennis elbow, heel pain & sports injuries. Faster healing with Dr. Y. Abhilash (PT).',
-        'keywords'    => [
-            // local
-            'laser therapy in {city}', 'laser therapy near me', 'laser physiotherapy {city}',
-            'laser therapy for pain {city}', 'laser treatment for pain near me', 'best laser therapy clinic {city}',
-            // technique
-            'low level laser therapy', 'LLLT physiotherapy', 'cold laser therapy', 'photobiomodulation therapy',
-            'laser therapy physiotherapy', 'pain relief laser treatment', 'non invasive pain treatment',
-            // problem
-            'laser therapy for back pain', 'laser therapy for knee pain', 'laser therapy for frozen shoulder',
-            'laser therapy for tennis elbow', 'laser therapy for plantar fasciitis', 'laser therapy for heel pain',
-            'laser therapy for sciatica', 'laser therapy for neck pain', 'laser therapy for sports injuries',
-            'laser therapy for arthritis', 'laser therapy for tendinitis',
-            // questions
-            'is laser therapy painful', 'laser therapy sessions needed', 'laser therapy cost {city}',
-            // brand
-            'New Life Physiotherapy laser therapy', 'Dr. Y. Abhilash laser therapy',
         ],
     ],
     'taping-techniques' => [
@@ -481,7 +460,7 @@ function page_schema(string $page): array
         ];
     }
 
-    // Speciality pages (manual therapy, laser therapy, ...): the therapy, and its FAQs
+    // Speciality pages (manual therapy, taping, ...): the therapy, and its FAQs
     if (isset($GLOBALS['specialityPages'][$page])) {
         $sp = $GLOBALS['specialityPages'][$page];
         $therapyName = trim($sp['banner']['title'] . ' ' . $sp['banner']['highlight']);
@@ -518,7 +497,7 @@ function page_schema(string $page): array
             '@context'    => 'https://schema.org',
             '@type'       => 'Person',
             'name'        => $site['doctor']['name'],
-            'jobTitle'    => $site['doctor']['role'],
+            'jobTitle'    => $profile['designation'],
             'description' => $profile['bio'][0],
             'image'       => $profile['photo'] ? absolute_url($profile['photo']) : null,
             'url'         => absolute_url('doctors.php'),
