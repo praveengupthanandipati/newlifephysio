@@ -3610,8 +3610,8 @@ a {
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
-  -o-object-position: 48% 30%;
-     object-position: 48% 30%;
+  -o-object-position: 56% 30%;
+     object-position: 56% 30%;
   transition: transform 0.8s ease;
 }
 .who-media__img:hover img {

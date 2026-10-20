@@ -488,7 +488,8 @@ $aboutPage = [
         ],
         'mission' => 'To help every patient move freely and live pain-free through expert, personalised physiotherapy.',
         'vision'  => "To be {city}'s most trusted clinic for adult and child rehabilitation.",
-        'image'   => 'banner01',
+        'image'   => 'about-page',
+        'alt'     => 'Physiotherapist guiding a patient through a dumbbell arm-strengthening exercise',
     ],
 
     // Meet our founder: philosophy, three focus cards, and the mission quote

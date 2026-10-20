@@ -31,7 +31,7 @@ $stats = [
             <div class="col-lg-6">
                 <div class="who-media">
                     <figure class="who-media__img" data-aos="reveal">
-                        <img src="img/<?= e($who['image']) ?>-1024.jpg" srcset="img/<?= e($who['image']) ?>-1024.jpg 1024w, img/<?= e($who['image']) ?>.jpg 1920w" sizes="(min-width: 992px) 45vw, 90vw" alt="Physiotherapist guiding a patient through an assisted leg stretch" loading="lazy">
+                        <img src="img/<?= e($who['image']) ?>-1024.jpg" srcset="img/<?= e($who['image']) ?>-1024.jpg 1024w, img/<?= e($who['image']) ?>.jpg 1920w" sizes="(min-width: 992px) 45vw, 90vw" alt="<?= e($who['alt']) ?>" loading="lazy">
                     </figure>
 
                     <div class="who-doctor" id="doctor" data-aos="fade-up" data-aos-delay="300">
