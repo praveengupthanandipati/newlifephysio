@@ -10,7 +10,7 @@
 /** @var array $contactPage */
 /** @var array $specialities */
 
-$addressLine = address_line();
+$hasBranches = count($site['address']['streets']) > 1;
 $mapQuery = map_query();
 $mapEmbed = 'https://www.google.com/maps?q=' . rawurlencode($mapQuery) . '&output=embed';
 $mapDirections = map_directions_url();
@@ -51,11 +51,20 @@ $subjects = contact_subjects(); // same list contact-submit.php accepts
                 <small>We reply within one working day</small>
             </li>
 <?php endif; ?>
-            <li class="ct-card" data-aos="fade-up" data-aos-delay="240">
+            <li class="ct-card<?= $hasBranches ? ' ct-card--visit' : '' ?>" data-aos="fade-up" data-aos-delay="240">
                 <span class="ct-card__icon" aria-hidden="true"><?= icon('map-pin') ?></span>
                 <h2>Visit Us</h2>
-                <address><?= e($site['name']) ?><br><?= e($addressLine) ?></address>
-                <a class="ct-card__link" href="<?= e($mapDirections) ?>" target="_blank" rel="noopener">Get directions <?= icon('arrow') ?></a>
+                <div class="ct-card__places">
+<?php foreach ($site['address']['streets'] as $i => $street): ?>
+                    <div class="ct-card__place">
+<?php if ($hasBranches): ?>
+                        <small class="ct-card__place-label">Location <?= $i + 1 ?></small>
+<?php endif; ?>
+                        <address><?= e($site['name']) ?><br><?= e(address_line($i)) ?></address>
+                        <a class="ct-card__link" href="<?= e(map_directions_url($i)) ?>" target="_blank" rel="noopener">Get directions <?= icon('arrow') ?></a>
+                    </div>
+<?php endforeach; ?>
+                </div>
             </li>
         </ul>
     </div>

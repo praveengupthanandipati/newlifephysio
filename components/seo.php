@@ -356,7 +356,7 @@ function page_schema(string $page): array
 
     $address = array_filter([
         '@type'           => 'PostalAddress',
-        'streetAddress'   => $site['address']['street'],
+        'streetAddress'   => $site['address']['streets'][0],
         'addressLocality' => $site['address']['city'],
         'addressRegion'   => $site['address']['region'],
         'postalCode'      => $site['address']['postal_code'],

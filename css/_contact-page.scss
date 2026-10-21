@@ -126,6 +126,53 @@ $ct-green: #1e9e57;
   @include ct-icon(16px);
 }
 
+// with more than one location, "Visit Us" takes its own full-width row
+// and the other cards share the row above it
+.ct-cards:has(> .ct-card--visit) {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 330px), 1fr));
+}
+
+.ct-card--visit {
+  grid-column: 1 / -1;
+
+  .ct-card__places {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    @include max(767px) {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  .ct-card__place {
+    padding: 1.1rem 1.25rem;
+    border: 1px solid rgba(23, 63, 135, 0.08);
+    border-radius: 16px;
+    background: #f5f9fe;
+  }
+}
+
+.ct-card__places {
+  display: grid;
+  gap: 1rem;
+  width: 100%;
+}
+
+// one block per clinic location
+.ct-card__place {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+}
+
+.ct-card .ct-card__place-label {
+  color: $ct-orange;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
 // ---------- Form + timings ----------
 .ct-main {
   padding: 5rem 0 6rem;

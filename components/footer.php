@@ -13,7 +13,7 @@
 /** @var array $footerSpecialities */
 /** @var array $legalLinks */
 
-$addressLine = address_line();
+$hasBranches = count($site['address']['streets']) > 1;
 $footerLegal = array_filter($legalLinks, function ($link) {
     return is_file(__DIR__ . '/../' . $link['url']);
 });
@@ -64,13 +64,15 @@ $footerLegal = array_filter($legalLinks, function ($link) {
                 <div class="col-lg-4 col-md-6">
                     <h5 class="ft-heading">Get in Touch</h5>
                     <ul class="ft-contact">
+<?php foreach ($site['address']['streets'] as $i => $street): ?>
                         <li>
                             <span class="ft-contact__icon" aria-hidden="true"><?= icon('map-pin') ?></span>
                             <span>
-                                <small>Address</small>
-                                <address><a href="<?= e(map_directions_url()) ?>" target="_blank" rel="noopener"><?= e($addressLine) ?></a></address>
+                                <small><?= $hasBranches ? 'Location ' . ($i + 1) : 'Address' ?></small>
+                                <address><a href="<?= e(map_directions_url($i)) ?>" target="_blank" rel="noopener"><?= e(address_line($i)) ?></a></address>
                             </span>
                         </li>
+<?php endforeach; ?>
                         <li>
                             <span class="ft-contact__icon" aria-hidden="true"><?= icon('phone') ?></span>
                             <span>

@@ -131,27 +131,30 @@ function contact_subjects(): array
     );
 }
 
-/** Clinic address on one line: street, city, region and PIN (empty parts skipped). */
-function address_line(): string
+/**
+ * Clinic address on one line: street, city, region and PIN (empty parts skipped).
+ * $i picks the location from $site['address']['streets'] (0 = main).
+ */
+function address_line(int $i = 0): string
 {
     $address = $GLOBALS['site']['address'];
     return implode(', ', array_filter([
-        $address['street'],
+        $address['streets'][$i],
         $address['city'],
         $address['region'],
         $address['postal_code'],
     ]));
 }
 
-/** Google Maps search text for the clinic: $site['map']['query'], else name + address. */
-function map_query(): string
+/** Google Maps search text for a location: $site['map']['query'] (main only), else name + address. */
+function map_query(int $i = 0): string
 {
     $site = $GLOBALS['site'];
-    return $site['map']['query'] ?: $site['name'] . ', ' . address_line();
+    return ($i === 0 ? $site['map']['query'] : '') ?: $site['name'] . ', ' . address_line($i);
 }
 
-/** Google Maps directions link to the clinic. */
-function map_directions_url(): string
+/** Google Maps directions link to a location. */
+function map_directions_url(int $i = 0): string
 {
-    return 'https://www.google.com/maps/dir/?api=1&destination=' . rawurlencode(map_query());
+    return 'https://www.google.com/maps/dir/?api=1&destination=' . rawurlencode(map_query($i));
 }

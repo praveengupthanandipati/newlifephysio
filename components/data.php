@@ -30,7 +30,11 @@ $site = [
     'email'    => 'info@newlifephysiotherapyclinic.com', // receives all website form submissions
 
     'address' => [
-        'street'      => 'Road No. 25, Beside Crayons School Street, Opposite RR Village Pointe, Alkapur Township, Manikonda',
+        // Both clinic locations; the first is the main one (SEO, contact-page map, doctor page)
+        'streets'     => [
+            '1st Floor, 5-1/33, Road No. 6, Beside Olive Mithai, Alkapoor Township, Puppalaguda, Manikonda',
+            'Road No. 25, Beside Crayons School Street, Opposite RR Village Pointe, Alkapur Township, Manikonda',
+        ],
         'city'        => 'Hyderabad',
         'region'      => 'Telangana',
         'region_code' => 'IN-TG',

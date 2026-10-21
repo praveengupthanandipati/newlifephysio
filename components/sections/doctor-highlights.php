@@ -12,7 +12,7 @@
 $profile = $doctorPage['profile'];
 $rating = (int) $profile['google_rating'];
 // last part of the street line is the area, e.g. "Manikonda"
-$streetParts = explode(', ', $site['address']['street']);
+$streetParts = explode(', ', $site['address']['streets'][0]);
 $area = end($streetParts);
 
 $highlights = array_filter([
