@@ -144,7 +144,7 @@ $mainPhone = $site['phones'][0];
 <?php endforeach; ?>
                     </ul>
 
-                    <a class="mh-btn-book" href="<?= ($GLOBALS['activePage'] ?? '') === 'free-appointment' ? '#appointment' : 'free-appointment.php#appointment' ?>" aria-label="Book Free Appointment">
+                    <a class="mh-btn-book" href="<?= e(booking_url()) ?>" aria-label="Book Free Appointment">
                         <span class="mh-btn-book__full" aria-hidden="true">Book Free Appointment</span>
                         <span class="mh-btn-book__short" aria-hidden="true">Book Now</span>
                         <span class="mh-btn-book__icon" aria-hidden="true"><?= icon('arrow') ?></span>

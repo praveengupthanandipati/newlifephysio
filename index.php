@@ -13,6 +13,7 @@ require __DIR__ . '/components/head.php';
 require __DIR__ . '/components/sections/hero.php';
 require __DIR__ . '/components/sections/services.php';
 require __DIR__ . '/components/sections/about.php';
+require __DIR__ . '/components/sections/home-doctor.php';
 require __DIR__ . '/components/sections/journey.php';
 require __DIR__ . '/components/sections/testimonials.php';
 ?>

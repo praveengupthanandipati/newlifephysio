@@ -445,6 +445,26 @@ $aboutFeatures = [
 ];
 
 // ---------------------------------------------------------------------------
+// Home: meet the doctor (intro + key points, links to doctors.php).
+// Name, designation, experience, languages and rating come from
+// $site['doctor'] and $doctorPage['profile'].
+// ---------------------------------------------------------------------------
+$homeDoctor = [
+    'eyebrow'   => 'Meet Your Doctor',
+    'title'     => 'Care Led by',
+    'lead'      => 'Dr. Y. Abhilash (PT) is the Founder of New Life Physiotherapy Clinic, with over 5 years of clinical experience helping adults and children recover from pain, injury, surgery and neurological conditions.',
+    'points'    => [
+        ['icon' => 'shield', 'title' => 'Registered Physiotherapist', 'text' => 'Founder of the clinic · Regd. No. 08928'],
+        ['icon' => 'assess', 'title' => 'Root-Cause Assessment', 'text' => 'Treats the cause of pain, not just the symptoms'],
+        ['icon' => 'hand', 'title' => 'Hands-on Expertise', 'text' => 'Manual therapy, joint mobilisation & kinesiology taping'],
+        ['icon' => 'brain', 'title' => 'Ortho, Neuro & Sports Rehab', 'text' => 'Spine, joints, sports injuries, stroke & post-surgery care'],
+        ['icon' => 'child', 'title' => 'Paediatric Physiotherapy', 'text' => 'Play-based therapy for developmental delays'],
+        ['icon' => 'family', 'title' => 'Patient-Centred Care', 'text' => 'Education, family involvement & home exercise plans'],
+    ],
+    'cta' => 'Read More About Doctor',
+];
+
+// ---------------------------------------------------------------------------
 // Home: journey to recovery
 // ---------------------------------------------------------------------------
 $journeySteps = [

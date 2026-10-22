@@ -2973,6 +2973,291 @@ a {
     animation: none;
   }
 }
+.home-doctor {
+  position: relative;
+  padding: 6.5rem 0;
+  overflow: hidden;
+  background: radial-gradient(circle at 1px 1px, rgba(23, 63, 135, 0.07) 1px, transparent 0) 0 0/22px 22px, linear-gradient(180deg, #f5f9fe 0%, #ffffff 55%, #fff8f1 100%);
+}
+.home-doctor::before, .home-doctor::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.home-doctor::before {
+  top: -120px;
+  left: -160px;
+  width: 480px;
+  height: 480px;
+  background: radial-gradient(circle, rgba(30, 136, 229, 0.12) 0%, rgba(30, 136, 229, 0) 70%);
+}
+.home-doctor::after {
+  right: -160px;
+  bottom: -120px;
+  width: 460px;
+  height: 460px;
+  background: radial-gradient(circle, rgba(244, 123, 32, 0.12) 0%, rgba(244, 123, 32, 0) 70%);
+}
+.home-doctor > .container-90 {
+  position: relative;
+  z-index: 1;
+}
+
+.hd-card {
+  position: relative;
+  max-width: 440px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 28px;
+  background: #fff;
+  box-shadow: 0 34px 70px -38px rgba(11, 38, 87, 0.6);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.hd-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 44px 80px -40px rgba(11, 38, 87, 0.65);
+}
+
+.hd-card__portrait {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 4/3.2;
+  overflow: hidden;
+  background: radial-gradient(circle at 80% 15%, rgba(249, 168, 38, 0.45) 0%, rgba(249, 168, 38, 0) 40%), linear-gradient(90deg, #071a3d 0%, #0b2657 50%, #173f87 100%);
+}
+.hd-card__portrait::before {
+  content: "";
+  position: absolute;
+  right: -50px;
+  bottom: -60px;
+  width: 240px;
+  height: 240px;
+  background: url("../img/favicon-192.png") center/contain no-repeat;
+  opacity: 0.12;
+}
+.hd-card__portrait img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.hd-card__initials {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 136px;
+  height: 136px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: 48px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.25), 0 0 0 12px rgba(255, 255, 255, 0.05), 0 0 0 26px rgba(255, 255, 255, 0.03);
+}
+.hd-card__initials::after {
+  content: "";
+  position: absolute;
+  inset: -18px;
+  border: 2px dashed rgba(249, 168, 38, 0.6);
+  border-radius: 50%;
+  animation: dpOrbit 22s linear infinite;
+}
+
+.hd-card__rating {
+  position: absolute;
+  top: 1.1rem;
+  left: 1.1rem;
+  display: inline-flex;
+  gap: 2px;
+  padding: 0.45rem 0.7rem;
+  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 10px 24px -12px rgba(0, 0, 0, 0.4);
+}
+.hd-card__rating svg {
+  width: 14px;
+  height: 14px;
+  fill: #f9a826;
+  stroke: none;
+}
+
+.hd-card__body {
+  padding: 1.6rem 1.75rem 1.75rem;
+  text-align: center;
+}
+
+.hd-card__name {
+  margin: 0;
+  color: #173f87;
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.hd-card__role {
+  margin: 0.3rem 0 0.8rem;
+  color: #6b7689;
+  font-size: 14.5px;
+}
+
+.hd-card__reg {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.9rem;
+  border-radius: 50px;
+  background: #fff1e4;
+  color: #d9600b;
+  font-size: 13px;
+  font-weight: 600;
+}
+.hd-card__reg svg {
+  width: 15px;
+  height: 15px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.hd-card__facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 1.4rem 0 0;
+  padding: 1.2rem 0 0;
+  list-style: none;
+  border-top: 1px dashed rgba(23, 63, 135, 0.16);
+}
+.hd-card__facts li + li {
+  border-left: 1px solid rgba(23, 63, 135, 0.1);
+}
+.hd-card__facts strong {
+  display: block;
+  background: linear-gradient(135deg, #f9a826 0%, #f47b20 55%, #e8650f 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+.hd-card__facts span {
+  display: block;
+  margin-top: 0.15rem;
+  color: #6b7689;
+  font-size: 12.5px;
+}
+
+.hd-lead {
+  margin-bottom: 1.75rem !important;
+  color: #6b7689;
+  font-size: 1.02rem;
+  line-height: 1.8;
+}
+
+.hd-points {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem;
+  margin: 0 0 2rem;
+  padding: 0;
+  list-style: none;
+}
+
+.hd-point {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid rgba(23, 63, 135, 0.08);
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 12px 30px -26px rgba(11, 38, 87, 0.6);
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+.hd-point strong {
+  display: block;
+  color: #173f87;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+.hd-point small {
+  display: block;
+  margin-top: 0.2rem;
+  color: #6b7689;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.hd-point:hover {
+  transform: translateY(-4px);
+  border-color: rgba(30, 136, 229, 0.25);
+  box-shadow: 0 22px 40px -26px rgba(11, 38, 87, 0.55);
+}
+.hd-point:hover .hd-point__icon {
+  background: linear-gradient(135deg, #1e88e5 0%, #173f87 100%);
+  color: #fff;
+}
+.hd-point:nth-child(4n+2) .hd-point__icon, .hd-point:nth-child(4n+3) .hd-point__icon {
+  background: #fff1e4;
+  color: #d9600b;
+}
+.hd-point:nth-child(4n+2):hover .hd-point__icon, .hd-point:nth-child(4n+3):hover .hd-point__icon {
+  background: linear-gradient(135deg, #f9a826 0%, #f47b20 55%, #e8650f 100%);
+  color: #fff;
+}
+
+.hd-point__icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: #eaf2fb;
+  color: #173f87;
+  transition: background 0.35s ease, color 0.35s ease;
+}
+.hd-point__icon svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@media (max-width: 991px) {
+  .home-doctor {
+    padding: 4.5rem 0;
+  }
+}
+@media (max-width: 575px) {
+  .hd-points {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .hd-card__body {
+    padding: 1.4rem 1.25rem 1.5rem;
+  }
+  .hd-card__facts strong {
+    font-size: 1.35rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hd-card__initials::after {
+    animation: none;
+  }
+}
 .testimonials-home {
   position: relative;
   padding: 6.5rem 0;

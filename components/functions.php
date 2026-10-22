@@ -37,13 +37,13 @@ function anchor(string $id): string
 }
 
 /**
- * Where "Book appointment" buttons go: the booking form on the same page on
- * the home and free-appointment pages, otherwise the free-appointment page.
+ * Where "Book appointment" buttons go: the booking form on the free-appointment
+ * page (just "#appointment" when already on it).
  */
 function booking_url(): string
 {
     $page = $GLOBALS['activePage'] ?? 'home';
-    return in_array($page, ['home', 'free-appointment'], true) ? '#appointment' : 'free-appointment.php';
+    return $page === 'free-appointment' ? '#appointment' : 'free-appointment.php#appointment';
 }
 
 /** Treatment choices of the booking forms (and what appointment.php accepts). */

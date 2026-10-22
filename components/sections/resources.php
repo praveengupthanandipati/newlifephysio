@@ -148,7 +148,7 @@ $faq = $rs['faq'];
                         <li><?= icon('shield') ?><?= e($item) ?></li>
 <?php endforeach; ?>
                     </ul>
-                    <a class="rs-panel__link" href="free-appointment.php">Book your first visit <?= icon('arrow') ?></a>
+                    <a class="rs-panel__link" href="<?= e(booking_url()) ?>">Book your first visit <?= icon('arrow') ?></a>
                 </div>
             </div>
         </div>
